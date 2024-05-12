@@ -1,4 +1,5 @@
 'use client'
+
 import assets from '@/app/assets/assets'
 import Icon from '@/app/components/form/Icon'
 import { useRouter, usePathname } from 'next/navigation'
@@ -11,9 +12,15 @@ const Navbar = () => {
   const data = [
     {
       label: 'Users',
-      iconKey: 'userlogo',
-      ActiconKey: 'ActiveExpert',
       route: ROUTES.users,
+    },
+    {
+      label: 'Societies',
+      route: ROUTES.societies,
+    },
+    {
+      label: 'Profile',
+      route: ROUTES.userProfile + '/1',
     },
   ]
 
@@ -24,10 +31,9 @@ const Navbar = () => {
   }
 
   return (
-    <div className='self-stretch flex flex-row items-start justify-start pt-0 px-0 box-border top-[0] z-[1] sticky max-w-full'>
-      <header className='flex-1 bg-royalblue flex flex-row items-center justify-between py-4 px-6 box-border gap-[20px] max-w-full text-left text-smi text-white font-noto-sans'>
-        <div className='h-[71px] w-[1440px] relative bg-royalblue hidden max-w-full' />
-        <Icon imageHeight={'h-[39px]'} imageWidth={'w-[57px]'} image={assets.icons.logo} />
+    <div className='self-stretch flex flex-row items-start justify-start pt-0 px-0 box-border top-[0] sticky max-w-full z-50'>
+      <header className='flex-1 bg-royalblue flex flex-row items-center justify-end py-4 px-6 box-border gap-[20px] max-w-full text-left text-smi text-white font-noto-sans'>
+        {/* <Icon imageHeight={'h-[39px]'} imageWidth={'w-[57px]'} image={assets.icons.logo} /> */}
         <div className='w-[395px] flex flex-row items-center justify-end gap-[24px] max-w-full mq450:w-[149px]'>
           {data?.map((item, index) => (
             <div

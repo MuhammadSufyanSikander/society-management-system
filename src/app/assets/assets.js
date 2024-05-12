@@ -18,9 +18,15 @@ import noContent from './icons/noContent.svg'
 import colorpicker from './icons/colorpicker.svg'
 import dropdownarrow from './icons/dropdownarrow.svg'
 import whitedots from './icons/whitedots.svg'
+import password from './icons/password.svg'
+import email from './icons/mail.svg'
+import user from './icons/user.svg'
 
 const assets = {
   icons: {
+    user,
+    email,
+    password,
     Frame,
     logout,
     logo,

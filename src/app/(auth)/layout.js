@@ -1,6 +1,4 @@
-import './globals.css'
-import Navbar from './components/Navbar'
-import { Providers } from './providers'
+import '../globals.css'
 
 export const metadata = {
   title: 'Society Managment System',
@@ -15,9 +13,7 @@ export default function RootLayout({ children }) {
         <link rel='preconnect' href='https://fonts.gstatic.com' />
         <link href='https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap' rel='stylesheet' />
       </head>
-      <body>
-        <Providers>{children}</Providers>
-      </body>
+      <body>{children}</body>
     </html>
   )
 }
