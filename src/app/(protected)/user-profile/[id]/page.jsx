@@ -35,8 +35,8 @@ const UserProfile = () => {
         </div>
       </div>
       <div className='gap-5 w-full h-auto flex flex-col justify-center items-center'>
-        {[1, 2, 3, 4, 5].map(() => (
-          <Card className='w-4/6 h-auto'>
+        {[1, 2, 3, 4, 5].map(value => (
+          <Card className='w-4/6 h-auto' key={value}>
             <CardHeader className='justify-between'>
               <div className='flex gap-5'>
                 <Avatar isBordered radius='full' size='md' src='https://nextui.org/avatars/avatar-1.png' />

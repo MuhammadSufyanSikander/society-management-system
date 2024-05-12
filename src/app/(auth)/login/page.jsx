@@ -5,7 +5,6 @@ import Input from '@/app/components/form/Input'
 import assets from '@/app/assets/assets'
 import Button from '@/app/components/form/Button'
 import Icon from '@/app/components/form/Icon'
-import withAuth from '@/app/Hoc/withAuth'
 import { login } from '@/app/redux/reducers/auth'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,4 +37,4 @@ function Login() {
   )
 }
 
-export default withAuth(Login)
+export default Login
