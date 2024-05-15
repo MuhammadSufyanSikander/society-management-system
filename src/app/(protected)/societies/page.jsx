@@ -12,12 +12,16 @@ import { PlusIcon } from '@/app/components/svg/PlusIcon'
 import Button from '@/app/components/form/Button'
 import DeleteSocietyModal from '@/app/components/Modals/DeleteSociety'
 import SocietyModal from '@/app/components/Modals/SocietyModal'
+import AddEventModal from '@/app/components/Modals/AddEventModal'
+import AddPollingModal from '@/app/components/Modals/AddPollingModal'
 
 export default function App() {
   const [isDeleteSocietyModal, setIsDeleteSocietyModal] = useState(false)
   const [isSocietyModal, setIsSocietyModal] = useState(false)
   const [isEditSociety, setIsEditSociety] = useState(false)
   const [isAddEventModal, setIsAddEventModal] = useState(false)
+  const [isEventModal, setIsEventModal] = useState(false)
+  const [isPollingModal, setIsPollingModal] = useState(false)
 
   const renderCell = React.useCallback((user, columnKey) => {
     const cellValue = user[columnKey]
@@ -76,8 +80,12 @@ export default function App() {
           <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => setIsSocietyModal(true)}>
             Add New
           </Button>
-          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => setIsAddEventModal(true)}>
+          
+          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => setIsEventModal(true)}>
             Add Event
+          </Button>
+          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => setIsPollingModal(true)}>
+            Add Polling
           </Button>
         </div>
       </div>
@@ -99,6 +107,10 @@ export default function App() {
         </TableHeader>
         <TableBody items={users}>{item => <TableRow key={item.id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}</TableBody>
       </Table>
+      <AddEventModal
+      isOpen={isEventModal}
+      onClose={()=>{setIsEventModal(false)}}/>
+      <AddPollingModal isOpen={isPollingModal} onClose={()=>setIsPollingModal(false)} />
 
       <SocietyModal
         isEdit={isEditSociety}
