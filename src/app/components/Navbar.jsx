@@ -19,6 +19,10 @@ const Navbar = () => {
       route: ROUTES.societies,
     },
     {
+      label: 'Events',
+      route: ROUTES.events,
+    },
+    {
       label: 'Profile',
       route: ROUTES.userProfile + '/1',
     },

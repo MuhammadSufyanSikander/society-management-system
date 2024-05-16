@@ -15,6 +15,10 @@ export default function AddPollingModal({ isOpen, onClose, onAddSociety, onEditS
  const handleAddInput = () => {
     setInputFields(prevFields => [...prevFields, `Selection ${prevFields.length + 1}`]);
   };
+  const handleRemoveInput = () => {
+    setInputFields(prevFields => prevFields.slice(0, -1))
+  };
+
   return (
     <Modal placement='center' size='lg' className='h-4/6 overflow-scroll' isOpen={isOpen} onClose={onClose}>
       <ModalContent>
@@ -26,13 +30,18 @@ export default function AddPollingModal({ isOpen, onClose, onAddSociety, onEditS
           {inputFields.map((fieldName, index) => (
             <Input key={index} autoFocus label={fieldName} />
           ))}
-          <Button color='primary' onPress={handleAddInput}>
+          <div className=' flex gap-[20px] w-full justify-between'>
+          <Button isDisabled={inputFields?.length <=2 } fullWidth='true' color='danger' variant='flat' onPress={handleRemoveInput}>
+            Remove
+          </Button>
+          <Button isDisabled={inputFields?.length >= 4} fullWidth='true' color='primary' onPress={handleAddInput}>
             Add
           </Button>
+          </div>
           
         </ModalBody>
         <ModalFooter>
-          <Button color='danger' variant='flat' onPress={onClose}>
+          <Button  color='danger' variant='flat' onPress={onClose}>
             Close
           </Button>
           <Button color='primary' onPress={isEdit ? onEditSociety : onAddSociety}>

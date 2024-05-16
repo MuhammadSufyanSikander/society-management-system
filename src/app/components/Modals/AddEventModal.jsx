@@ -13,7 +13,7 @@ export default function AddEventModal({ isOpen, onClose, onAddSociety, onEditSoc
   return (
     <Modal placement='center' size='lg' className='h-4/6 overflow-scroll' isOpen={isOpen} onClose={onClose}>
       <ModalContent>
-        <ModalHeader className='flex flex-col gap-1'> {isEdit ? 'Edit Society' : 'Add New Event'}</ModalHeader>
+        <ModalHeader className='flex flex-col gap-1'> {isEdit ? 'Edit Event' : 'Add New Event'}</ModalHeader>
         <ModalBody className='gap-5'>
           <Input autoFocus label='Event title' />
           <TextArea label='Description' />
