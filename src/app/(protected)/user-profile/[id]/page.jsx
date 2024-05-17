@@ -1,6 +1,6 @@
 'use client'
 
-import { Avatar, Card, CardHeader, CardBody } from '@nextui-org/react'
+import { Avatar, Card, CardHeader, CardBody, Button } from '@nextui-org/react'
 
 import React, { useEffect } from 'react'
 
@@ -26,15 +26,68 @@ const UserProfile = () => {
         <div className='flex flex-col justify-center items-center gap-2'>
           <h1 className='text-22xl font-semibold leading-none text-default-600'>Zoey Lang</h1>
 
-          <h1 className='text-large font-semibold leading-none text-default-600 italic'>department</h1>
+          {/* <h1 className='text-large font-semibold leading-none text-default-600 italic'>department</h1> */}
         </div>
 
-        <div className='mt-5 flex flex-col gap-1 justify-center items-center text-small text-default-400'>
+        {/* <div className='mt-5 flex flex-col gap-1 justify-center items-center text-small text-default-400'>
           <p>email address . mobile number</p>
           <span>date of birth</span>
+        </div> */}
+      </div>
+      <div class='w-full border-[1px] h-fit mb-4 border-gray-50 rounded-[4px] p-[22px]'>
+        <div className='flex justify-between'>
+        <div className='font-bold text-[20px] mb-[15px]'>User Details</div>
+        <Button color='primary' className='min-w-fit'  onClick={() => setIsSocietyModal(true)}>
+            Edit
+          </Button>
+        </div>
+        <div className=' grid grid-cols-3 gap-5'>
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>First Name</span>
+          <span className='text-[16px] font-normal'>User</span>
+        </div>
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>Mobile Number</span>
+          <span className='text-[16px] font-normal'>03000300990</span>
+        </div>
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>Registration Number</span>
+          <span className='text-[16px] font-normal'>123</span>
+        </div>
+        
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>Last Name</span>
+          <span className='text-[16px] font-normal'>123 </span>
+        </div>
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>National Identity Card #/ B-Form</span>
+          <span className='text-[16px] font-normal'>35303-0000000-0 </span>
+        </div>
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>Gender</span>
+          <span className='text-[16px] font-normal'>Male</span>
+        </div>
+        
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>E-mail</span>
+          <span className='text-[16px] font-normal'>user@gmail.com</span>
+        </div>
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>Department</span>
+          <span className='text-[16px] font-normal'>Computer Science</span>
+        </div>
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>Program</span>
+          <span className='text-[16px] font-normal'>BS-2023</span>
+        </div>
+        <div class='flex flex-col'>
+          <span className='text-[12px] font-semibold font-noto-sans'>Society</span>
+          <span className='text-[16px] font-normal'>Evemt Management Society</span>
         </div>
       </div>
-      <div className='gap-5 w-full h-auto flex flex-col justify-center items-center'>
+      </div>
+
+      {/* <div className='gap-5 w-full h-auto flex flex-col justify-center items-center'>
         {[1, 2, 3, 4, 5].map(value => (
           <Card className='w-4/6 h-auto' key={value}>
             <CardHeader className='justify-between'>
@@ -57,7 +110,7 @@ const UserProfile = () => {
             </CardBody>
           </Card>
         ))}
-      </div>
+      </div> */}
     </div>
   )
 }

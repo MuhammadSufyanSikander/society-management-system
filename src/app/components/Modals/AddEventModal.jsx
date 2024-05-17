@@ -18,7 +18,7 @@ export default function AddEventModal({ isOpen, onClose, onAddSociety, onEditSoc
           <Input autoFocus label='Event title' />
           <TextArea label='Description' />
           <DateTimeInput label={'Event time'}/>
-          <Input autoFocus label='Event location' />
+          <Input label='Event location' />
           <Select name={'Society'} label={'Select society'} items={societies} />
         </ModalBody>
         <ModalFooter>
