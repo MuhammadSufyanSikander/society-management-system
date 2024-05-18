@@ -11,6 +11,10 @@ const Navbar = () => {
 
   const data = [
     {
+      label: 'Homepage',
+      route: ROUTES.homepage,
+    },
+    {
       label: 'Users',
       route: ROUTES.users,
     },

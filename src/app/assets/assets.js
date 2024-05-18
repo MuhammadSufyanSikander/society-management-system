@@ -21,6 +21,7 @@ import whitedots from './icons/whitedots.svg'
 import password from './icons/password.svg'
 import email from './icons/mail.svg'
 import user from './icons/user.svg'
+import background from './icons/background.jpg'
 
 const assets = {
   icons: {
@@ -47,6 +48,7 @@ const assets = {
     colorpicker,
     dropdownarrow,
     whitedots,
+    background,
   },
 }
 export default assets

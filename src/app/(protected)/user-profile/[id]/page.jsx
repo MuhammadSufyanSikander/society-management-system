@@ -1,10 +1,12 @@
 'use client'
 
+import EditProfileModal from '@/app/components/Modals/EditProfileModal'
 import { Avatar, Card, CardHeader, CardBody, Button } from '@nextui-org/react'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const UserProfile = () => {
+  const [isEdit,setIsEdit] = useState()
   const user = {
     name: 'John Doe',
     department: 'Software Development',
@@ -37,7 +39,7 @@ const UserProfile = () => {
       <div class='w-full border-[1px] h-fit mb-4 border-gray-50 rounded-[4px] p-[22px]'>
         <div className='flex justify-between'>
         <div className='font-bold text-[20px] mb-[15px]'>User Details</div>
-        <Button color='primary' className='min-w-fit'  onClick={() => setIsSocietyModal(true)}>
+        <Button color='primary' className='min-w-fit'  onClick={() => setIsEdit(true)}>
             Edit
           </Button>
         </div>
@@ -65,7 +67,7 @@ const UserProfile = () => {
         </div>
         <div class='flex flex-col'>
           <span className='text-[12px] font-semibold font-noto-sans'>Gender</span>
-          <span className='text-[16px] font-normal'>Male</span>
+          <span className='text-[16px] font-normal'>Female</span>
         </div>
         
         <div class='flex flex-col'>
@@ -111,7 +113,10 @@ const UserProfile = () => {
           </Card>
         ))}
       </div> */}
+
+<EditProfileModal isEdit='true' isOpen={isEdit} onClose={()=>setIsEdit(false)} />
     </div>
+
   )
 }
 

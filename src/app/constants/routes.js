@@ -5,6 +5,7 @@ const ROUTES = {
   societies: '/societies',
   events:'/events',
   userProfile: '/user-profile',
+  homepage:'/homepage'
 }
 
 export default ROUTES
