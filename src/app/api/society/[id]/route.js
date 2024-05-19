@@ -2,6 +2,8 @@ import { connect } from '@/app/db/connect'
 import { checkAuth } from '../../middleware/auth'
 import { NextResponse } from 'next/server'
 import Society from '@/app/models/Society'
+import Department from '@/app/models/Department'
+import Users from '@/app/models/Users'
 
 export const PUT = async (req, { params }) => {
   const body = await req.json()
@@ -16,7 +18,9 @@ export const PUT = async (req, { params }) => {
 
     if (!isAuthenticated) return NextResponse.json({ success: false, message: message }, { status: 401 })
 
-    const updatedSociety = await Society.findOneAndUpdate({ _id: id }, body, { new: true })
+    Department
+    Users
+    const updatedSociety = await Society.findOneAndUpdate({ _id: id }, body, { new: true }).populate('department admin')
 
     if (!updatedSociety) return NextResponse.json({ success: false, message: 'Society not found' }, { status: 404 })
 

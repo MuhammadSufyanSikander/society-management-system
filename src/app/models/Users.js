@@ -9,10 +9,10 @@ const UserSchema = new mongoose.Schema({
   registration: { type: String },
   phone: { type: String, required: true },
   email: { type: String, required: true },
-  department: { type: String },
+  department: { type: mongoose.Schema.Types.ObjectId, ref: 'Department' },
   program: { type: String },
   section: { type: String },
-  society: { type: String },
+  society: { type: mongoose.Schema.Types.ObjectId, ref: 'Society' },
   password: { type: String, required: true },
   role: { type: String, required: true },
 })

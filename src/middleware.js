@@ -2,12 +2,7 @@ import { NextResponse } from 'next/server'
 import jwt from 'jsonwebtoken'
 import localStorage from 'redux-persist/es/storage'
 
-const SECRET_KEY = 'secretkey' // Replace with your actual secret key
-
 const unProtectedRoutes = ['/', '/login', '/register']
-
-// const ownerApiRoutes = ['/society']
-// const adminApiRoutes = ['/society']
 
 const protectWebRoutes = ({ pathname, token, req }) => {
   // unprotected, no token, be on same unprotected page.
