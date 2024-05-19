@@ -52,6 +52,8 @@ module.exports = {
         },
         blue: {
           10: '#F5F5F5',
+          100:'#0693e3',
+          200:'#2596be',
           400: '#214C74',
         },
         whitesmoke: '#f2f4f5',

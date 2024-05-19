@@ -30,6 +30,18 @@ const Navbar = () => {
       label: 'Profile',
       route: ROUTES.userProfile + '/1',
     },
+    {
+      label: 'FAQ',
+      route: ROUTES.faq,
+    },
+    {
+      label: 'Contact Us',
+      route: ROUTES.contactUs,
+    },
+    {
+      label: 'About Us',
+      route: ROUTES.aboutUs,
+    },
   ]
 
   const navActiveColor = path => {
@@ -42,7 +54,7 @@ const Navbar = () => {
     <div className='self-stretch flex flex-row items-start justify-start pt-0 px-0 box-border top-[0] sticky max-w-full z-50'>
       <header className='flex-1 bg-royalblue flex flex-row items-center justify-end py-4 px-6 box-border gap-[20px] max-w-full text-left text-smi text-white font-noto-sans'>
         {/* <Icon imageHeight={'h-[39px]'} imageWidth={'w-[57px]'} image={assets.icons.logo} /> */}
-        <div className='w-[395px] flex flex-row items-center justify-end gap-[24px] max-w-full mq450:w-[149px]'>
+        <div className='w-full flex flex-row items-center justify-end gap-[24px] max-w-full mq450:w-[249px]'>
           {data?.map((item, index) => (
             <div
               key={index}

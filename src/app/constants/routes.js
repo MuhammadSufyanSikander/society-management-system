@@ -5,7 +5,10 @@ const ROUTES = {
   societies: '/societies',
   events:'/events',
   userProfile: '/user-profile',
-  homepage:'/homepage'
+  homepage:'/homepage',
+  aboutUs:'/aboutus',
+  contactUs:'/contactus',
+  faq:'/faq',
 }
 
 export default ROUTES

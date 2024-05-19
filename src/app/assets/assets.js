@@ -22,6 +22,8 @@ import password from './icons/password.svg'
 import email from './icons/mail.svg'
 import user from './icons/user.svg'
 import background from './icons/background.jpg'
+import rector from './images/rector.jpg'
+import faq from './images/faq.jpg'
 
 const assets = {
   icons: {
@@ -50,5 +52,9 @@ const assets = {
     whitedots,
     background,
   },
+  images:{
+    rector,
+    faq,
+  }
 }
 export default assets
