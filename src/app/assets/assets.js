@@ -24,6 +24,7 @@ import user from './icons/user.svg'
 import background from './icons/background.jpg'
 import rector from './images/rector.jpg'
 import faq from './images/faq.jpg'
+import uniLogo from './images/logo.png'
 
 const assets = {
   icons: {
@@ -55,6 +56,7 @@ const assets = {
   images:{
     rector,
     faq,
+    uniLogo,
   }
 }
 export default assets

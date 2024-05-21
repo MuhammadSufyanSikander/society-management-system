@@ -9,8 +9,8 @@ const Register = () => {
   return (
     <div className='w-full relative flex flex-col items-center justify-start h-screen mb-20'>
       <div className='flex pt-16 justify-center h-screen w-screen '>
-        <div className='w-[383px]  flex flex-col items-center justify-start py-0 px-5  box-border gap-[60px] max-w-full mq450:gap-[30px]'>
-          <Icon imageWidth={'w-[131px]'} imageHeight={'h-[89px]'} image={assets.icons.Frame} />
+        <div className='w-[383px]   flex flex-col items-center justify-start py-0 px-5  box-border gap-[60px] max-w-full mq450:gap-[30px]'>
+          <Icon imageWidth={131} imageHeight={89} image={assets.images.uniLogo} />
           <Step1 />
           <Step2 />
           <Step3 />
