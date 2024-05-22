@@ -16,19 +16,29 @@ import { getDepartments } from '@/app/redux/reducers/department'
 const Step2 = () => {
   const { userInfo, error, step } = useSelector(state => state.auth)
   const { departments } = useSelector(state => state.department)
-  console.log('asdada', departments)
+  const { societies } = useSelector(state => state.society)
+  console.log('societies:', societies)
   const dispatch = useDispatch()
 
   const handleChange = e => {
-    console.log('asdasdasdsd', e.target)
     dispatch(setAuthUserInfo({ key: e.target.name, value: e.target.name === 'department' ? e.target.id : e.target.value }))
   }
   const handleDepartmentChange = value => {
     const selectedDepartment = departments.find(dep => dep.department === value.target.value)
-    const selectedDepartmentId = selectedDepartment?._id
-    console.log('Selected Department ID:', selectedDepartmentId, value.target.value)
-    dispatch(setAuthUserInfo({ key: 'department', value: selectedDepartmentId }))
+    console.log('selectedDepartment :', selectedDepartment)
+    dispatch(setAuthUserInfo({ key: 'department', value: selectedDepartment?.department }))
+    dispatch(setAuthUserInfo({ key: 'departmentId', value: selectedDepartment._id }))
   }
+
+  const handleSocietyChange = value => {
+    const selectedSociety = societies.find(society => society.societyName === value.target.value)
+
+    dispatch(setAuthUserInfo({ key: 'society', value: selectedSociety?._id }))
+    dispatch(setAuthUserInfo({ key: 'societyName', value: selectedSociety.societyName }))
+
+    console.log('selectedSociety :', selectedSociety)
+  }
+
   const handleSubmitStepTwo = () => {
     dispatch(
       setAuthValue({
@@ -76,7 +86,16 @@ const Step2 = () => {
       />
       <Select name={'program'} label={'Select Program'} items={step2Data.programs} onChange={handleChange} value={userInfo?.program} errorMessage={error?.program} />
       <Select name={'section'} label={'Select Section'} items={step2Data.sections} onChange={handleChange} value={userInfo?.section} errorMessage={error?.section} />
-      <Select name={'society'} label={'Select Society'} items={step2Data.sections} onChange={handleChange} value={userInfo?.society} errorMessage={error?.society} />
+      <Select
+        name={'society'}
+        label={'Select Society'}
+        items={societies}
+        obj='societyName'
+        objValue='societyName'
+        onChange={handleSocietyChange}
+        value={userInfo?.societyName}
+        errorMessage={error?.society}
+      />
       <div className='w-full gap-5 flex'>
         <Button
           variant='ghost'

@@ -5,9 +5,7 @@ import { department } from '@/app/apiMethod/department'
 function* getDepartmentItems(action) {
   try {
     const response = yield call(department().getDepartments)
-    console.log('asdasds123', response)
     yield put(getDepartmentsSuccess({ departments: response.data.departments }))
-    // router.push(routes.REGISTER)
   } catch (error) {
     console.log('error login', error)
   }

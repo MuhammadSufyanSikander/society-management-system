@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
-import { login, register, success } from '../reducers/auth'
+import { login, register, setAuthValue, success } from '../reducers/auth'
 import routes from '@/app/routes'
 import { auth } from '@/app/apiMethod/auth'
 
@@ -17,13 +17,13 @@ function* signin(action) {
 }
 
 function* signup(action) {
-  // const { router } = yield select(state => state.settings)
   try {
-    const { data } = action.payload
+    const { data, router } = action.payload
 
     const response = yield call(auth().register, data)
-    yield put(success({}))
-    // router.push(routes.REGISTER)
+    yield put(success({ userInfo: response.data.user, token: response.data.token }))
+    yield put(setAuthValue({ key: 'step', value: 1 }))
+    router.push(routes.HOME)
   } catch (error) {
     console.log('error login', error)
   }

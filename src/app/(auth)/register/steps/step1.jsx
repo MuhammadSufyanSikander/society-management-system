@@ -21,11 +21,12 @@ const Step1 = () => {
   console.log('tesdsd', userInfo)
 
   const handleChange = e => {
+    console.log('Eeeeee :', e)
     dispatch(setAuthUserInfo({ key: e.target.name, value: e.target.value }))
   }
 
   const handleSubmitStepOne = () => {
-    dispatch(getDepartments())
+    // dispatch(getDepartments())
 
     dispatch(
       setAuthValue({
