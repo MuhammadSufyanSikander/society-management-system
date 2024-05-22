@@ -4,7 +4,7 @@ export const department = () => {
   return {
     getDepartments: async () => {
       try {
-        const response = await client.get('/api/departments')
+        const response = await client.get('/departments')
         return response
       } catch (error) {
         console.log('error', error)

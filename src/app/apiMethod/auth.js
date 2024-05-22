@@ -4,7 +4,7 @@ export const auth = () => {
   return {
     login: async (email, password) => {
       try {
-        const response = await client.post('/api/login', { email, password })
+        const response = await client.post('/login', { email, password })
         return response
       } catch (error) {
         throw error
@@ -12,7 +12,7 @@ export const auth = () => {
     },
     register: async data => {
       try {
-        const response = await client.post('/api/register', data)
+        const response = await client.post('/register', data)
         return response
       } catch (error) {
         throw error
