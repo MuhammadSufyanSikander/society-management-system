@@ -6,14 +6,8 @@ import Society from '@/app/models/Society'
 import Department from '@/app/models/Department'
 
 export const GET = async req => {
-  const token = req.headers.get('Authorization')?.split(' ')?.[1]
-
   try {
     await connect()
-
-    const { success: isAuthenticated, message } = await checkAuth({ token, role: ['owner'] })
-
-    if (!isAuthenticated) return NextResponse.json({ success: false, message: message }, { status: 401 })
 
     Society
     Department

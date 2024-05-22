@@ -13,9 +13,10 @@ const DatePicker = ({ id, label, name, type = 'text', errorMessage = '', value, 
       label={label}
       value={value}
       onChange={value => {
+        console.log('Valueueueueue :', value)
         const formattedDate = moment(`${value.year}-${value.month}-${value.day}`).format('YYYY-MM-DD')
 
-        onChange(formattedDate)
+        formattedDate && onChange(formattedDate)
       }}
     />
   )

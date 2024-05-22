@@ -5,18 +5,29 @@ import Society from '@/app/models/Society'
 import Department from '@/app/models/Department'
 import Users from '@/app/models/Users'
 
-export const PUT = async (req, { params }) => {
-  const body = await req.json()
+export const GET = async (req, { params }) => {
   const { id } = params
-
-  const token = req.headers.get('Authorization')?.split(' ')?.[1]
 
   try {
     await connect()
 
-    const { success: isAuthenticated, message } = await checkAuth({ token, role: ['owner'] })
+    const society = await Society.findOne({ _id: id })
 
-    if (!isAuthenticated) return NextResponse.json({ success: false, message: message }, { status: 401 })
+    if (!society) return NextResponse.json({ success: false, message: 'Society not found' }, { status: 404 })
+
+    return NextResponse.json({ success: true, society }, { status: 200 })
+  } catch (error) {
+    console.log(error)
+    return NextResponse.json({ message: 'Something went wrong', error }, { status: 500 })
+  }
+}
+
+export const PUT = async (req, { params }) => {
+  const body = await req.json()
+  const { id } = params
+
+  try {
+    await connect()
 
     Department
     Users
@@ -34,14 +45,8 @@ export const PUT = async (req, { params }) => {
 export const DELETE = async (req, { params }) => {
   const { id } = params
 
-  const token = req.headers.get('Authorization')?.split(' ')?.[1]
-
   try {
     await connect()
-
-    const { success: isAuthenticated, message } = await checkAuth({ token, role: ['owner'] })
-
-    if (!isAuthenticated) return NextResponse.json({ success: false, message: message }, { status: 401 })
 
     const deletedSociety = await Society.findOneAndDelete({ _id: id })
 

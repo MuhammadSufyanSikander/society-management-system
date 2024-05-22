@@ -19,13 +19,15 @@ function Login() {
     <div className='w-full relative  overflow-hidden flex flex-col items-center justify-start h-screen'>
       <div className=' flex items-center justify-center h-screen w-screen '>
         <div className='w-[383px]  flex flex-col items-center justify-start py-0 px-5  box-border gap-[60px] max-w-full mq450:gap-[30px]'>
-          <Icon imageWidth={'w-[131px]'} imageHeight={'h-[89px]'} image={assets.icons.Frame} />
+        
+        <Icon image={assets.images.uniLogo} />
+       
           <form className='m-0 self-stretch flex flex-col items-center justify-start gap-[20px]'>
             <Input name={'email'} label={'Email'} leftIcon={assets.icons.email} />
             <Input name={'password'} type='password' label={'Password'} leftIcon={assets.icons.password} />
             <Button
               onClick={() => {
-                // dispatch(login({ router }))
+                dispatch(login({ email:'ali@gmail.com',password:'12345678' }))
               }}
             >
               Log in

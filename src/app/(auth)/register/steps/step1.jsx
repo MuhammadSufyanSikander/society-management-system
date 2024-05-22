@@ -12,17 +12,22 @@ import { resetAuthValues, setAuthUserInfo, setAuthValue } from '@/app/redux/redu
 import step1Schema from '@/app/validation/register/step1Validation'
 import moment from 'moment'
 import { parseDate } from '@internationalized/date'
+import { getDepartments } from '@/app/redux/reducers/department'
 
 const Step1 = () => {
   const dispatch = useDispatch()
 
   const { userInfo, error, step } = useSelector(state => state.auth)
+  console.log('tesdsd', userInfo)
 
   const handleChange = e => {
+    console.log('Eeeeee :', e)
     dispatch(setAuthUserInfo({ key: e.target.name, value: e.target.value }))
   }
 
   const handleSubmitStepOne = () => {
+    // dispatch(getDepartments())
+
     dispatch(
       setAuthValue({
         key: 'error',
