@@ -34,7 +34,7 @@ function Homepage() {
       <div ref={sectionRef}>
         <div className='w-full h-[89vh] '>
           <section className='w-full bg-gray-10  justify-center text-center px-32 py-10'>
-            <div className='text-[25px] font-bold mb-[20px]'>Vice Chancellor's Message</div>
+            <div className='text-[25px] font-bold mb-[20px]'>Vice Chancellor&apos;s Message</div>
             <div className='flex text-left justify-center'>
               <div className=' w-[60%] italic'>
                 Government College University Faisalabad is a dynamic seat of learning aspiring to provide highly stimulating and conducive academic environments for quality research, formal education
