@@ -35,23 +35,21 @@ function page() {
       </div>
       <section className='w-full bg-gray-10  justify-center px-32 py-10'>
         <div className='flex'>
-        <div className='w-[80%]'>
-          <div className='text-[25px] text-blue-200 font-bold '>RECTOR'S MESSAGE</div>
-          <div className='text-[12px] text-black-100'>Engr Javed Mahmood Bukhari</div>
-          <div className='text-[12px] mb-[20px]  text-black-100'>Rector Nust</div>
+          <div className='w-[80%]'>
+            <div className='text-[25px] text-blue-200 font-bold '>RECTOR&apos;S MESSAGE</div>
+            <div className='text-[12px] text-black-100'>Engr Javed Mahmood Bukhari</div>
+            <div className='text-[12px] mb-[20px]  text-black-100'>Rector Nust</div>
 
-          <div className=' w-[100%] italic'>
-            It gives me immense pleasure to welcome you to the National University of Sciences & Technology (NUST), an esteemed higher education institution where we collectively embark on a journey
-            of knowledge, growth and discovery. As the head of this prestigious institution, I am committed to taking its mission forward, while ensuring a conducive and stimulating environment that
-            fosters creativity, adaptability, and a sense of responsibility towards the society.
+            <div className=' w-[100%] italic'>
+              It gives me immense pleasure to welcome you to the National University of Sciences & Technology (NUST), an esteemed higher education institution where we collectively embark on a journey
+              of knowledge, growth and discovery. As the head of this prestigious institution, I am committed to taking its mission forward, while ensuring a conducive and stimulating environment that
+              fosters creativity, adaptability, and a sense of responsibility towards the society.
+            </div>
           </div>
-
-         </div>
-         <div className='  flex flex-col w-[40%] items-center text-center'>
-          <Icon imageWidth={'w-[200px] h-[200px] '} image={assets.images.rector} />
+          <div className='  flex flex-col w-[40%] items-center text-center'>
+            <Icon imageWidth={'w-[200px] h-[200px] '} image={assets.images.rector} />
+          </div>
         </div>
-        </div>
-        
       </section>
     </div>
   )
