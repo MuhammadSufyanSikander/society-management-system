@@ -5,12 +5,13 @@ import React from 'react'
 import Button from '@/app/components/form/Button'
 import Input from '@/app/components/form/Input'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetAuthValues, setAuthUserInfo, setAuthValue } from '@/app/redux/reducers/auth'
+import { register, resetAuthValues, setAuthUserInfo, setAuthValue } from '@/app/redux/reducers/auth'
 import step3Schema from '@/app/validation/register/step3Validation'
 
 const Step3 = () => {
   const dispatch = useDispatch()
   const { userInfo, error, step } = useSelector(state => state.auth)
+  console.log('asdasda', userInfo)
 
   const handleChange = e => {
     dispatch(setAuthUserInfo({ key: e.target.name, value: e.target.value }))
@@ -25,6 +26,7 @@ const Step3 = () => {
     )
 
     try {
+      dispatch(register({ data: { ...userInfo, role: 'student', society: '664906b430c399eb1206594d8', phone: '123123123' } }))
       step3Schema.parse(userInfo)
       dispatch(setAuthValue({ key: 'step', value: 1 }))
     } catch (error) {

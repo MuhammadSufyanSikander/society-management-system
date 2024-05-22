@@ -27,7 +27,7 @@ function Login() {
             <Input name={'password'} type='password' label={'Password'} leftIcon={assets.icons.password} />
             <Button
               onClick={() => {
-                // dispatch(login({ router }))
+                dispatch(login({ email:'ali@gmail.com',password:'12345678' }))
               }}
             >
               Log in

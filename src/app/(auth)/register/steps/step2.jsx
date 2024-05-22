@@ -11,15 +11,24 @@ import step2Data from './step2Data'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAuthUserInfo, setAuthValue } from '@/app/redux/reducers/auth'
 import step2Schema from '@/app/validation/register/step2Validation'
+import { getDepartments } from '@/app/redux/reducers/department'
 
 const Step2 = () => {
   const { userInfo, error, step } = useSelector(state => state.auth)
+  const { departments } = useSelector(state => state.department)
+  console.log('asdada', departments)
   const dispatch = useDispatch()
 
   const handleChange = e => {
-    dispatch(setAuthUserInfo({ key: e.target.name, value: e.target.value }))
+    console.log('asdasdasdsd', e.target)
+    dispatch(setAuthUserInfo({ key: e.target.name, value: e.target.name === 'department' ? e.target.id : e.target.value }))
   }
-
+  const handleDepartmentChange = value => {
+    const selectedDepartment = departments.find(dep => dep.department === value.target.value)
+    const selectedDepartmentId = selectedDepartment?._id
+    console.log('Selected Department ID:', selectedDepartmentId, value.target.value)
+    dispatch(setAuthUserInfo({ key: 'department', value: selectedDepartmentId }))
+  }
   const handleSubmitStepTwo = () => {
     dispatch(
       setAuthValue({
@@ -42,7 +51,9 @@ const Step2 = () => {
       )
     }
   }
-  useEffect(() => {}, [])
+  useEffect(() => {
+    dispatch(getDepartments())
+  }, [])
 
   if (step !== 2) return null
 
@@ -53,7 +64,16 @@ const Step2 = () => {
       }}
       className='m-0 self-stretch flex flex-col items-center justify-start gap-[20px]'
     >
-      <Select name={'department'} label={'Select Department'} items={step2Data.departments} onChange={handleChange} value={userInfo?.department} errorMessage={error?.department} />
+      <Select
+        obj={'department'}
+        objValue='department'
+        name={'department'}
+        label={'Select Department'}
+        items={departments}
+        onChange={handleDepartmentChange}
+        value={userInfo?.department}
+        errorMessage={error?.department}
+      />
       <Select name={'program'} label={'Select Program'} items={step2Data.programs} onChange={handleChange} value={userInfo?.program} errorMessage={error?.program} />
       <Select name={'section'} label={'Select Section'} items={step2Data.sections} onChange={handleChange} value={userInfo?.section} errorMessage={error?.section} />
       <Select name={'society'} label={'Select Society'} items={step2Data.sections} onChange={handleChange} value={userInfo?.society} errorMessage={error?.society} />
@@ -61,6 +81,7 @@ const Step2 = () => {
         <Button
           variant='ghost'
           onClick={() => {
+            // dispatch(getDepartments())
             dispatch(setAuthValue({ key: 'step', value: 1 }))
           }}
         >
