@@ -1,74 +1,41 @@
-'use client'
+import assets from '@/app/assets/assets'
+import FlexCard from '@/app/components/flexCard'
+import Icon from '@/app/components/form/Icon'
+import React from 'react'
 
-import EditProfileModal from '@/app/components/Modals/EditProfileModal'
-import SocietyModal from '@/app/components/Modals/SocietyModal'
-import { Avatar, Card, CardHeader, CardBody, Button } from '@nextui-org/react'
-
-import React, { useEffect, useState } from 'react'
-
-const Society = () => {
-  const [isEdit,setIsEdit] = useState()
-  const user = {
-    name: 'John Doe',
-    department: 'Software Development',
-    email: 'john.doe@example.com',
-    photo: 'https://picsum.photos/id/1/200/300', // Replace with the actual path to the photo
-    posts: [
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    ],
-  }
-
+function page() {
   return (
-    <div className='w-full relative flex flex-col items-center justify-start h-screen my-5 px-20'>
-      <div  className='container relative flex justify-center items-start flex-col mb-5 overflow-visible py-5'>
+    <div className='p-16 flex flex-col gap-[80px]'>
+      <div className='flex '>
+        <div className=' w-full'>
+          <h1 className='font-bold font-noto-sans leading-[50px] text-[50px] text-royalblue'>Software Engineering Society</h1>
+          <p className='mt-[40px] text-gray-800 font-noto-sans'>
+            The Software Engineering Society is an initiative aimed at bridging the gap between industry and academia in the field of software engineering. The society was created with the goal of
+            creating a platform for collaboration and communication between industry professionals and academics, to foster innovation and advance the field of software engineering. Software
+            engineering is a rapidly evolving field, with new technologies and best practices emerging at an unprecedented pace. However, there is often a gap between the knowledge and skills that are
+            taught in academia and the practical skills and knowledge required in the industry
+          </p>
+        </div>
+        <Icon imageWidth={'w-[40%] h-[100%] '} image={assets.images.societylogo} />
+      </div>
 
-        <div className='flex flex-col justify-center items-center gap-2'>
-          <h1 className='text-22xl font-semibold leading-none text-default-600'>Society name1</h1>
-        </div>
-
-       
+      <div className='text-center'>
+        <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Scope</h1>
+        <p className='mt-[30px] text-start  text-gray-800 font-noto-sans'>
+          The society’s scope is to create a platform for collaboration and communication between industry professionals and academics, with the goal of advancing the field of software engineering.
+        </p>
       </div>
-      <div class='w-full border-[1px] h-fit mb-4 border-gray-50 rounded-[4px] p-[22px]'>
-        <div className='flex justify-between'>
-        <div className='font-bold text-[20px] mb-[15px]'>Society Details</div>
-        <Button color='primary' className='min-w-fit'  onClick={() => setIsEdit(true)}>
-            Edit
-          </Button>
-        </div>
-        <div className=' grid grid-cols-3 gap-5'>
-        <div class='flex flex-col'>
-          <span className='text-[12px] font-semibold font-noto-sans'>Society Name</span>
-          <span className='text-[16px] font-normal'>Society name1</span>
-        </div>
-        <div class='flex flex-col'>
-          <span className='text-[12px] font-semibold font-noto-sans'>Society Mssion</span>
-          <span className='text-[16px] font-normal'>03000300990</span>
-        </div>
-    
-        
-        
-        <div class='flex flex-col'>
-          <span className='text-[12px] font-semibold font-noto-sans'>Society Description</span>
-          <span className='text-[16px] font-normal'>XYZ</span>
-        </div>
-        
-        
-        <div class='flex flex-col'>
-          <span className='text-[12px] font-semibold font-noto-sans'>Rules & Regulations</span>
-          <span className='text-[16px] font-normal'>XYZ</span>
-        </div>
-        <div class='flex flex-col'>
-          <span className='text-[12px] font-semibold font-noto-sans'>Department</span>
-          <span className='text-[16px] font-normal'>Computer Science</span>
-        </div>
+      <div className='text-center'>
+        <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Objectives</h1>
+        <p className='mt-[30px] text-start  text-gray-800 font-noto-sans'>
+          1. Providing a platform for students, researchers, and professionals to explore career opportunities and learn about the latest trends and developments in the industry. 2. Aims to support
+          the growth of the field and help to address the skills gap that exists between industry and academia. 3. Society is to facilitate networking. Through organizing networking events and
+          activities that bring together industry professionals, academics, and students, the society aims to create a strong community of professionals who can support and learn from each other.
+        </p>
       </div>
-      </div>
-<SocietyModal isEdit='true' isOpen={isEdit} onClose={()=>setIsEdit(false)} />
+      <FlexCard />
     </div>
-
   )
 }
 
-export default Society
+export default page

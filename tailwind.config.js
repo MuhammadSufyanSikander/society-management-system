@@ -17,7 +17,7 @@ module.exports = {
         lightWhite: 'rgba(255, 255, 255, 0.7)',
         offWhite: 'rgba(255, 255, 255, 0.60)',
         lightgray: '#d2d2d2',
-        overlay: 'rgba(0,0,0,0.5)',
+        overlay: 'rgba(0,0,0,0.7)',
         black: {
           50: 'rgba(77, 77, 77, 0.70)',
           100: '#4D4D4D',
@@ -26,6 +26,7 @@ module.exports = {
           100: '#EEECEC',
         },
         gray: {
+          5: '#F6F6F6',
           10: '#EAEBEF',
           50: '#7E919F',
           100: '#181818',
@@ -52,8 +53,8 @@ module.exports = {
         },
         blue: {
           10: '#F5F5F5',
-          100:'#0693e3',
-          200:'#2596be',
+          100: '#0693e3',
+          200: '#2596be',
           400: '#214C74',
         },
         whitesmoke: '#f2f4f5',

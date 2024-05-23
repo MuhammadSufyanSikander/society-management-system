@@ -25,6 +25,10 @@ import background from './icons/background.jpg'
 import rector from './images/rector.jpg'
 import faq from './images/faq.jpg'
 import uniLogo from './images/logo.png'
+import societylogo from './images/societylogo.png'
+import clock from './icons/clock.svg'
+import acheivement from './icons/acheivement.svg'
+import event from './icons/event.svg'
 
 const assets = {
   icons: {
@@ -52,11 +56,15 @@ const assets = {
     dropdownarrow,
     whitedots,
     background,
+    clock,
+    acheivement,
+    event,
   },
-  images:{
+  images: {
     rector,
     faq,
     uniLogo,
-  }
+    societylogo,
+  },
 }
 export default assets
