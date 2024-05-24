@@ -1,5 +1,5 @@
 import assets from '@/app/assets/assets'
-import FlexCard from '@/app/components/flexCard'
+import FlexCard from '@/app/components/FlexCard'
 import Icon from '@/app/components/form/Icon'
 import React from 'react'
 
