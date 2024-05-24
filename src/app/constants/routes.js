@@ -4,6 +4,7 @@ const ROUTES = {
   users: '/users',
   societies: '/societies',
   events: '/events',
+  event: '/event',
   userProfile: '/user-profile',
   homepage: '/homepage',
   aboutUs: '/aboutus',

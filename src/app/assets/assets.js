@@ -27,8 +27,10 @@ import faq from './images/faq.jpg'
 import uniLogo from './images/logo.png'
 import societylogo from './images/societylogo.png'
 import clock from './icons/clock.svg'
+import darkclock from './icons/darkclock.svg'
 import acheivement from './icons/acheivement.svg'
 import event from './icons/event.svg'
+import location from './icons/location.svg'
 
 const assets = {
   icons: {
@@ -59,6 +61,8 @@ const assets = {
     clock,
     acheivement,
     event,
+    darkclock,
+    location,
   },
   images: {
     rector,
