@@ -4,7 +4,13 @@ export const society = () => {
   return {
     getSocieties: async () => {
       try {
-        const response = await client.get(`/societies?timestamp=${Date.now()}`)
+        const response = await client.get(`/societies?timestamp=${Date.now()}`, {
+          headers: {
+            'Cache-Control': 'no-cache',
+            Pragma: 'no-cache',
+            Expires: '0',
+          },
+        })
         return response
       } catch (error) {
         console.log('error', error)
