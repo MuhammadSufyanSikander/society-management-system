@@ -3,7 +3,6 @@ import Users from '@/app/models/Users'
 import bcrypt from 'bcrypt'
 import { connect } from '@/app/db/connect'
 import jwt from 'jsonwebtoken'
-import mongoose from 'mongoose'
 import Society from '@/app/models/Society'
 import Department from '@/app/models/Department'
 
