@@ -4,7 +4,7 @@ export const society = () => {
   return {
     getSocieties: async () => {
       try {
-        const response = await fetch(`${API_URL}/societies?timestamp=${Date.now()}`, { cache: 'no-cache', next: { revalidate: 3000 } })
+        const response = await fetch(`${API_URL}/societies?timestamp=${Date.now()}`, { cache: 'no-cache', next: { revalidate: 5 } })
         const data = await response.json()
 
         return { data }
@@ -14,7 +14,7 @@ export const society = () => {
     },
     getSociety: async ({ society_id }) => {
       try {
-        const response = await fetch(`${API_URL}/society/${society_id}?timestamp=${Date.now()}`, { cache: 'no-cache', next: { revalidate: 3000 } })
+        const response = await fetch(`${API_URL}/society/${society_id}?timestamp=${Date.now()}`, { cache: 'no-cache', next: { revalidate: 5 } })
         const data = await response.json()
 
         return { data }
