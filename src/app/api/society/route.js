@@ -10,6 +10,10 @@ export const POST = async (req, res) => {
   try {
     await connect()
 
+    const found = await Society.findOne({ societyName: body.societyName })
+
+    if (!found) return NextResponse.json({ success: false, message: 'society already exist' }, { status: 409 })
+
     const society = new Society(body)
 
     const response = await society.save()

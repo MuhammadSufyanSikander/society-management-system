@@ -16,7 +16,7 @@ function Login() {
   const dispatch = useDispatch()
   const [inputFields, , errorMessage, onChange, onSubmit] = useForm({ email: '', password: '' })
   const router = useRouter()
-  const { token } = useSelector(state => state.auth)
+  const { token, loading } = useSelector(state => state.auth)
 
   const handleChange = e => {
     onChange({ target: { name: e.target.name, value: e.target.value } })
@@ -39,7 +39,9 @@ function Login() {
           <form className='m-0 self-stretch flex flex-col items-center justify-start gap-[20px]'>
             <Input name={'email'} value={inputFields.email} label={'Email'} errorMessage={errorMessage?.email} leftIcon={assets.icons.email} onChange={handleChange} />
             <Input name={'password'} type='password' value={inputFields.password} errorMessage={errorMessage?.password} label={'Password'} leftIcon={assets.icons.password} onChange={handleChange} />
-            <Button onClick={handleSubmit}>Log in</Button>
+            <Button loading={loading} loadingLabel='logging...' onClick={handleSubmit}>
+              Log in
+            </Button>
           </form>
         </div>
       </div>

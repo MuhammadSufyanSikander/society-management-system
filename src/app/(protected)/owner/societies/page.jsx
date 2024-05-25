@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Tooltip } from '@nextui-org/react'
 import { EditIcon } from '@/app/components/svg/EditIcon'
 import { DeleteIcon } from '@/app/components/svg/DeleteIcon'
@@ -12,32 +12,77 @@ import { PlusIcon } from '@/app/components/svg/PlusIcon'
 import Button from '@/app/components/form/Button'
 import DeleteSocietyModal from '@/app/components/Modals/DeleteSociety'
 import SocietyModal from '@/app/components/Modals/SocietyModal'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { getSocieties, insertSociety, setSocietyValue } from '@/app/redux/reducers/society'
+import useForm from '@/app/hooks/useForm'
+import { getDepartments } from '@/app/redux/reducers/department'
+import societyAddSchema from '@/app/validation/society/societyAddValidation'
 
 export default function Events() {
   const [isDeleteSocietyModal, setIsDeleteSocietyModal] = useState(false)
-  const [isSocietyModal, setIsSocietyModal] = useState(false)
   const [isEditSociety, setIsEditSociety] = useState(false)
-  // const [isAddEventModal, setIsAddEventModal] = useState(false)
-  // const [isEventModal, setIsEventModal] = useState(false)
-  // const [isPollingModal, setIsPollingModal] = useState(false)
+  const { societies, isAddSociety } = useSelector(state => state.society)
+  const { departments } = useSelector(state => state.department)
+  console.log('departmentsdepartmentsdepartments:', departments)
+  const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({
+    societyName: '',
+    societyDescription: '',
+    department: '',
+    departmentId: '',
+    mission: '',
+    achievements: '',
+    rules: '',
+  })
+  const dispatch = useDispatch()
 
-  const renderCell = React.useCallback((user, columnKey) => {
-    const cellValue = user[columnKey]
+  useEffect(() => {
+    dispatch(getSocieties())
+    dispatch(getDepartments())
+  }, [])
+
+  const handleDepartmentChange = value => {
+    const selectedDepartment = departments.find(dep => dep.department === value.target.value)
+    onChange({ target: { name: 'department', value: selectedDepartment?.department } })
+    onChange({ target: { name: 'departmentId', value: selectedDepartment?._id } })
+  }
+
+  const handleChangeAddSociety = e => {
+    if (e.target.name === 'department') return handleDepartmentChange(e)
+
+    onChange({ target: { name: e.target.name, value: e.target.value } })
+  }
+
+  const handleSubmitAddSociety = () => {
+    console.log('socuety added data :', inputFields)
+    onSubmit(societyAddSchema, () => {
+      dispatch(insertSociety({ data: { ...inputFields, department: inputFields.departmentId } }))
+    })
+  }
+
+  const renderCell = React.useCallback((item, columnKey) => {
+    const cellValue = item[columnKey]
 
     switch (columnKey) {
-      case 'name':
+      case 'societyName':
         return (
           <div className='flex flex-col'>
             <p className='text-bold text-sm capitalize'>{cellValue}</p>
-            <p className='text-bold text-sm capitalize text-default-400'>{user.email}</p>
+            {item?.admin && <p className='text-bold text-sm capitalize text-default-400'>{`${item.admin.email}`}</p>}
           </div>
         )
-      case 'role':
+      case 'department':
         return (
           <div className='flex flex-col'>
-            <p className='text-bold text-sm capitalize'>{cellValue}</p>
-            <p className='text-bold text-sm capitalize text-default-400'>{user.team}</p>
+            <p className='text-bold text-sm capitalize'>{cellValue.department}</p>
+            {/* <p className='text-bold text-sm capitalize text-default-400'>{user.team}</p> */}
+          </div>
+        )
+      case 'admin':
+        if (!cellValue) return null
+        return (
+          <div className='flex flex-col'>
+            <p className='text-bold text-sm capitalize'>{cellValue.cnic}</p>
+            {item?.admin && <p className='text-bold text-sm capitalize text-default-400'>{`${item.admin.firstname} ${item.admin.lastname}`}</p>}
           </div>
         )
       case 'actions':
@@ -52,7 +97,7 @@ export default function Events() {
               <span
                 onClick={() => {
                   setIsEditSociety(true)
-                  setIsSocietyModal(true)
+                  dispatch(setSocietyValue({ key: 'isAddSociety', value: true }))
                 }}
                 className='text-lg text-default-400 cursor-pointer active:opacity-50'
               >
@@ -76,16 +121,9 @@ export default function Events() {
       <div className='flex w-full flex-col gap-4 mb-10'>
         <div className='flex w-full gap-3 items-end'>
           <Input isClearable className='w-[30%] sm:max-w-[44%]' placeholder='Search by name...' startContent={<SearchIcon />} />
-          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => setIsSocietyModal(true)}>
+          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => dispatch(setSocietyValue({ key: 'isAddSociety', value: true }))}>
             Add New
           </Button>
-          
-          {/* <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => setIsEventModal(true)}>
-            Add Event
-          </Button>
-          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => setIsPollingModal(true)}>
-            Add Polling
-          </Button> */}
         </div>
       </div>
     )
@@ -104,24 +142,25 @@ export default function Events() {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={users}>{item => <TableRow key={item.id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}</TableBody>
+        <TableBody items={societies}>{item => <TableRow key={item._id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}</TableBody>
       </Table>
-      {/* <AddEventModal
-      isOpen={isEventModal}
-      onClose={()=>{setIsEventModal(false)}}/>
-      <AddPollingModal isOpen={isPollingModal} onClose={()=>setIsPollingModal(false)} /> */}
 
       <SocietyModal
+        onChangeInput={handleChangeAddSociety}
         isEdit={isEditSociety}
-        isOpen={isSocietyModal}
+        isOpen={isAddSociety}
         onAddSociety={() => {
           setIsEditSociety(false)
-          setIsSocietyModal(false)
+          handleSubmitAddSociety()
+          // dispatch(setSocietyValue({ key: 'isAddSociety', value: false }))
         }}
         onClose={() => {
           setIsEditSociety(false)
-          setIsSocietyModal(false)
+          dispatch(setSocietyValue({ key: 'isAddSociety', value: false }))
         }}
+        inputFields={inputFields}
+        departments={departments}
+        errorMessage={errorMessage}
       />
       <DeleteSocietyModal isOpen={isDeleteSocietyModal} onClose={() => setIsDeleteSocietyModal(false)} onDelete={() => setIsDeleteSocietyModal(false)} />
     </div>
