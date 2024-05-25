@@ -11,7 +11,9 @@ export const GET = async req => {
 
     Society
     Department
-    const users = await Users.find().populate('society department').select('-password')
+    const users = await Users.find({ role: { $ne: 'owner' } })
+      .populate('society department')
+      .select('-password')
 
     if (!users.length) return NextResponse.json({ success: false, message: 'No data found' }, { status: 404 })
 

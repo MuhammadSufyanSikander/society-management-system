@@ -15,6 +15,8 @@ const Step3 = () => {
   const router = useRouter()
 
   const handleChange = e => {
+    if (e.target.name === 'image') return dispatch(setAuthUserInfo({ key: e.target.name, value: e.target.files[0] }))
+
     dispatch(setAuthUserInfo({ key: e.target.name, value: e.target.value }))
   }
 
@@ -27,8 +29,6 @@ const Step3 = () => {
     )
 
     try {
-      console.log('user info: ', userInfo)
-
       step3Schema.parse(userInfo)
 
       dispatch(register({ router, data: { ...userInfo, department: userInfo.departmentId, role: 'student', society: userInfo.society, phone: '123123123' } }))
@@ -54,6 +54,7 @@ const Step3 = () => {
       className='m-0 self-stretch flex flex-col items-center justify-start gap-[20px]'
     >
       <Input name={'password'} label={'Password'} type='password' value={userInfo?.password} onChange={handleChange} errorMessage={error?.password} />
+      <input name={'image'} type='file' onChange={handleChange} />
       <div className='w-full flex gap-5'>
         <Button
           variant='ghost'

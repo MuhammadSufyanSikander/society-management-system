@@ -12,11 +12,14 @@ const DatePicker = ({ id, label, name, type = 'text', errorMessage = '', value, 
       type={type}
       label={label}
       value={value}
+      showMonthAndYearPickers
       onChange={value => {
-        console.log('Valueueueueue :', value)
-        const formattedDate = moment(`${value.year}-${value.month}-${value.day}`).format('YYYY-MM-DD')
+        console.log('Valueueueueue :', value, value.year.toString().length)
+        if (value.year.toString().length === 4) {
+          const formattedDate = moment(`${value.year}-${value.month}-${value.day}`).format('YYYY-MM-DD')
 
-        formattedDate && onChange(formattedDate)
+          formattedDate && onChange(formattedDate)
+        }
       }}
     />
   )

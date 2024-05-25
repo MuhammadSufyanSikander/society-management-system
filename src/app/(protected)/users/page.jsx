@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Spinner, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@nextui-org/react'
 import { columns, users } from './data'
 import Input from '@/app/components/form/Input'
@@ -11,6 +11,7 @@ import RejectRequestModal from '@/app/components/Modals/RejectRequestModal'
 import { PlusIcon } from '@/app/components/svg/PlusIcon'
 import { ChevronDownIcon } from '@/app/components/svg/ChevronDownIcon'
 import { capitalize } from '@/app/utils/string'
+import { useDispatch } from 'react-redux'
 
 const statusColorMap = {
   active: 'success',
@@ -26,6 +27,9 @@ const statusOptions = [
 export default function UsersPage() {
   const [isOpenAcceptModal, setIsOpenAcceptModal] = useState(false)
   const [isOpenRejectModal, setIsOpenRejectModal] = useState(false)
+  const dispatch = useDispatch()
+
+  useEffect(() => {}, [])
 
   const renderCell = React.useCallback((user, columnKey) => {
     const cellValue = user[columnKey]

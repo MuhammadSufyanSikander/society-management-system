@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
   society: { type: mongoose.Schema.Types.ObjectId, ref: 'Society' },
   password: { type: String, required: true },
   role: { type: String, required: true },
+  image: { type: String },
 })
 
 export default mongoose.models.User || mongoose.model('User', UserSchema)

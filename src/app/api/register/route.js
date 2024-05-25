@@ -14,11 +14,13 @@ export const POST = async req => {
 
     console.log('bodydddd :', body)
 
-    const { password, society, department } = body
-    const isValid = mongoose.Types.ObjectId.isValid(society)
-    const isValidOne = mongoose.Types.ObjectId.isValid(department)
+    const { email, password, society, department } = body
 
-    console.log('is valid id zaid :', isValid, isValidOne, society, department)
+    const found = await Users.findOne({
+      $and: [{ email }, { society }],
+    })
+
+    if (found) return NextResponse.json({ success: false, message: 'Email already exist' }, { status: 409 })
 
     const hash = await bcrypt.hash(password, 10)
 
