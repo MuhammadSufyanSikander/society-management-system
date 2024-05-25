@@ -19,7 +19,6 @@ import { getDepartments } from '@/app/redux/reducers/department'
 import societyAddSchema from '@/app/validation/society/societyAddValidation'
 
 export default function Events() {
-  const [isDeleteSocietyModal, setIsDeleteSocietyModal] = useState(false)
   const { societies, isAddSociety, isEditSociety, isDeleteSociety } = useSelector(state => state.society)
   const { departments } = useSelector(state => state.department)
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({
