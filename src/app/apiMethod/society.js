@@ -1,12 +1,13 @@
-import client from './client'
+import client, { API_URL } from './client'
 
 export const society = () => {
   return {
     getSocieties: async () => {
       try {
-        const response = await fetch(`/societies`, { cache: 'no-cache' })
+        const response = await fetch(`${API_URL}/societies`, { cache: 'no-cache' })
+        const data = await response.json()
 
-        return await response.json()
+        return { data }
       } catch (error) {
         console.log('error', error)
         throw error
