@@ -10,7 +10,7 @@ import { useParams } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-function page() {
+function Society() {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { society, loading } = useSelector(state => state.society)
@@ -58,4 +58,4 @@ function page() {
   )
 }
 
-export default page
+export default Society
