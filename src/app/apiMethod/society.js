@@ -2,9 +2,9 @@ import client, { API_URL } from './client'
 
 export const society = () => {
   return {
-    getSocieties: async () => {
+    getSocieties: async (searchQuery = '') => {
       try {
-        const response = await fetch(`${API_URL}/societies?timestamp=${Date.now()}`, { cache: 'no-cache', next: { revalidate: 5 } })
+        const response = await fetch(`${API_URL}/societies?timestamp=${Date.now()}&searchQuery=${searchQuery}`, { cache: 'no-cache', next: { revalidate: 5 } })
         const data = await response.json()
 
         return { data }

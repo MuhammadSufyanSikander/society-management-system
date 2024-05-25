@@ -26,7 +26,9 @@ import { firebaseStorage } from '@/app/apiMethod/storage'
 
 function* fetchSocieties(action) {
   try {
-    const response = yield call(society().getSocieties)
+    const { searchQuery } = action.payload || {}
+
+    const response = yield call(society().getSocieties, searchQuery)
 
     yield put(getSocietiesSuccess({ societies: response.data.societies }))
   } catch (error) {

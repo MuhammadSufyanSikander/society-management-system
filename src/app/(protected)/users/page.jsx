@@ -2,21 +2,22 @@
 
 import React, { useState, useEffect } from 'react'
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, User, Chip, Spinner, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from '@nextui-org/react'
-import { columns, users } from './data'
+import { columns } from './data'
 import Input from '@/app/components/form/Input'
 import { SearchIcon } from '@/app/components/svg/SearchIcon'
 import { VerticalDotsIcon } from '@/app/components/svg/VerticalDotsIcon'
 import AcceptRequestModal from '@/app/components/Modals/AcceptRequestModal'
 import RejectRequestModal from '@/app/components/Modals/RejectRequestModal'
-import { PlusIcon } from '@/app/components/svg/PlusIcon'
 import { ChevronDownIcon } from '@/app/components/svg/ChevronDownIcon'
 import { capitalize } from '@/app/utils/string'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUsers, modifyUser, setUserValue } from '@/app/redux/reducers/user'
+import useForm from '@/app/hooks/useForm'
 
 const statusColorMap = {
   active: 'success',
   rejected: 'danger',
-  vacation: 'warning',
+  pending: 'warning',
 }
 
 const statusOptions = [
@@ -25,19 +26,40 @@ const statusOptions = [
 ]
 
 export default function UsersPage() {
-  const [isOpenAcceptModal, setIsOpenAcceptModal] = useState(false)
-  const [isOpenRejectModal, setIsOpenRejectModal] = useState(false)
   const dispatch = useDispatch()
+  const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ user_id: null, isVerified: 'pending' })
+  const { users, loading, isOpenAcceptModal, isOpenRejectModal } = useSelector(state => state.user)
 
-  useEffect(() => {}, [])
+  const openAcceptModal = item => {
+    dispatch(setUserValue({ key: 'isOpenAcceptModal', value: true }))
+    setInputFields({ user_id: item._id, isVerified: 'active' })
+  }
+  const openRejectModal = item => {
+    dispatch(setUserValue({ key: 'isOpenRejectModal', value: true }))
+    setInputFields({ user_id: item._id, isVerified: 'rejected' })
+  }
+
+  const handleAccepterRequest = () => {
+    dispatch(setUserValue({ key: 'isOpenAcceptModal', value: false }))
+    dispatch(modifyUser({ data: inputFields }))
+  }
+
+  const handleRejectRequest = () => {
+    dispatch(setUserValue({ key: 'isOpenRejectModal', value: false }))
+    dispatch(modifyUser({ data: inputFields }))
+  }
+
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [])
 
   const renderCell = React.useCallback((user, columnKey) => {
     const cellValue = user[columnKey]
 
     switch (columnKey) {
-      case 'name':
+      case 'firstname':
         return (
-          <User avatarProps={{ radius: 'lg', src: user.avatar }} description={user.email} name={cellValue}>
+          <User avatarProps={{ radius: 'lg', src: user.image }} description={user.email} name={`${user.firstname} ${user.lastname}`}>
             {user.email}
           </User>
         )
@@ -47,10 +69,16 @@ export default function UsersPage() {
             <p className='text-bold text-sm capitalize'>{cellValue}</p>
           </div>
         )
+      case 'society':
+        return (
+          <div className='flex flex-col'>
+            <p className='text-bold text-sm capitalize'>{cellValue.societyName}</p>
+          </div>
+        )
       case 'department':
         return (
           <div className='flex flex-col'>
-            <p className='text-bold text-sm capitalize'>{cellValue}</p>
+            <p className='text-bold text-sm capitalize'>{cellValue.department}</p>
           </div>
         )
       case 'cnic':
@@ -59,9 +87,9 @@ export default function UsersPage() {
             <p className='text-bold text-sm capitalize'>{cellValue}</p>
           </div>
         )
-      case 'status':
+      case 'isVerified':
         return (
-          <Chip className='capitalize' color={statusColorMap[user.status]} size='sm' variant='flat'>
+          <Chip className='capitalize' color={statusColorMap[user.isVerified]} size='sm' variant='flat'>
             {cellValue}
           </Chip>
         )
@@ -75,10 +103,12 @@ export default function UsersPage() {
             </DropdownTrigger>
             <DropdownMenu>
               <DropdownItem>View</DropdownItem>
-              <DropdownItem onClick={() => setIsOpenAcceptModal(true)}>Accept</DropdownItem>
-              <DropdownItem className='text-danger-500' color='danger' onClick={() => setIsOpenRejectModal(true)}>
-                Reject
-              </DropdownItem>
+              {(user.isVerified === 'pending' || user.isVerified === 'rejected') && <DropdownItem onClick={() => openAcceptModal(user)}>Accept</DropdownItem>}
+              {user.isVerified === 'pending' && (
+                <DropdownItem className='text-danger-500' color='danger' onClick={() => openRejectModal(user)}>
+                  Reject
+                </DropdownItem>
+              )}
             </DropdownMenu>
           </Dropdown>
         )
@@ -112,6 +142,13 @@ export default function UsersPage() {
     )
   }
 
+  if (!users.length && loading)
+    return (
+      <div className='h-[100vh] flex justify-center items-center'>
+        <Spinner size='lg' />
+      </div>
+    )
+
   return (
     <div className='p-10'>
       <TopContent />
@@ -124,12 +161,12 @@ export default function UsersPage() {
           )}
         </TableHeader>
         <TableBody loadingState='idle' loadingContent={<Spinner />} items={users}>
-          {item => <TableRow key={item.id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}
+          {item => <TableRow key={item._id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}
         </TableBody>
       </Table>
 
-      <AcceptRequestModal isOpen={isOpenAcceptModal} onClose={() => setIsOpenAcceptModal(false)} onAccept={() => setIsOpenAcceptModal(false)} />
-      <RejectRequestModal isOpen={isOpenRejectModal} onClose={() => setIsOpenRejectModal(false)} onReject={() => setIsOpenRejectModal(false)} />
+      <AcceptRequestModal isOpen={isOpenAcceptModal} onClose={() => dispatch(setUserValue({ key: 'isOpenAcceptModal', value: false }))} onAccept={() => handleAccepterRequest()} />
+      <RejectRequestModal isOpen={isOpenRejectModal} onClose={() => dispatch(setUserValue({ key: 'isOpenRejectModal', value: false }))} onReject={() => handleRejectRequest()} />
     </div>
   )
 }

@@ -13,6 +13,8 @@ export const PUT = async (req, { params }) => {
   try {
     await connect()
 
+    console.log('bodyyydd :', id, body)
+
     Society
     Department
     const updatedUser = await Users.findOneAndUpdate({ _id: id }, body, { new: true }).select('-password').populate('society department')
@@ -23,6 +25,7 @@ export const PUT = async (req, { params }) => {
 
     return NextResponse.json({ success: true, user: updatedUser, token: updatedToken }, { status: 200 })
   } catch (error) {
+    console.log('errorroror : ,', error)
     return NextResponse.json({ message: 'Something went wrong', error }, { status: 500 })
   }
 }

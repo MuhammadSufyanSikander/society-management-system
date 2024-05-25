@@ -1,10 +1,11 @@
 import React from 'react'
 const columns = [
-  { name: 'NAME', uid: 'name' },
+  { name: 'NAME', uid: 'firstname' },
   { name: 'REGISTRATION', uid: 'registration' },
   { name: 'DEPARTMENT', uid: 'department' },
+  { name: 'Society', uid: 'society' },
   { name: 'CNIC', uid: 'cnic' },
-  { name: 'STATUS', uid: 'status' },
+  { name: 'STATUS', uid: 'isVerified' },
   { name: 'ACTIONS', uid: 'actions' },
 ]
 

@@ -29,13 +29,17 @@ export default function Events() {
     mission: '',
     achievements: '',
     rules: '',
+    searchQuery: '',
   })
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getSocieties())
     dispatch(getDepartments())
   }, [])
+
+  useEffect(() => {
+    dispatch(getSocieties({ searchQuery: inputFields.searchQuery }))
+  }, [inputFields?.searchQuery])
 
   const handleDepartmentChange = value => {
     const selectedDepartment = departments.find(dep => dep.department === value.target.value)
@@ -90,6 +94,10 @@ export default function Events() {
       achievements: item.achievements,
       rules: item.rules,
     })
+  }
+
+  const handleSearch = e => {
+    onChange({ target: { name: e.target.name, value: e.target.value } })
   }
 
   const renderCell = React.useCallback((item, columnKey) => {
@@ -152,7 +160,7 @@ export default function Events() {
     return (
       <div className='flex w-full flex-col gap-4 mb-10'>
         <div className='flex w-full gap-3 items-end'>
-          <Input isClearable className='w-[30%] sm:max-w-[44%]' placeholder='Search by name...' startContent={<SearchIcon />} />
+          <Input onChange={handleSearch} name={'searchQuery'} value={inputFields.searchQuery} className='w-[30%] sm:max-w-[44%]' placeholder='Search by name...' startContent={<SearchIcon />} />
           <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => dispatch(setSocietyValue({ key: 'isAddSociety', value: true }))}>
             Add New
           </Button>

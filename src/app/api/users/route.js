@@ -5,6 +5,7 @@ import Users from '@/app/models/Users'
 import Society from '@/app/models/Society'
 import Department from '@/app/models/Department'
 
+export const dynamic = 'force-dynamic'
 export const GET = async req => {
   try {
     await connect()
