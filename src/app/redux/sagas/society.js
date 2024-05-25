@@ -6,6 +6,9 @@ import {
   getSocieties,
   getSocietiesFailed,
   getSocietiesSuccess,
+  getSociety,
+  getSocietyFailed,
+  getSocietySuccess,
   insertSociety,
   insertSocietyFailed,
   insertSocietySuccess,
@@ -28,6 +31,20 @@ function* fetchSocieties(action) {
     yield put(getSocietiesSuccess({ societies: response.data.societies }))
   } catch (error) {
     yield put(getSocietiesFailed({ error }))
+
+    toast.error(error?.response?.data?.message ?? error?.message)
+  }
+}
+
+function* fetchSociety(action) {
+  try {
+    const { data } = action.payload
+
+    const response = yield call(society().getSociety, data)
+
+    yield put(getSocietySuccess({ society: response.data.society }))
+  } catch (error) {
+    yield put(getSocietyFailed({ error }))
 
     toast.error(error?.response?.data?.message ?? error?.message)
   }
@@ -63,6 +80,11 @@ function* addSociety(action) {
 function* editSociety(action) {
   try {
     const { data, setInputFields } = action.payload
+    if (data?.image) {
+      const url = yield call(firebaseStorage().uploadImage, { collectionName: 'society', file: data.image })
+
+      data.image = url
+    }
 
     const response = yield call(society().editSociety, data)
 
@@ -103,6 +125,7 @@ function* deleteSociety(action) {
 
 export function* societySaga() {
   yield takeEvery(getSocieties.type, fetchSocieties)
+  yield takeEvery(getSociety.type, fetchSociety)
   yield takeEvery(insertSociety.type, addSociety)
   yield takeEvery(modifySociety.type, editSociety)
   yield takeEvery(removeSociety.type, deleteSociety)

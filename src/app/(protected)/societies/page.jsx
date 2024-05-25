@@ -1,7 +1,18 @@
-import Card from '@/app/components/Card'
-import React from 'react'
+'use client'
 
-function page() {
+import Card from '@/app/components/Card'
+import { getSocieties } from '@/app/redux/reducers/society'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+function Societies() {
+  const dispatch = useDispatch()
+  const { societies } = useSelector(state => state.society)
+
+  useEffect(() => {
+    dispatch(getSocieties())
+  }, [])
+
   return (
     <div>
       <div
@@ -19,15 +30,12 @@ function page() {
       </div>
 
       <div className='flex flex-wrap gap-4 two-columns justify-center bg-slate-50 p-[15px] w-full'>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {societies.map(society => (
+          <Card key={society._id} title={society.societyName} description={society.societyDescription} routeId={society._id} />
+        ))}
       </div>
     </div>
   )
 }
 
-export default page
+export default Societies

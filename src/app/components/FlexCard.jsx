@@ -17,17 +17,17 @@ function FlexCard() {
         <div className='font-bold text-[20px]'>Events</div>
       </div>
 
-      <div className='flex w-fit justify-center items-center gap-3 flex-col'>
+      {/* <div className='flex w-fit justify-center items-center gap-3 flex-col'>
         <Icon imageHeight={'w-[40px] h-[40px]'} image={assets.icons.acheivement} />
         <div className='font-bold text-[40px]'>9</div>
         <div className='font-bold text-[20px]'>Awards</div>
-      </div>
+      </div> */}
 
-      <div className='flex w-fit justify-center items-center gap-3 flex-col'>
+      {/* <div className='flex w-fit justify-center items-center gap-3 flex-col'>
         <Icon imageHeight={'w-[40px] h-[40px]'} image={assets.icons.clock} />
         <div className='font-bold text-[40px]'>6</div>
         <div className='font-bold text-[20px]'>Years</div>
-      </div>
+      </div> */}
     </div>
   )
 }
