@@ -52,13 +52,13 @@ export default function Events() {
 
   const handleSubmitAddSociety = () => {
     onSubmit(societyAddSchema, () => {
-      dispatch(insertSociety({ data: { ...inputFields, department: inputFields.departmentId } }))
+      dispatch(insertSociety({ data: { ...inputFields, department: inputFields.departmentId }, setInputFields }))
     })
   }
 
   const handleSubmitEditSociety = () => {
     onSubmit(societyAddSchema, () => {
-      dispatch(modifySociety({ data: { ...inputFields, department: inputFields.departmentId } }))
+      dispatch(modifySociety({ data: { ...inputFields, department: inputFields.departmentId }, setInputFields }))
     })
   }
 
@@ -168,7 +168,7 @@ export default function Events() {
         onAddSociety={() => {
           dispatch(setSocietyValue({ key: 'isEditSociety', value: false }))
           handleSubmitAddSociety()
-          setInputFields({})
+
           // dispatch(setSocietyValue({ key: 'isAddSociety', value: false }))
         }}
         onClose={() => {

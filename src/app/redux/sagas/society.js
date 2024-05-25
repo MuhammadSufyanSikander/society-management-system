@@ -30,7 +30,7 @@ function* fetchSocieties(action) {
 
 function* addSociety(action) {
   try {
-    const { data } = action.payload
+    const { data, setInputFields } = action.payload
 
     const response = yield call(society().addSociety, data)
 
@@ -39,6 +39,8 @@ function* addSociety(action) {
     yield put(insertSocietySuccess({}))
 
     yield put(setSocietyValue({ key: 'isAddSociety', value: false }))
+
+    setInputFields && setInputFields({})
 
     toast.success('Society added')
   } catch (error) {
@@ -50,7 +52,7 @@ function* addSociety(action) {
 
 function* editSociety(action) {
   try {
-    const { data } = action.payload
+    const { data, setInputFields } = action.payload
 
     const response = yield call(society().editSociety, data)
 
@@ -60,7 +62,7 @@ function* editSociety(action) {
 
     yield put(setSocietyValue({ key: 'isAddSociety', value: false }))
     yield put(setSocietyValue({ key: 'isEditSociety', value: false }))
-
+    setInputFields && setInputFields({})
     toast.success('Society Edited')
   } catch (error) {
     yield put(modifySocietyFailed({ error }))
