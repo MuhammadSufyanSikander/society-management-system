@@ -28,5 +28,13 @@ export const society = () => {
         throw error
       }
     },
+    deleteSociety: async data => {
+      try {
+        const response = await client.delete(`/society/${data.society_id}`)
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
   }
 }

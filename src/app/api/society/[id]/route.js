@@ -29,10 +29,6 @@ export const PUT = async (req, { params }) => {
   try {
     await connect()
 
-    const found = await Society.findOne({ societyName: body.societyName })
-
-    if (found) return NextResponse.json({ success: false, message: 'society already exist' }, { status: 409 })
-
     Department
     Users
     const updatedSociety = await Society.findOneAndUpdate({ _id: id }, body, { new: true }).populate('department admin')

@@ -12,6 +12,9 @@ import {
   modifySociety,
   modifySocietyFailed,
   modifySocietySuccess,
+  removeSociety,
+  removeSocietyFailed,
+  removeSocietySuccess,
   setSocietyValue,
 } from '../reducers/society'
 import toast from 'react-hot-toast'
@@ -71,8 +74,29 @@ function* editSociety(action) {
   }
 }
 
+function* deleteSociety(action) {
+  try {
+    const { data, setInputFields } = action.payload
+
+    yield call(society().deleteSociety, data)
+
+    yield put(getSocieties())
+
+    yield put(removeSocietySuccess({}))
+
+    yield put(setSocietyValue({ key: 'isDeleteSociety', value: false }))
+    setInputFields && setInputFields({})
+    toast.success('Society Deleted')
+  } catch (error) {
+    yield put(removeSocietyFailed({ error }))
+
+    toast.error(error?.response?.data?.message ?? error?.message)
+  }
+}
+
 export function* societySaga() {
   yield takeEvery(getSocieties.type, fetchSocieties)
   yield takeEvery(insertSociety.type, addSociety)
   yield takeEvery(modifySociety.type, editSociety)
+  yield takeEvery(removeSociety.type, deleteSociety)
 }
