@@ -2,7 +2,6 @@ import { NextResponse, NextRequest } from 'next/server'
 
 import { connect } from '@/app/db/connect'
 import Society from '@/app/models/Society'
-import { checkAuth } from '../middleware/auth'
 
 export const POST = async (req, res) => {
   const body = await req.json()
@@ -12,7 +11,7 @@ export const POST = async (req, res) => {
 
     const found = await Society.findOne({ societyName: body.societyName })
 
-    if (!found) return NextResponse.json({ success: false, message: 'society already exist' }, { status: 409 })
+    if (found) return NextResponse.json({ success: false, message: 'society already exist' }, { status: 409 })
 
     const society = new Society(body)
 

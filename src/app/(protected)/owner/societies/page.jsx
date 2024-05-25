@@ -13,17 +13,15 @@ import Button from '@/app/components/form/Button'
 import DeleteSocietyModal from '@/app/components/Modals/DeleteSociety'
 import SocietyModal from '@/app/components/Modals/SocietyModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSocieties, insertSociety, setSocietyValue } from '@/app/redux/reducers/society'
+import { getSocieties, insertSociety, modifySociety, setSocietyValue } from '@/app/redux/reducers/society'
 import useForm from '@/app/hooks/useForm'
 import { getDepartments } from '@/app/redux/reducers/department'
 import societyAddSchema from '@/app/validation/society/societyAddValidation'
 
 export default function Events() {
   const [isDeleteSocietyModal, setIsDeleteSocietyModal] = useState(false)
-  const [isEditSociety, setIsEditSociety] = useState(false)
-  const { societies, isAddSociety } = useSelector(state => state.society)
+  const { societies, isAddSociety, isEditSociety } = useSelector(state => state.society)
   const { departments } = useSelector(state => state.department)
-  console.log('departmentsdepartmentsdepartments:', departments)
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({
     societyName: '',
     societyDescription: '',
@@ -53,9 +51,28 @@ export default function Events() {
   }
 
   const handleSubmitAddSociety = () => {
-    console.log('socuety added data :', inputFields)
     onSubmit(societyAddSchema, () => {
       dispatch(insertSociety({ data: { ...inputFields, department: inputFields.departmentId } }))
+    })
+  }
+
+  const handleSubmitEditSociety = () => {
+    onSubmit(societyAddSchema, () => {
+      dispatch(modifySociety({ data: { ...inputFields, department: inputFields.departmentId } }))
+    })
+  }
+
+  const openEditSocietyModel = item => {
+    dispatch(setSocietyValue({ key: 'isEditSociety', value: true }))
+    dispatch(setSocietyValue({ key: 'isAddSociety', value: true }))
+    setInputFields({
+      societyName: item.societyName,
+      societyDescription: item.societiesDescription,
+      department: item?.department?.department,
+      departmentId: item.department?._id,
+      mission: item.mission,
+      achievements: item.achievements,
+      rules: item.rules,
     })
   }
 
@@ -78,7 +95,7 @@ export default function Events() {
           </div>
         )
       case 'admin':
-        if (!cellValue) return null
+        if (!cellValue) return <p className='text-bold text-sm capitalize'>-</p>
         return (
           <div className='flex flex-col'>
             <p className='text-bold text-sm capitalize'>{cellValue.cnic}</p>
@@ -96,8 +113,7 @@ export default function Events() {
             <Tooltip content='Edit society'>
               <span
                 onClick={() => {
-                  setIsEditSociety(true)
-                  dispatch(setSocietyValue({ key: 'isAddSociety', value: true }))
+                  openEditSocietyModel(item)
                 }}
                 className='text-lg text-default-400 cursor-pointer active:opacity-50'
               >
@@ -150,17 +166,19 @@ export default function Events() {
         isEdit={isEditSociety}
         isOpen={isAddSociety}
         onAddSociety={() => {
-          setIsEditSociety(false)
+          dispatch(setSocietyValue({ key: 'isEditSociety', value: false }))
           handleSubmitAddSociety()
+          setInputFields({})
           // dispatch(setSocietyValue({ key: 'isAddSociety', value: false }))
         }}
         onClose={() => {
-          setIsEditSociety(false)
+          dispatch(setSocietyValue({ key: 'isEditSociety', value: false }))
           dispatch(setSocietyValue({ key: 'isAddSociety', value: false }))
         }}
         inputFields={inputFields}
         departments={departments}
         errorMessage={errorMessage}
+        onEditSociety={handleSubmitEditSociety}
       />
       <DeleteSocietyModal isOpen={isDeleteSocietyModal} onClose={() => setIsDeleteSocietyModal(false)} onDelete={() => setIsDeleteSocietyModal(false)} />
     </div>

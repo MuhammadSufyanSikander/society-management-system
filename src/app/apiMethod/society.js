@@ -20,5 +20,13 @@ export const society = () => {
         throw error
       }
     },
+    editSociety: async data => {
+      try {
+        const response = await client.put(`/society/${data.society_id}`, data)
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
   }
 }
