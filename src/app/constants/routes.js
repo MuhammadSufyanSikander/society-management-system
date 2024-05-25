@@ -11,6 +11,7 @@ const ROUTES = {
   contactUs: '/contactus',
   faq: '/faq',
   society: '/society',
+  feedbackForm: '/feedbackForm',
 }
 
 export default ROUTES

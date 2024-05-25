@@ -35,6 +35,10 @@ const Navbar = () => {
       route: ROUTES.faq,
     },
     {
+      label: 'Feedback',
+      route: ROUTES.feedbackForm,
+    },
+    {
       label: 'Contact Us',
       route: ROUTES.contactUs,
     },

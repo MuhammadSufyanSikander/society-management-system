@@ -6,7 +6,7 @@ function FlexCard() {
   return (
     <div className='bg-royalblue flex justify-around text-white font-noto-sans rounded-[8px] p-[30px]'>
       <div className='flex w-fit justify-center items-center gap-3 flex-col'>
-        <Icon imageHeight={'w-[40px] h-[40px]'} image={assets.icons.clock} />
+        <Icon imageHeight={'w-[40px] h-[40px]'} image={assets.icons.members} />
         <div className='font-bold text-[40px]'>27</div>
         <div className='font-bold text-[20px]'>Members</div>
       </div>

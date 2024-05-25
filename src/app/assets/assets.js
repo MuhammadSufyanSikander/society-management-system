@@ -31,10 +31,12 @@ import darkclock from './icons/darkclock.svg'
 import acheivement from './icons/acheivement.svg'
 import event from './icons/event.svg'
 import location from './icons/location.svg'
+import members from './icons/members.svg'
 
 const assets = {
   icons: {
     user,
+    members,
     email,
     password,
     Frame,
