@@ -160,7 +160,7 @@ export default function Events() {
     return (
       <div className='flex w-full flex-col gap-4 mb-10'>
         <div className='flex w-full gap-3 items-end'>
-          <Input onChange={handleSearch} name={'searchQuery'} value={inputFields.searchQuery} className='w-[30%] sm:max-w-[44%]' placeholder='Search by name...' startContent={<SearchIcon />} />
+          <Input autoFocus onChange={handleSearch} name={'searchQuery'} value={inputFields.searchQuery} className='w-[30%] sm:max-w-[44%]' placeholder='Search by name...' type='text' />
           <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => dispatch(setSocietyValue({ key: 'isAddSociety', value: true }))}>
             Add New
           </Button>
