@@ -6,6 +6,7 @@ import { checkAuth } from '../middleware/auth'
 import Department from '@/app/models/Department'
 import Users from '@/app/models/Users'
 
+export const dynamic = 'force-dynamic'
 export const GET = async (req, res) => {
   try {
     await connect()

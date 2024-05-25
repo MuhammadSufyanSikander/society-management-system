@@ -5,6 +5,7 @@ import Society from '@/app/models/Society'
 import Department from '@/app/models/Department'
 import Users from '@/app/models/Users'
 
+export const dynamic = 'force-dynamic'
 export const GET = async (req, { params }) => {
   const { id } = params
 

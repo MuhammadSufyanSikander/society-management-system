@@ -4,6 +4,7 @@ import { connect } from '@/app/db/connect'
 import Society from '@/app/models/Society'
 import Event from '@/app/models/Event'
 
+export const dynamic = 'force-dynamic'
 export const GET = async (req, res) => {
   try {
     await connect()
