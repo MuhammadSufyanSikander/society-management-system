@@ -4,14 +4,9 @@ export const society = () => {
   return {
     getSocieties: async () => {
       try {
-        const response = await client.get(`/societies?timestamp=${Date.now()}`, {
-          headers: {
-            'Cache-Control': 'no-cache',
-            Pragma: 'no-cache',
-            Expires: '0',
-          },
-        })
-        return response
+        const response = await fetch(`/societies`, { cache: 'no-cache' })
+
+        return await response.json()
       } catch (error) {
         console.log('error', error)
         throw error
