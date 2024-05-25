@@ -25,7 +25,7 @@ const Step1 = () => {
     dispatch(setAuthUserInfo({ key: e.target.name, value: e.target.value }))
   }
 
-  const handleSubmitStepOne = () => {
+  const handleSubmitStepOne = async () => {
     // dispatch(getDepartments())
 
     dispatch(
@@ -36,7 +36,7 @@ const Step1 = () => {
     )
 
     try {
-      step1Schema.parse(userInfo)
+      await step1Schema.parse(userInfo)
       dispatch(setAuthValue({ key: 'step', value: 2 }))
     } catch (error) {
       dispatch(

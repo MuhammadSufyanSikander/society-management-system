@@ -2,17 +2,22 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 import { login, register, setAuthValue, success } from '../reducers/auth'
 import routes from '@/app/routes'
 import { auth } from '@/app/apiMethod/auth'
+import toast from 'react-hot-toast'
 
 function* signin(action) {
   // const { router } = yield select(state => state.settings)
   try {
-    const { email, password } = action.payload
+    const {
+      data: { email, password },
+      router,
+    } = action.payload
 
     const response = yield call(auth().login, email, password)
     yield put(success({ token: response.data.token, userInfo: response.data.data }))
-    // router.push(routes.REGISTER)
+    router.push(routes.HOME)
+    toast.success('Login successful')
   } catch (error) {
-    console.log('error login', error)
+    toast.error(error?.response?.data?.message ?? 'Hello world')
   }
 }
 
