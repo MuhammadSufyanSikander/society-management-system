@@ -44,6 +44,8 @@ export default function Events() {
   }
 
   const handleChangeAddSociety = e => {
+    if (e.target.name == 'image') return onChange({ target: { name: 'image', value: e.target.files[0] } })
+
     if (e.target.name === 'department') return handleDepartmentChange(e)
 
     onChange({ target: { name: e.target.name, value: e.target.value } })

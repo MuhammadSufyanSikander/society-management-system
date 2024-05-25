@@ -8,6 +8,7 @@ const SocietySchema = new mongoose.Schema({
   achievements: { type: String, required: true },
   rules: { type: String, required: true },
   admin: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  image: { type: String },
 })
 
 export default mongoose.models.Society || mongoose.model('Society', SocietySchema)

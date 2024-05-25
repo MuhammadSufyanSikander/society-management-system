@@ -18,6 +18,8 @@ import {
   setSocietyValue,
 } from '../reducers/society'
 import toast from 'react-hot-toast'
+import { uploadImage } from '@/app/firebase/storage'
+import { firebaseStorage } from '@/app/apiMethod/storage'
 
 function* fetchSocieties(action) {
   try {
@@ -35,8 +37,13 @@ function* addSociety(action) {
   try {
     const { data, setInputFields } = action.payload
 
+    const url = yield call(firebaseStorage().uploadImage, { collectionName: 'society', file: data.image })
+
+    data.image = url
+
     const response = yield call(society().addSociety, data)
 
+    console.log('error found in try')
     yield put(getSocieties())
 
     yield put(insertSocietySuccess({}))

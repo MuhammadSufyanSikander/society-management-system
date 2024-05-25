@@ -2,7 +2,6 @@ import React from 'react'
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from '@nextui-org/react'
 import Input from '../form/Input'
 import TextArea from '../form/TextArea'
-import step2Data from '@/app/(auth)/register/steps/step2Data'
 import Select from '../form/Select'
 
 export default function SocietyModal({ isOpen, onClose, onAddSociety, onEditSociety, isEdit = false, onChangeInput, departments, inputFields, errorMessage }) {
@@ -11,6 +10,7 @@ export default function SocietyModal({ isOpen, onClose, onAddSociety, onEditSoci
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'> {isEdit ? 'Edit Society' : 'Add New Society'}</ModalHeader>
         <ModalBody className='gap-5'>
+          <input name={'image'} type='file' onChange={onChangeInput} />
           <Input autoFocus name={'societyName'} label='Society Name' onChange={onChangeInput} value={inputFields?.societyName} errorMessage={errorMessage?.societyName} />
           <TextArea label='Society Description' name={'societyDescription'} onChange={onChangeInput} value={inputFields?.societyDescription} errorMessage={errorMessage?.societyDescription} />
           <Select
