@@ -20,11 +20,14 @@ import { getEvents, insertEvent, modifyEvent, removeEvent, setEventValue } from 
 import useForm from '@/app/hooks/useForm'
 import { getSocieties } from '@/app/redux/reducers/society'
 import moment from 'moment'
+import ViewEventModal from '@/app/components/Modals/ViewEventModal'
 
 export default function Events() {
   const { isDeleteEventModal, isEditEventModal, isEventModal, events } = useSelector(state => state.event)
   const { societies } = useSelector(state => state.society)
   const [isPollingModal, setIsPollingModal] = useState(false)
+  const [isViewModal, setIsViewModal] = useState(false)
+  const [singleEvent, setSingleEvent] = useState()
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ title: '', description: '', time: '2021-04-07T18:45:22Z', location: '', society: '', image: null, searchQuery: '' })
 
   console.log('eventseventsevents:', events)
@@ -86,6 +89,11 @@ export default function Events() {
     })
   }
 
+  const handleView = item => {
+    setSingleEvent(item)
+    setIsViewModal(true)
+  }
+
   React.useEffect(() => {
     dispatch(getSocieties())
   }, [])
@@ -96,6 +104,7 @@ export default function Events() {
 
   const renderCell = React.useCallback((item, columnKey) => {
     const cellValue = item[columnKey]
+    console.log('item', item)
 
     switch (columnKey) {
       case 'title':
@@ -130,7 +139,7 @@ export default function Events() {
         return (
           <div className='relative flex items-center gap-2'>
             <Tooltip content='Details'>
-              <span className='text-lg text-default-400 cursor-pointer active:opacity-50'>
+              <span onClick={() => handleView(item)} className='text-lg text-default-400 cursor-pointer active:opacity-50'>
                 <EyeIcon />
               </span>
             </Tooltip>
@@ -207,6 +216,7 @@ export default function Events() {
         onEditEvent={handleEditEvent}
       />
       {/* <AddPollingModal isOpen={isPollingModal} onClose={() => setIsPollingModal(false)} /> */}
+      <ViewEventModal data={singleEvent} isOpen={isViewModal} onClose={() => setIsViewModal(false)} />
       <DeleteEventModal isOpen={isDeleteEventModal} onClose={() => dispatch(setEventValue({ key: 'isDeleteEventModal', value: false }))} onDelete={() => handleDeleteEvent()} />
     </div>
   )

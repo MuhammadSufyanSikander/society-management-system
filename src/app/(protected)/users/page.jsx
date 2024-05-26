@@ -13,6 +13,7 @@ import { capitalize } from '@/app/utils/string'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers, modifyUser, setUserValue } from '@/app/redux/reducers/user'
 import useForm from '@/app/hooks/useForm'
+import ViewUserModal from '@/app/components/Modals/ViewUserModal'
 
 const statusColorMap = {
   active: 'success',
@@ -28,6 +29,8 @@ const statusOptions = [
 
 export default function UsersPage() {
   const dispatch = useDispatch()
+  const [isViewModal, setIsViewModal] = useState(false)
+  const [singleUser, setSingleUser] = useState()
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ user_id: null, isVerified: 'pending', searchQuery: '', status: '' })
   const { users, loading, isOpenAcceptModal, isOpenRejectModal } = useSelector(state => state.user)
 
@@ -48,6 +51,11 @@ export default function UsersPage() {
   const handleRejectRequest = () => {
     dispatch(setUserValue({ key: 'isOpenRejectModal', value: false }))
     dispatch(modifyUser({ data: inputFields }))
+  }
+
+  const handleView = user => {
+    setSingleUser(user)
+    setIsViewModal(true)
   }
 
   useEffect(() => {
@@ -103,7 +111,7 @@ export default function UsersPage() {
               </Button>
             </DropdownTrigger>
             <DropdownMenu>
-              <DropdownItem>View</DropdownItem>
+              <DropdownItem onClick={() => handleView(user)}>View</DropdownItem>
               {(user.isVerified === 'pending' || user.isVerified === 'rejected') && <DropdownItem onClick={() => openAcceptModal(user)}>Accept</DropdownItem>}
               {user.isVerified === 'pending' && (
                 <DropdownItem className='text-danger-500' color='danger' onClick={() => openRejectModal(user)}>
@@ -178,6 +186,7 @@ export default function UsersPage() {
 
       <AcceptRequestModal isOpen={isOpenAcceptModal} onClose={() => dispatch(setUserValue({ key: 'isOpenAcceptModal', value: false }))} onAccept={() => handleAccepterRequest()} />
       <RejectRequestModal isOpen={isOpenRejectModal} onClose={() => dispatch(setUserValue({ key: 'isOpenRejectModal', value: false }))} onReject={() => handleRejectRequest()} />
+      <ViewUserModal data={singleUser} isOpen={isViewModal} onClose={() => setIsViewModal(false)} />
     </div>
   )
 }

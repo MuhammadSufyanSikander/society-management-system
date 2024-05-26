@@ -1,5 +1,6 @@
 'use client'
 import assets from '@/app/assets/assets'
+import Footer from '@/app/components/Footer'
 import Icon from '@/app/components/form/Icon'
 import React, { useRef } from 'react'
 
@@ -8,12 +9,13 @@ function Homepage() {
 
   const scrollToSection = () => {
     if (sectionRef.current) {
-      sectionRef.current.scrollIntoView({ behavior: 'smooth' })
+      const topOffset = sectionRef.current.offsetTop
+      window.scrollTo({ top: topOffset - 15, behavior: 'smooth' })
     }
   }
 
   return (
-    <div className='overflow-hidden'>
+    <div>
       <div
         className=' relative w-full h-[88.6vh] bg-cover bg-center'
         style={{
@@ -32,19 +34,19 @@ function Homepage() {
 
       {/* New Section */}
       <div ref={sectionRef}>
-        <div className='w-full h-[89vh] '>
+        <div className='w-full h-screen '>
           <section className='w-full bg-gray-10  justify-center text-center px-32 py-10'>
-            <div className='text-[25px] font-bold mb-[20px]'>Rector&apos;s Message</div>
+            <div className='text-[25px] font-bold mb-[20px]'>Vice Chancellor&apos;s Message</div>
             <div className='flex text-left justify-center'>
               <div className=' w-[60%] italic'>
-                It gives me immense pleasure to welcome you to the National University of Sciences & Technology (NUST), an esteemed higher education institution where we collectively embark on a
-                journey of knowledge, growth and discovery. As the head of this prestigious institution, I am committed to taking its mission forward, while ensuring a conducive and stimulating
-                environment that fosters creativity, adaptability, and a sense of responsibility towards the society.
+                Government College University Faisalabad is a dynamic seat of learning aspiring to provide highly stimulating and conducive academic environments for quality research, formal education
+                and professional growth. In the recent years, the university has achieved phenomenal success in research contribution and in improving the quality of education which is reflected
+                through the meteoric rise of the institution in HEC ranking from 59th to its 7th position, resulting in growing confidence of civil society and business community of the region.
               </div>
               <div className='  flex flex-col w-[40%] items-center text-center'>
-                <Icon imageWidth={'w-[100px] h-[100px] rounded-full'} image={assets.images.rector} />
-                <div className='text-[12px] text-black-100'>Engr Javed Mahmood Bukhari</div>
-                <div className='text-[12px]  text-black-100'>Rector Nust</div>
+                <Icon imageWidth={'w-[138px] h-[140px] rounded-full'} image={assets.images.rector} />
+                <div className='text-[12px] text-black-100'> Prof. Dr. Nasir Amin</div>
+                <div className='text-[12px]  text-black-100'>Vice Chancellor, Government College University Faisalabad</div>
               </div>
             </div>
             <div></div>
@@ -58,6 +60,7 @@ function Homepage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

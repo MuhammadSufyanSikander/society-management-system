@@ -20,11 +20,14 @@ import societyAddSchema from '@/app/validation/society/societyAddValidation'
 import AssignAdminModal from '@/app/components/Modals/AssignAdminModal'
 import { getUsers } from '@/app/redux/reducers/user'
 import toast from 'react-hot-toast'
+import ViewSocietyModal from '@/app/components/Modals/ViewSocietyModal'
 
 export default function Events() {
   const { societies, isAddSociety, isEditSociety, isDeleteSociety, isAssignAdminModal } = useSelector(state => state.society)
   const { departments } = useSelector(state => state.department)
   const { users } = useSelector(state => state.user)
+  const [isViewModal, setIsViewModal] = useState(false)
+  const [singleSociety, setSingleSociety] = useState()
 
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({
     societyName: '',
@@ -56,6 +59,11 @@ export default function Events() {
     const selectedStudent = users.find(user => user.firstname === value.target.value)
     onChange({ target: { name: 'studentFirstName', value: selectedStudent?.firstname } })
     onChange({ target: { name: 'student_id', value: selectedStudent?._id } })
+  }
+
+  const handleView = item => {
+    setSingleSociety(item)
+    setIsViewModal(true)
   }
 
   const handleSocietyChange = value => {
@@ -169,7 +177,7 @@ export default function Events() {
         return (
           <div className='relative flex items-center gap-2'>
             <Tooltip content='Details'>
-              <span className='text-lg text-default-400 cursor-pointer active:opacity-50'>
+              <span onClick={() => handleView(item)} className='text-lg text-default-400 cursor-pointer active:opacity-50'>
                 <EyeIcon />
               </span>
             </Tooltip>
@@ -255,6 +263,7 @@ export default function Events() {
         onAssignAdmin={handleAssignAdmin}
         onClose={() => dispatch(setSocietyValue({ key: 'isAssignAdminModal', value: false }))}
       />
+      <ViewSocietyModal data={singleSociety} isOpen={isViewModal} onClose={() => setIsViewModal(false)} />
     </div>
   )
 }

@@ -32,9 +32,15 @@ import acheivement from './icons/acheivement.svg'
 import event from './icons/event.svg'
 import location from './icons/location.svg'
 import members from './icons/members.svg'
+import facebook from './icons/facebook.svg'
+import linkedin from './icons/linkedin.svg'
+import twitter from './icons/twitter.svg'
 
 const assets = {
   icons: {
+    twitter,
+    facebook,
+    linkedin,
     user,
     members,
     email,
