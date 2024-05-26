@@ -16,9 +16,9 @@ const Navbar = () => {
   if (!token) {
     data = loggedOutRoutes
   } else {
-    if (userInfo.role === 'student') {
+    if (userInfo?.role === 'student') {
       data = studentRoutes
-    } else if (userInfo.role === 'admin') {
+    } else if (userInfo?.role === 'admin') {
       data = adminRoutes
     } else {
       data = ownerRoutes
