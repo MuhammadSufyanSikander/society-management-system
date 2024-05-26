@@ -46,9 +46,9 @@ function page() {
               the meteoric rise of the institution in HEC ranking from 59th to its 7th position, resulting in growing confidence of civil society and business community of the region. <br />
               <br />
               This university is striving for academic and cultural excellence by living up to the international standards of education. We offer innovative syllabi encompassing the latest trends and
-              approaches in the field's higher education. Our curricula inculcate creativity, objectivity and critical thinking, impart values of commitment and singleness of purpose to learning and
-              professionalism and promote confidence, adaptability and high level communication skills in students to ensure success of our graduates in this highly competitive and challenging global
-              world order.
+              approaches in the field&apos;s higher education. Our curricula inculcate creativity, objectivity and critical thinking, impart values of commitment and singleness of purpose to learning
+              and professionalism and promote confidence, adaptability and high level communication skills in students to ensure success of our graduates in this highly competitive and challenging
+              global world order.
               <br />
               <br />
               We are for inter-disciplinary approach and social cohesion. We offer a wide range of courses in the fields of Natural and Physical Sciences, Information Technology, Engineering, Food and
