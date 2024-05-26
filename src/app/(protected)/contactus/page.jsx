@@ -30,18 +30,6 @@ function ContactUs() {
           },
         }),
       )
-
-      // const response = await email().sendEmail({
-      //   from: inputFields?.email,
-      //   subject: `Email from ${inputFields?.firstname} ${inputFields?.lastname}`,
-      //   recipients: owners.map(owner => owner.email),
-      //   text: inputFields.feedback,
-      // })
-      // if (response.success) {
-      //   toast.success('Email sent successfully')
-      // } else {
-      //   toast.error('Email not sent, something went wrong')
-      // }
     })
   }
 

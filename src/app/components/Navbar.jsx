@@ -4,49 +4,28 @@ import assets from '@/app/assets/assets'
 import Icon from '@/app/components/form/Icon'
 import { useRouter, usePathname } from 'next/navigation'
 import { ROUTES } from '@/app/constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { adminRoutes, loggedOutRoutes, ownerRoutes, studentRoutes } from '../constants/routes'
+import { logout } from '../redux/reducers/auth'
 
 const Navbar = () => {
   const router = useRouter()
   const pathname = usePathname()
+  const { token, userInfo } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
 
-  const data = [
-    {
-      label: 'Homepage',
-      route: ROUTES.homepage,
-    },
-    {
-      label: 'Users',
-      route: ROUTES.users,
-    },
-    {
-      label: 'Societies',
-      route: ROUTES.societies,
-    },
-    {
-      label: 'Events',
-      route: ROUTES.events,
-    },
-    {
-      label: 'Profile',
-      route: ROUTES.userProfile + '/1',
-    },
-    {
-      label: 'FAQ',
-      route: ROUTES.faq,
-    },
-    {
-      label: 'Feedback',
-      route: ROUTES.feedbackForm,
-    },
-    {
-      label: 'Contact Us',
-      route: ROUTES.contactUs,
-    },
-    {
-      label: 'About Us',
-      route: ROUTES.aboutUs,
-    },
-  ]
+  let data = []
+  if (!token) {
+    data = loggedOutRoutes
+  } else {
+    if (userInfo?.role === 'student') {
+      data = studentRoutes
+    } else if (userInfo?.role === 'admin') {
+      data = adminRoutes
+    } else {
+      data = ownerRoutes
+    }
+  }
 
   const navActiveColor = path => {
     const currentRoute = pathname
@@ -69,7 +48,10 @@ const Navbar = () => {
             </div>
           ))}
           <div
-            onClick={() => router.push(ROUTES.login)}
+            onClick={() => {
+              dispatch(logout())
+              router.push(ROUTES.login)
+            }}
             className='h-[30px] w-[30px] rounded-lg box-border flex flex-row items-center justify-center p-1.5 relative gap-[10px] z-[1] border-[1.5px] border-dashed border-gray-300'
           >
             <Icon imageHeight={'max-h-[18px]'} imageWidth={'max-w-[18px]'} image={assets.icons.logout} />

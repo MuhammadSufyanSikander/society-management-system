@@ -12,7 +12,7 @@ export const POST = async (req, res) => {
 
     const { email, password } = body
 
-    const user = await Users.findOne({ email })
+    const user = await Users.findOne({ email }).populate('society department')
 
     if (!user) return NextResponse.json({ message: 'User not found' }, { status: 404 })
 

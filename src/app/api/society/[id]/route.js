@@ -12,7 +12,9 @@ export const GET = async (req, { params }) => {
   try {
     await connect()
 
-    const society = await Society.findOne({ _id: id })
+    Users
+    Department
+    const society = await Society.findOne({ _id: id }).populate('admin department')
 
     if (!society) return NextResponse.json({ success: false, message: 'Society not found' }, { status: 404 })
 

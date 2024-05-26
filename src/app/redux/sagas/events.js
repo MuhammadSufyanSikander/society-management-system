@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
+import { call, put, select, takeEvery } from 'redux-saga/effects'
 import toast from 'react-hot-toast'
 import { event } from '@/app/apiMethod/event'
 import {
@@ -20,8 +20,12 @@ import {
   setEventValue,
 } from '../reducers/events'
 import { firebaseStorage } from '@/app/apiMethod/storage'
+import { user } from '@/app/apiMethod/user'
+import { email } from '@/app/apiMethod/email'
 
 function* addEvent(action) {
+  const { userInfo, token } = yield select(state => state.auth)
+
   try {
     const { data, setInputFields } = action.payload || {}
 
@@ -41,6 +45,17 @@ function* addEvent(action) {
     setInputFields && setInputFields({})
 
     toast.success('Event added successfully')
+
+    if (!token) return
+
+    const usersResponse = yield call(user().fetchUsers, '', '', data.society)
+
+    yield call(email().sendEmail, {
+      from: userInfo.email,
+      subject: `New Event, Title: ${data.title}`,
+      text: 'A new event added, please visit society portal.',
+      recipients: usersResponse.data.users.map(user => user.email),
+    })
   } catch (error) {
     yield put(insertEventFailed({ error }))
 
@@ -49,6 +64,8 @@ function* addEvent(action) {
 }
 
 function* editEvent(action) {
+  const { userInfo, token } = yield select(state => state.auth)
+
   try {
     const { data, setInputFields } = action.payload || {}
 
@@ -70,6 +87,17 @@ function* editEvent(action) {
     setInputFields && setInputFields({})
 
     toast.success('Event edited successfully')
+
+    if (!token) return
+
+    const usersResponse = yield call(user().fetchUsers, '', '', data.society)
+
+    yield call(email().sendEmail, {
+      from: userInfo.email,
+      subject: `New Event, Title: ${data.title}`,
+      text: 'A new event added, please visit society portal.',
+      recipients: usersResponse.data.users.map(user => user.email),
+    })
   } catch (error) {
     yield put(modifyEventFailed({ error }))
 

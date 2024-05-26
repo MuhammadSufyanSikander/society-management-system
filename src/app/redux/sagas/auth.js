@@ -14,7 +14,7 @@ function* signin(action) {
     } = action.payload
 
     const response = yield call(auth().login, email, password)
-    yield put(success({ token: response.data.token, userInfo: response.data.data }))
+    yield put(success({ token: response.data.token, userInfo: response.data.user }))
     router.push(routes.HOME)
     toast.success('Login successful')
   } catch (error) {
