@@ -25,6 +25,7 @@ import { email } from '@/app/apiMethod/email'
 
 function* addEvent(action) {
   const { userInfo, token } = yield select(state => state.auth)
+
   try {
     const { data, setInputFields } = action.payload || {}
 
@@ -63,6 +64,8 @@ function* addEvent(action) {
 }
 
 function* editEvent(action) {
+  const { userInfo, token } = yield select(state => state.auth)
+
   try {
     const { data, setInputFields } = action.payload || {}
 
@@ -84,6 +87,17 @@ function* editEvent(action) {
     setInputFields && setInputFields({})
 
     toast.success('Event edited successfully')
+
+    if (!token) return
+
+    const usersResponse = yield call(user().fetchUsers, '', '', data.society)
+
+    yield call(email().sendEmail, {
+      from: userInfo.email,
+      subject: `New Event, Title: ${data.title}`,
+      text: 'A new event added, please visit society portal.',
+      recipients: usersResponse.data.users.map(user => user.email),
+    })
   } catch (error) {
     yield put(modifyEventFailed({ error }))
 

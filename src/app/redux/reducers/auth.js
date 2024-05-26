@@ -35,7 +35,12 @@ const authSlice = createSlice({
       const { key, value } = action.payload
       state[key] = value
     },
-
+    logout: (state, action) => {
+      state.loading = false
+      state.error = null
+      state.userInfo = {}
+      state.token = null
+    },
     resetAuthValues: (state, action) => {
       state = initialState
     },
@@ -51,4 +56,4 @@ const authSlice = createSlice({
 })
 
 export default authSlice.reducer
-export const { resetAuthValues, register, registerSuccess, failed, login, setAuthValue, success, setAuthUserInfo } = authSlice.actions
+export const { logout, resetAuthValues, register, registerSuccess, failed, login, setAuthValue, success, setAuthUserInfo } = authSlice.actions

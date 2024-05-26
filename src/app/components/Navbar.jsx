@@ -5,12 +5,14 @@ import Icon from '@/app/components/form/Icon'
 import { useRouter, usePathname } from 'next/navigation'
 import { ROUTES } from '@/app/constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { adminRoutes, loggedOutRoutes, ownerRoutes } from '../constants/routes'
+import { adminRoutes, loggedOutRoutes, ownerRoutes, studentRoutes } from '../constants/routes'
+import { logout } from '../redux/reducers/auth'
 
 const Navbar = () => {
   const router = useRouter()
   const pathname = usePathname()
   const { token, userInfo } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
 
   let data = []
   if (!token) {
@@ -46,7 +48,10 @@ const Navbar = () => {
             </div>
           ))}
           <div
-            onClick={() => router.push(ROUTES.login)}
+            onClick={() => {
+              dispatch(logout())
+              router.push(ROUTES.login)
+            }}
             className='h-[30px] w-[30px] rounded-lg box-border flex flex-row items-center justify-center p-1.5 relative gap-[10px] z-[1] border-[1.5px] border-dashed border-gray-300'
           >
             <Icon imageHeight={'max-h-[18px]'} imageWidth={'max-w-[18px]'} image={assets.icons.logout} />

@@ -150,10 +150,10 @@ export const ownerRoutes = [
     label: 'FAQ',
     route: ROUTES.faq,
   },
-  {
-    label: 'Feedback',
-    route: ROUTES.feedbackForm,
-  },
+  // {
+  //   label: 'Feedback',
+  //   route: ROUTES.feedbackForm,
+  // },
   {
     label: 'Contact Us',
     route: ROUTES.contactUs,
