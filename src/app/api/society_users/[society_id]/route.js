@@ -2,15 +2,12 @@ import { NextResponse, NextRequest } from 'next/server'
 
 import { connect } from '@/app/db/connect'
 import Society from '@/app/models/Society'
-import { checkAuth } from '../middleware/auth'
 import Department from '@/app/models/Department'
 import Users from '@/app/models/Users'
 
 export const dynamic = 'force-dynamic'
 export const GET = async (req, { params }) => {
   try {
-    // Extract searchQuery from the request URL query parameters
-
     await connect()
 
     Users
