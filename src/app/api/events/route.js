@@ -7,10 +7,12 @@ import Event from '@/app/models/Event'
 export const dynamic = 'force-dynamic'
 export const GET = async (req, res) => {
   try {
+    const url = new URL(req.url)
+    const searchQuery = url.searchParams.get('searchQuery')
     await connect()
 
     Society
-    const events = await Event.find().populate('society')
+    const events = await Event.find({ title: new RegExp(searchQuery, 'i') }).populate('society')
 
     return NextResponse.json({ success: true, events }, { status: 200 })
   } catch (error) {

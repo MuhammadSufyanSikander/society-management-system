@@ -47,5 +47,13 @@ export const society = () => {
         throw error
       }
     },
+    assignAdminToSociety: async data => {
+      try {
+        const response = await client.put(`/assign_admin/${data.society_id}`, data)
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
   }
 }

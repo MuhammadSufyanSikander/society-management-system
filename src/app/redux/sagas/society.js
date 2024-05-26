@@ -1,8 +1,9 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { society } from '@/app/apiMethod/society'
 import {
-  addSocietyFailed,
-  addSocietySuccess,
+  assignAdminSociety,
+  assignAdminSocietyFailed,
+  assignAdminSocietySuccess,
   getSocieties,
   getSocietiesFailed,
   getSocietiesSuccess,
@@ -125,10 +126,31 @@ function* deleteSociety(action) {
   }
 }
 
+function* assignAdminToSociety(action) {
+  try {
+    const { data, setInputFields } = action.payload || {}
+
+    yield call(society().assignAdminToSociety, data)
+
+    yield put(getSocieties())
+
+    yield put(assignAdminSocietySuccess({}))
+
+    yield put(setSocietyValue({ key: 'isAssignAdminModal', value: false }))
+    setInputFields && setInputFields({})
+    toast.success('Admin Assigned Successfully')
+  } catch (error) {
+    yield put(assignAdminSocietyFailed({ error }))
+
+    toast.error(error?.response?.data?.message ?? error?.message)
+  }
+}
+
 export function* societySaga() {
   yield takeEvery(getSocieties.type, fetchSocieties)
   yield takeEvery(getSociety.type, fetchSociety)
   yield takeEvery(insertSociety.type, addSociety)
   yield takeEvery(modifySociety.type, editSociety)
   yield takeEvery(removeSociety.type, deleteSociety)
+  yield takeEvery(assignAdminSociety.type, assignAdminToSociety)
 }

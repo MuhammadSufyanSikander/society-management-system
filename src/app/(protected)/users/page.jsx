@@ -23,11 +23,12 @@ const statusColorMap = {
 const statusOptions = [
   { name: 'Active', uid: 'active' },
   { name: 'Rejected', uid: 'rejected' },
+  { name: 'clear', uid: '' },
 ]
 
 export default function UsersPage() {
   const dispatch = useDispatch()
-  const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ user_id: null, isVerified: 'pending' })
+  const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ user_id: null, isVerified: 'pending', searchQuery: '', status: '' })
   const { users, loading, isOpenAcceptModal, isOpenRejectModal } = useSelector(state => state.user)
 
   const openAcceptModal = item => {
@@ -50,8 +51,8 @@ export default function UsersPage() {
   }
 
   useEffect(() => {
-    dispatch(getUsers())
-  }, [])
+    dispatch(getUsers({ data: { searchQuery: inputFields.searchQuery, status: inputFields.status } }))
+  }, [inputFields.searchQuery, inputFields.status])
 
   const renderCell = React.useCallback((user, columnKey) => {
     const cellValue = user[columnKey]
@@ -121,7 +122,15 @@ export default function UsersPage() {
     return (
       <div className='flex w-full flex-col gap-4 mb-10'>
         <div className='flex w-full gap-3 items-end'>
-          <Input isClearable className='w-[30%] sm:max-w-[44%]' placeholder='Search by name...' startContent={<SearchIcon />} />
+          <Input
+            autoFocus
+            name={'searchQuery'}
+            onChange={e => onChange({ target: { name: e.target.name, value: e.target.value } })}
+            value={inputFields?.searchQuery}
+            className='w-[30%] sm:max-w-[44%]'
+            placeholder='Search by name...'
+            startContent={<SearchIcon />}
+          />
 
           <Dropdown>
             <DropdownTrigger>
@@ -131,7 +140,7 @@ export default function UsersPage() {
             </DropdownTrigger>
             <DropdownMenu disallowEmptySelection aria-label='Table Columns' closeOnSelect={false}>
               {statusOptions.map(status => (
-                <DropdownItem key={status.uid} className='capitalize'>
+                <DropdownItem key={status.uid} onPressChange={() => onChange({ target: { name: 'status', value: status.uid } })} className='capitalize'>
                   {capitalize(status.name)}
                 </DropdownItem>
               ))}
@@ -142,7 +151,9 @@ export default function UsersPage() {
     )
   }
 
-  if (!users.length && loading)
+  console.log('userssss :', users)
+
+  if (!users?.length && loading)
     return (
       <div className='h-[100vh] flex justify-center items-center'>
         <Spinner size='lg' />

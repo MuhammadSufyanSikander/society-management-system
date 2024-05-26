@@ -9,10 +9,25 @@ export const dynamic = 'force-dynamic'
 export const GET = async req => {
   try {
     await connect()
+    const url = new URL(req.url)
+    const searchQuery = url.searchParams.get('searchQuery')
+    const status = url.searchParams.get('status')
+    const society = url.searchParams.get('society')
+
+    console.log('societyqweqweqwe :', society)
 
     Society
     Department
-    const users = await Users.find({ role: { $ne: 'owner' } })
+    const users = await Users.find({
+      $and: [
+        { role: { $ne: 'owner' } },
+        {
+          $or: [{ firstname: new RegExp(searchQuery, 'i') }, { lastname: new RegExp(searchQuery, 'i') }, { email: new RegExp(searchQuery, 'i') }],
+        },
+        { isVerified: new RegExp(status, 'i') },
+        society !== '' ? { society: society } : {},
+      ],
+    })
       .populate('society department')
       .select('-password')
 

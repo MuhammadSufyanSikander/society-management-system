@@ -9,6 +9,7 @@ const initialState = {
   isAddSociety: false,
   isEditSociety: false,
   isDeleteSociety: false,
+  isAssignAdminModal: false,
 }
 
 const society = createSlice({
@@ -77,6 +78,18 @@ const society = createSlice({
       state.loading = false
       state.error = action.payload.error
     },
+    assignAdminSociety: (state, action) => {
+      state.loading = true
+      state.error = null
+    },
+    assignAdminSocietySuccess: (state, action) => {
+      state.loading = false
+      state.error = null
+    },
+    assignAdminSocietyFailed: (state, action) => {
+      state.loading = false
+      state.error = action.payload.error
+    },
     setSocietyValue: (state, action) => {
       const { key, value } = action.payload
       state[key] = value
@@ -86,6 +99,9 @@ const society = createSlice({
 
 export default society.reducer
 export const {
+  assignAdminSociety,
+  assignAdminSocietyFailed,
+  assignAdminSocietySuccess,
   getSociety,
   getSocietyFailed,
   getSocietySuccess,

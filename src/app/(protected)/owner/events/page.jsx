@@ -15,31 +15,115 @@ import SocietyModal from '@/app/components/Modals/SocietyModal'
 import AddEventModal from '@/app/components/Modals/AddEventModal'
 import AddPollingModal from '@/app/components/Modals/AddPollingModal'
 import DeleteEventModal from '@/app/components/Modals/DeleteEventModal'
+import { useDispatch, useSelector } from 'react-redux'
+import { getEvents, insertEvent, modifyEvent, removeEvent, setEventValue } from '@/app/redux/reducers/events'
+import useForm from '@/app/hooks/useForm'
+import { getSocieties } from '@/app/redux/reducers/society'
+import moment from 'moment'
 
 export default function Events() {
-  const [isDeleteEventModal, setIsDeleteEventModal] = useState(false)
-  const [isEditEventModal, setIsEditEventModal] = useState(false)
-  const [isEditSociety, setIsEditSociety] = useState(false)
-  const [isAddEventModal, setIsAddEventModal] = useState(false)
-  const [isEventModal, setIsEventModal] = useState(false)
+  const { isDeleteEventModal, isEditEventModal, isEventModal, events } = useSelector(state => state.event)
+  const { societies } = useSelector(state => state.society)
   const [isPollingModal, setIsPollingModal] = useState(false)
+  const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ title: '', description: '', time: '2021-04-07T18:45:22Z', location: '', society: '', image: null, searchQuery: '' })
 
-  const renderCell = React.useCallback((user, columnKey) => {
-    const cellValue = user[columnKey]
+  console.log('eventseventsevents:', events)
+
+  const dispatch = useDispatch()
+
+  const handleSocietyChange = value => {
+    const selectedSociety = societies.find(society => society.societyName === value.target.value)
+
+    onChange({ target: { name: 'society', value: selectedSociety?._id } })
+    onChange({ target: { name: 'societyName', value: selectedSociety?.societyName } })
+  }
+
+  const handleChangeAddEvent = e => {
+    if (e.target.name === 'society') return handleSocietyChange(e)
+
+    if (e.target.name === 'image') return onChange({ target: { name: e.target.name, value: e.target.files[0] } })
+
+    onChange({ target: { name: e.target.name, value: e.target.value } })
+  }
+
+  const handleAddEvent = () => {
+    onSubmit(null, () => {
+      dispatch(insertEvent({ data: inputFields }))
+    })
+  }
+
+  const openEditEventModal = event => {
+    dispatch(setEventValue({ key: 'isEditEventModal', value: true }))
+    dispatch(setEventValue({ key: 'isEventModal', value: true }))
+
+    setInputFields({
+      title: event.title,
+      description: event.description,
+      time: event.time,
+      location: event.location,
+      society: event.society._id,
+      societyName: event.society.societyName,
+      event_id: event._id,
+    })
+  }
+
+  const handleEditEvent = () => {
+    onSubmit(null, () => {
+      dispatch(modifyEvent({ data: inputFields, setInputFields }))
+    })
+  }
+
+  const openDeleteEvent = event => {
+    dispatch(setEventValue({ key: 'isDeleteEventModal', value: true }))
+    setInputFields({
+      event_id: event._id,
+    })
+  }
+
+  const handleDeleteEvent = () => {
+    onSubmit(null, () => {
+      dispatch(removeEvent({ data: inputFields, setInputFields }))
+    })
+  }
+
+  React.useEffect(() => {
+    dispatch(getSocieties())
+  }, [])
+
+  React.useEffect(() => {
+    dispatch(getEvents({ searchQuery: inputFields?.searchQuery }))
+  }, [inputFields?.searchQuery])
+
+  const renderCell = React.useCallback((item, columnKey) => {
+    const cellValue = item[columnKey]
 
     switch (columnKey) {
-      case 'name':
+      case 'title':
         return (
           <div className='flex flex-col'>
             <p className='text-bold text-sm capitalize'>{cellValue}</p>
-            <p className='text-bold text-sm capitalize text-default-400'>{user.email}</p>
+            {/* <p className='text-bold text-sm capitalize text-default-400'>{user.email}</p> */}
           </div>
         )
-      case 'role':
+      case 'time':
+        return (
+          <div className='flex flex-col'>
+            <p className='text-bold text-sm capitalize'>{moment(cellValue).format('DD-MM-YYYY hh:mm A')}</p>
+            {/* <p className='text-bold text-sm capitalize text-default-400'>{user.team}</p> */}
+          </div>
+        )
+      case 'location':
         return (
           <div className='flex flex-col'>
             <p className='text-bold text-sm capitalize'>{cellValue}</p>
-            <p className='text-bold text-sm capitalize text-default-400'>{user.team}</p>
+            {/* <p className='text-bold text-sm capitalize text-default-400'>{user.team}</p> */}
+          </div>
+        )
+      case 'society':
+        return (
+          <div className='flex flex-col'>
+            <p className='text-bold text-sm capitalize'>{cellValue.societyName}</p>
+            {/* <p className='text-bold text-sm capitalize text-default-400'>{user.team}</p> */}
           </div>
         )
       case 'actions':
@@ -53,8 +137,7 @@ export default function Events() {
             <Tooltip content='Edit event'>
               <span
                 onClick={() => {
-                  setIsEditEventModal(true)
-                  setIsEventModal(true)
+                  openEditEventModal(item)
                 }}
                 className='text-lg text-default-400 cursor-pointer active:opacity-50'
               >
@@ -62,7 +145,7 @@ export default function Events() {
               </span>
             </Tooltip>
             <Tooltip color='danger' content='Delete event'>
-              <span onClick={() => setIsDeleteEventModal(true)} className='text-lg text-danger cursor-pointer active:opacity-50'>
+              <span onClick={() => openDeleteEvent(item)} className='text-lg text-danger cursor-pointer active:opacity-50'>
                 <DeleteIcon />
               </span>
             </Tooltip>
@@ -77,13 +160,19 @@ export default function Events() {
     return (
       <div className='flex w-full flex-col gap-4 mb-10'>
         <div className='flex w-full gap-3 items-end'>
-          <Input isClearable className='w-[30%] sm:max-w-[44%]' placeholder='Search by name...' startContent={<SearchIcon />} />
+          <Input
+            autoFocus
+            value={inputFields?.searchQuery}
+            name={'searchQuery'}
+            onChange={e => onChange({ target: { name: e.target.name, value: e.target.value } })}
+            isClearable
+            className='w-[30%] sm:max-w-[44%]'
+            placeholder='Search by name...'
+            startContent={<SearchIcon />}
+          />
 
-          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => setIsEventModal(true)}>
+          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => dispatch(setEventValue({ key: 'isEventModal', value: true }))}>
             Add New Event
-          </Button>
-          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => setIsPollingModal(true)}>
-            Add Polling
           </Button>
         </div>
       </div>
@@ -103,17 +192,22 @@ export default function Events() {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={events}>{item => <TableRow key={item.id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}</TableBody>
+        <TableBody items={events}>{item => <TableRow key={item._id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}</TableBody>
       </Table>
       <AddEventModal
+        societies={societies}
+        onAddEvent={handleAddEvent}
+        inputFields={inputFields}
+        onChangeInput={handleChangeAddEvent}
         isEdit={isEditEventModal}
         isOpen={isEventModal}
         onClose={() => {
-          setIsEventModal(false)
+          dispatch(setEventValue({ key: 'isEventModal', value: false }))
         }}
+        onEditEvent={handleEditEvent}
       />
-      <AddPollingModal isOpen={isPollingModal} onClose={() => setIsPollingModal(false)} />
-      <DeleteEventModal isOpen={isDeleteEventModal} onClose={() => setIsDeleteEventModal(false)} onDelete={() => setIsDeleteEventModal(false)} />
+      {/* <AddPollingModal isOpen={isPollingModal} onClose={() => setIsPollingModal(false)} /> */}
+      <DeleteEventModal isOpen={isDeleteEventModal} onClose={() => dispatch(setEventValue({ key: 'isDeleteEventModal', value: false }))} onDelete={() => handleDeleteEvent()} />
     </div>
   )
 }

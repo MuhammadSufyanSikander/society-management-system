@@ -13,14 +13,19 @@ import Button from '@/app/components/form/Button'
 import DeleteSocietyModal from '@/app/components/Modals/DeleteSociety'
 import SocietyModal from '@/app/components/Modals/SocietyModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSocieties, insertSociety, modifySociety, removeSociety, setSocietyValue } from '@/app/redux/reducers/society'
+import { assignAdminSociety, getSocieties, insertSociety, modifySociety, removeSociety, setSocietyValue } from '@/app/redux/reducers/society'
 import useForm from '@/app/hooks/useForm'
 import { getDepartments } from '@/app/redux/reducers/department'
 import societyAddSchema from '@/app/validation/society/societyAddValidation'
+import AssignAdminModal from '@/app/components/Modals/AssignAdminModal'
+import { getUsers } from '@/app/redux/reducers/user'
+import toast from 'react-hot-toast'
 
 export default function Events() {
-  const { societies, isAddSociety, isEditSociety, isDeleteSociety } = useSelector(state => state.society)
+  const { societies, isAddSociety, isEditSociety, isDeleteSociety, isAssignAdminModal } = useSelector(state => state.society)
   const { departments } = useSelector(state => state.department)
+  const { users } = useSelector(state => state.user)
+
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({
     societyName: '',
     societyDescription: '',
@@ -47,10 +52,36 @@ export default function Events() {
     onChange({ target: { name: 'departmentId', value: selectedDepartment?._id } })
   }
 
+  const handleStudentChange = value => {
+    const selectedStudent = users.find(user => user.firstname === value.target.value)
+    onChange({ target: { name: 'studentFirstName', value: selectedStudent?.firstname } })
+    onChange({ target: { name: 'student_id', value: selectedStudent?._id } })
+  }
+
+  const handleSocietyChange = value => {
+    const selectedSociety = societies.find(society => society.societyName === value.target.value)
+
+    dispatch(getUsers({ data: { society: selectedSociety?._id } }))
+
+    onChange({ target: { name: 'society', value: selectedSociety?._id } })
+    onChange({ target: { name: 'societyName', value: selectedSociety?.societyName } })
+
+    onChange({ target: { name: 'studentFirstname', value: '' } })
+    onChange({ target: { name: 'student_id', value: '' } })
+  }
+
   const handleChangeAddSociety = e => {
     if (e.target.name == 'image') return onChange({ target: { name: 'image', value: e.target.files[0] } })
 
     if (e.target.name === 'department') return handleDepartmentChange(e)
+
+    onChange({ target: { name: e.target.name, value: e.target.value } })
+  }
+
+  const handleChangeAdmin = e => {
+    if (e.target.name === 'society') return handleSocietyChange(e)
+
+    if (e.target.name === 'student') return handleStudentChange(e)
 
     onChange({ target: { name: e.target.name, value: e.target.value } })
   }
@@ -70,6 +101,14 @@ export default function Events() {
   const handleDeleteSociety = () => {
     onSubmit(null, () => {
       dispatch(removeSociety({ data: inputFields, setInputFields }))
+    })
+  }
+
+  const handleAssignAdmin = () => {
+    onSubmit(null, () => {
+      if (!inputFields?.society || !inputFields.student_id) return toast.error('society and student selection is required')
+
+      dispatch(assignAdminSociety({ data: { society_id: inputFields?.society, admin: inputFields?.student_id }, setInputFields }))
     })
   }
 
@@ -164,6 +203,9 @@ export default function Events() {
           <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => dispatch(setSocietyValue({ key: 'isAddSociety', value: true }))}>
             Add New
           </Button>
+          <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => dispatch(setSocietyValue({ key: 'isAssignAdminModal', value: true }))}>
+            Assign Admin
+          </Button>
         </div>
       </div>
     )
@@ -204,6 +246,15 @@ export default function Events() {
         onEditSociety={handleSubmitEditSociety}
       />
       <DeleteSocietyModal isOpen={isDeleteSociety} onClose={() => dispatch(setSocietyValue({ key: 'isDeleteSociety', value: false }))} onDelete={handleDeleteSociety} />
+      <AssignAdminModal
+        isOpen={isAssignAdminModal}
+        onChangeInput={handleChangeAdmin}
+        inputFields={inputFields}
+        societies={societies}
+        users={users}
+        onAssignAdmin={handleAssignAdmin}
+        onClose={() => dispatch(setSocietyValue({ key: 'isAssignAdminModal', value: false }))}
+      />
     </div>
   )
 }

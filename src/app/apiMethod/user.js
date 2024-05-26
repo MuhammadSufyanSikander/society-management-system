@@ -2,9 +2,19 @@ import client, { API_URL } from './client'
 
 export const user = () => {
   return {
-    fetchUsers: async () => {
+    fetchUsers: async (searchQuery = '', status = '', society = '') => {
       try {
-        const response = await fetch(`${API_URL}/users?timestamp=${Date.now()}`, { cache: 'no-cache', next: { revalidate: 5 } })
+        const response = await fetch(`${API_URL}/users?timestamp=${Date.now()}&searchQuery=${searchQuery}&status=${status}&society=${society}`, { cache: 'no-cache', next: { revalidate: 5 } })
+        const data = await response.json()
+
+        return { data }
+      } catch (error) {
+        throw error
+      }
+    },
+    fetchOwners: async () => {
+      try {
+        const response = await fetch(`${API_URL}/owners`, { cache: 'no-cache', next: { revalidate: 5 } })
         const data = await response.json()
 
         return { data }
