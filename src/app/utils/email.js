@@ -6,8 +6,8 @@ export const sendEmail = ({ from, recipients = [], subject, text }) => {
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'zaidali36422@gmail.com',
-          pass: 'dmee rcab dnvp alms',
+          user: 'imsufyansikander@gmail.com',
+          pass: 'hzgy vtrk zuwp fixt',
         },
       })
 
