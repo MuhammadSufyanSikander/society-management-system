@@ -9,7 +9,7 @@ import { useParams } from 'next/navigation'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-function page() {
+function Event() {
   const { id } = useParams()
   const dispatch = useDispatch()
   const { event, loading } = useSelector(state => state.event)
@@ -56,4 +56,4 @@ function page() {
   )
 }
 
-export default page
+export default Event

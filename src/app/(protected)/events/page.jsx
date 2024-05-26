@@ -8,7 +8,7 @@ import { Spinner } from '@nextui-org/react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-function page() {
+function Events() {
   const dispatch = useDispatch()
   const { events, loading } = useSelector(state => state.event)
 
@@ -46,4 +46,4 @@ function page() {
   )
 }
 
-export default page
+export default Events

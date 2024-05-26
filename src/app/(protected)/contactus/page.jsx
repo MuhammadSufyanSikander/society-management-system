@@ -7,7 +7,7 @@ import { Button } from '@nextui-org/react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-function page() {
+function ContactUs() {
   const dispatch = useDispatch()
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ firstname: '', lastname: '', email: '', feedback: '' })
   const { owners } = useSelector(state => state.user)
@@ -79,4 +79,4 @@ function page() {
   )
 }
 
-export default page
+export default ContactUs
