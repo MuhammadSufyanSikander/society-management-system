@@ -16,6 +16,7 @@ import {
   sendEmail as sendEmailAction,
 } from '../reducers/user'
 import { email } from '@/app/apiMethod/email'
+import { success } from '../reducers/auth'
 
 function* fetchUsers(action) {
   try {
@@ -46,11 +47,17 @@ function* fetchOwners(action) {
 
 function* updateUser(action) {
   try {
-    const { data } = action.payload
+    const { data, isUpdateUser = false } = action.payload || {}
     const response = yield call(user().updateUser, data)
     yield put(modifyUserSuccess())
 
-    yield put(getUsers())
+    yield put(getUsers({ data: { searchQuery: '', status: '', society: '' } }))
+
+    console.log('user info: ', response)
+    if (isUpdateUser) {
+      yield put(success({ token: response.data.token, userInfo: response.data.user }))
+      toast.success('User updated successfully')
+    }
   } catch (error) {
     yield put(modifyUserFailed({ error }))
     toast.error(error?.response?.data?.message ?? error.message)

@@ -20,13 +20,13 @@ function page() {
           <Icon image={assets.images.faq} imageHeight={'w-[40%] h-[40%]'} />
         </div>
       </div>
-    <div className='px-10 flex flex-col justify-center items-center w-[50%]'>
-      <h1 className='text-[20px]  items-start font-bold py-[10px]'>About Us</h1>
-      <Divider className='w-[97%]'/>
-    <Accordion  isCompact/>
-      
-   
-    </div>
+      <div className='px-10 flex flex-col justify-center items-center'>
+        <div className='w-[50%]'>
+          <h1 className='text-[20px]  items-start font-bold py-[10px]'>About Us</h1>
+          <Divider className='w-[97%]' />
+          <Accordion isCompact />
+        </div>
+      </div>
     </div>
   )
 }

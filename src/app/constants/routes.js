@@ -66,7 +66,7 @@ export const studentRoutes = [
   },
   {
     label: 'Profile',
-    route: ROUTES.userProfile + '/1',
+    route: ROUTES.userProfile,
   },
   {
     label: 'FAQ',

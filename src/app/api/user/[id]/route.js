@@ -5,6 +5,7 @@ import Users from '@/app/models/Users'
 import jwt from 'jsonwebtoken'
 import Society from '@/app/models/Society'
 import Department from '@/app/models/Department'
+import bcrypt from 'bcrypt'
 
 export const PUT = async (req, { params }) => {
   const body = await req.json()
@@ -13,7 +14,10 @@ export const PUT = async (req, { params }) => {
   try {
     await connect()
 
-    console.log('bodyyydd :', id, body)
+    if (body?.password) {
+      const hash = await bcrypt.hash(body?.password, 10)
+      body.password = hash
+    }
 
     Society
     Department

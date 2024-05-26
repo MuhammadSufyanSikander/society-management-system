@@ -8,11 +8,11 @@ import moment from 'moment'
 
 function EventCard({ item }) {
   const router = useRouter()
-  const { location, time, title, _id } = item
+  const { location, time, title, _id, image } = item
 
   return (
     <div className='w-[280px] mt-[20px] shadow-2xl'>
-      <Icon imageHeight={'w-[280px]'} image={assets.images.rector} />
+      <Icon imageHeight={'w-[280px]'} image={image} />
       <div className='p-[15px] flex flex-col gap-[10px]'>
         <h1 className='font-semibold text-[20px]'>{title}</h1>
         <div className='flex mt-[7px] gap-3'>

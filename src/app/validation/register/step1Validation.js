@@ -9,7 +9,7 @@ const step1Schema = z.object({
     .string()
     .min(1, 'CNIC is required')
     .refine(value => /^[\d]{5}-[\d]{7}-[\d]{1}$/.test(value), 'Invalid CNIC, Expected format: 00000-00000000-0'),
-  registration: z.string().refine(value => /^\d+$/.test(value), 'Registration must be a number'),
+  registration: z.string().min(1, 'Registration is required'),
   mobile: z.string().refine(value => /^\d+$/.test(value), 'Mobile must be a number'),
   email: z.string().email('Invalid Email Address').min(1, 'Email Address is required'),
 })

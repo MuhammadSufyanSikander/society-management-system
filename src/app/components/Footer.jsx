@@ -1,6 +1,8 @@
 import React from 'react'
 import Icon from './form/Icon'
 import assets from '../assets/assets'
+import Link from 'next/link'
+import { ROUTES } from '../constants'
 
 function Footer() {
   return (
@@ -9,15 +11,14 @@ function Footer() {
         <div className=' w-[60%] flex justify-between text-[12px] font-noto-sans p-[30px] text-white'>
           <Icon imageHeight={'w-[250px] h-[80px]'} image={assets.images.uniLogo} />
           <div className='flex flex-col gap-2'>
-            <p>About us</p>
-            <p>Our societies</p>
-            <p>Events</p>
+            <Link href={ROUTES.aboutUs}>About us</Link>
+            <Link href={ROUTES.societies}>Our societies</Link>
+            <Link href={ROUTES.events}>Events</Link>
           </div>
           <div className='flex flex-col gap-2'>
-            <p>FAQ</p>
-            <p>Feedback</p>
-            <p>Eligibility</p>
-            <p>Contact us</p>
+            <Link href={ROUTES.faq}>FAQ</Link>
+            <Link href={ROUTES.feedbackForm}>Feedback</Link>
+            <Link href={ROUTES.contactUs}>Contact us</Link>
           </div>
         </div>
       </div>

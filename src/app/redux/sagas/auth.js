@@ -4,9 +4,9 @@ import routes from '@/app/routes'
 import { auth } from '@/app/apiMethod/auth'
 import toast from 'react-hot-toast'
 import { firebaseStorage } from '@/app/apiMethod/storage'
+import { email } from '@/app/apiMethod/email'
 
 function* signin(action) {
-  // const { router } = yield select(state => state.settings)
   try {
     const {
       data: { email, password },
@@ -35,8 +35,17 @@ function* signup(action) {
     yield put(success({ userInfo: response.data.user, token: response.data.token }))
     yield put(setAuthValue({ key: 'step', value: 1 }))
     router.push(routes.HOME)
+
+    yield call(
+      email().sendEmail({
+        from: 'zaidsaleem.tbox@gmail.com',
+        subject: 'Account successfully registered',
+        recipients: [data.email],
+        text: 'Your account is successfully created. The admin will verify your accoount and you will be good to go.',
+      }),
+    )
   } catch (error) {
-    toast.error(error?.response?.data?.message ?? 'Hello world')
+    toast.error(error?.response?.data?.message ?? error.message)
   }
 }
 
