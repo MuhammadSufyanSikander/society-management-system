@@ -10,7 +10,7 @@ import React from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 
-function page() {
+function FeedbackForm() {
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ feedbackType: 'suggestion', feedback: '', firstname: '', lastname: '', email: '' })
   const dispatch = useDispatch()
   const { society } = useSelector(state => state.society)
@@ -79,4 +79,4 @@ function page() {
   )
 }
 
-export default page
+export default FeedbackForm
