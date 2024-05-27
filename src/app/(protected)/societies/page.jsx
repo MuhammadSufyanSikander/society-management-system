@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 function Societies() {
   const dispatch = useDispatch()
-  const { societies } = useSelector(state => simageUrlsociety)
+  const { societies } = useSelector(state => state.society)
 
   useEffect(() => {
     dispatch(getSocieties())
