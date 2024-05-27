@@ -24,10 +24,13 @@ function Homepage() {
           backgroundImage: 'url("https://firebasestorage.googleapis.com/v0/b/society-management-syste-446c5.appspot.com/o/19.jpg?alt=media&token=85e82a28-65a7-474a-b7d9-07bbbdb0aec6")',
         }}
       >
-        <div className='absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-[40px] font-noto-sans text-center'>Share your idea with us</div>
-        <div className='absolute w-[60%]  bottom-1/2 left-1/4 text-[16px] text-center text-white'>
-          Whether studying for a big exam, learning something new, or brushing up on old skills, the right tutor can help you feel empowered, knowledgeable, and ready for anything
+        <div className='absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white font-bold text-[40px] font-noto-sans text-center mq450:w-[85%]'>
+          <div className='mb-[20px] mq450:text-[30px]'>Share your idea with us</div>
+          <div className=' text-[16px] text-center text-white'>
+            Whether studying for a big exam, learning something new, or brushing up on old skills, the right tutor can help you feel empowered, knowledgeable, and ready for anything
+          </div>
         </div>
+
         <div className='absolute bottom-10 left-1/2'>
           <Icon image={assets.icons.downarrow} imageHeight={'w-[30px] h-[30px]'} onClick={scrollToSection} />
         </div>
@@ -35,8 +38,8 @@ function Homepage() {
 
       {/* New Section */}
       <div ref={sectionRef}>
-        <div className='w-full h-screen '>
-          <section className='w-full bg-gray-10  justify-center text-center px-32 py-10'>
+        <div className='w-full h-full mb-[40px]'>
+          <section className='w-full bg-gray-10  justify-center text-center px-[50px] py-[30px]'>
             <div className='text-[25px] font-bold mb-[20px]'>Vice Chancellor&apos;s Message</div>
             <div className='flex text-left justify-center'>
               <div className=' w-[60%] italic'>
@@ -55,7 +58,7 @@ function Homepage() {
             </div>
             <div></div>
           </section>
-          <section className='w-full bg-gray-10  justify-center text-center px-32 py-10'>
+          <section className='w-full bg-gray-10  justify-center text-center px-[50px] py-[30px]'>
             <div className='text-[25px] font-bold mb-[20px]'>Directorate of Students Affairs</div>
             <div className='flex text-left justify-center'>
               <div className=' w-[60%] italic'>
@@ -74,7 +77,7 @@ function Homepage() {
             </div>
             <div></div>
           </section>
-          <div className='px-32 mt-[20px] text-left w-full'>
+          <div className='px-[50px] mt-[20px] text-left w-full'>
             <h1 className='text-[25px] font-bold'>Welcome to GCUF</h1>
             <p className='w-[65%]'>
               GCUF is an extraordinary place for learning, discovery and transformation. Here, you have the freedom to ask questions, challenge the ordinary and spark innovation. We seek out bright
