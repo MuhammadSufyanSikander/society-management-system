@@ -7,13 +7,14 @@ import { Button } from '@nextui-org/react'
 import { ROUTES } from '../constants'
 import { useRouter } from 'next/navigation'
 
-function Card({ title, description, routeId }) {
+function Card({ title, description, routeId, image }) {
   const router = useRouter()
   return (
     <div className='w-[525px] bg-white  p-[15px]'>
       <Icon
         imageWidth={'w-full'}
         image={
+          image ??
           'https://firebasestorage.googleapis.com/v0/b/society-management-syste-446c5.appspot.com/o/society%2F360_F_461470323_6TMQSkCCs9XQoTtyer8VCsFypxwRiDGU.jpg?alt=media&token=736c0d79-baa8-4f72-800f-b8bda8f57142'
         }
       />
