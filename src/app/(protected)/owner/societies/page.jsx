@@ -67,7 +67,7 @@ export default function Events() {
   }
 
   const handleSocietyChange = value => {
-    const selectedSociety = societies.find(society => society.societyName === value.target.value)
+    const selectedSociety = societies.find(society => society?.societyName === value.target.value)
 
     dispatch(getUsers({ data: { society: selectedSociety?._id } }))
 
@@ -132,14 +132,14 @@ export default function Events() {
     dispatch(setSocietyValue({ key: 'isAddSociety', value: true }))
 
     setInputFields({
-      society_id: item._id,
-      societyName: item.societyName,
-      societyDescription: item.societyDescription,
+      society_id: item?._id,
+      societyName: item?.societyName,
+      societyDescription: item?.societyDescription,
       department: item?.department?.department,
       departmentId: item.department?._id,
-      mission: item.mission,
-      achievements: item.achievements,
-      rules: item.rules,
+      mission: item?.mission,
+      achievements: item?.achievements,
+      rules: item?.rules,
     })
   }
 
@@ -155,13 +155,13 @@ export default function Events() {
         return (
           <div className='flex flex-col'>
             <p className='text-bold text-sm capitalize'>{cellValue}</p>
-            {item?.admin && <p className='text-bold text-sm capitalize text-default-400'>{`${item.admin.email}`}</p>}
+            {item?.admin && <p className='text-bold text-sm capitalize text-default-400'>{`${item?.admin?.email}`}</p>}
           </div>
         )
       case 'department':
         return (
           <div className='flex flex-col'>
-            <p className='text-bold text-sm capitalize'>{cellValue.department}</p>
+            <p className='text-bold text-sm capitalize'>{cellValue?.department}</p>
             {/* <p className='text-bold text-sm capitalize text-default-400'>{user.team}</p> */}
           </div>
         )
@@ -169,7 +169,7 @@ export default function Events() {
         if (!cellValue) return <p className='text-bold text-sm capitalize'>-</p>
         return (
           <div className='flex flex-col'>
-            <p className='text-bold text-sm capitalize'>{cellValue.cnic}</p>
+            <p className='text-bold text-sm capitalize'>{cellValue?.cnic}</p>
             {item?.admin && <p className='text-bold text-sm capitalize text-default-400'>{`${item.admin.firstname} ${item.admin.lastname}`}</p>}
           </div>
         )

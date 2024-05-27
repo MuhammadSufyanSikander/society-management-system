@@ -36,11 +36,11 @@ export default function UsersPage() {
 
   const openAcceptModal = item => {
     dispatch(setUserValue({ key: 'isOpenAcceptModal', value: true }))
-    setInputFields({ user_id: item._id, isVerified: 'active' })
+    setInputFields({ user_id: item?._id, isVerified: 'active' })
   }
   const openRejectModal = item => {
     dispatch(setUserValue({ key: 'isOpenRejectModal', value: true }))
-    setInputFields({ user_id: item._id, isVerified: 'rejected' })
+    setInputFields({ user_id: item?._id, isVerified: 'rejected' })
   }
 
   const handleAccepterRequest = () => {
@@ -59,8 +59,8 @@ export default function UsersPage() {
   }
 
   useEffect(() => {
-    dispatch(getUsers({ data: { searchQuery: inputFields.searchQuery, status: inputFields.status } }))
-  }, [inputFields.searchQuery, inputFields.status])
+    dispatch(getUsers({ data: { searchQuery: inputFields?.searchQuery, status: inputFields?.status } }))
+  }, [inputFields?.searchQuery, inputFields?.status])
 
   const renderCell = React.useCallback((user, columnKey) => {
     const cellValue = user[columnKey]
@@ -68,8 +68,8 @@ export default function UsersPage() {
     switch (columnKey) {
       case 'firstname':
         return (
-          <User avatarProps={{ radius: 'lg', src: user.image }} description={user.email} name={`${user.firstname} ${user.lastname}`}>
-            {user.email}
+          <User avatarProps={{ radius: 'lg', src: user.image }} description={user?.email} name={`${user?.firstname} ${user?.lastname}`}>
+            {user?.email}
           </User>
         )
       case 'registration':
@@ -81,13 +81,13 @@ export default function UsersPage() {
       case 'society':
         return (
           <div className='flex flex-col'>
-            <p className='text-bold text-sm capitalize'>{cellValue.societyName}</p>
+            <p className='text-bold text-sm capitalize'>{cellValue?.societyName}</p>
           </div>
         )
       case 'department':
         return (
           <div className='flex flex-col'>
-            <p className='text-bold text-sm capitalize'>{cellValue.department}</p>
+            <p className='text-bold text-sm capitalize'>{cellValue?.department}</p>
           </div>
         )
       case 'cnic':
@@ -98,7 +98,7 @@ export default function UsersPage() {
         )
       case 'isVerified':
         return (
-          <Chip className='capitalize' color={statusColorMap[user.isVerified]} size='sm' variant='flat'>
+          <Chip className='capitalize' color={statusColorMap[user?.isVerified]} size='sm' variant='flat'>
             {cellValue}
           </Chip>
         )
@@ -112,8 +112,8 @@ export default function UsersPage() {
             </DropdownTrigger>
             <DropdownMenu>
               <DropdownItem onClick={() => handleView(user)}>View</DropdownItem>
-              {(user.isVerified === 'pending' || user.isVerified === 'rejected') && <DropdownItem onClick={() => openAcceptModal(user)}>Accept</DropdownItem>}
-              {user.isVerified === 'pending' && (
+              {(user?.isVerified === 'pending' || user?.isVerified === 'rejected') && <DropdownItem onClick={() => openAcceptModal(user)}>Accept</DropdownItem>}
+              {user?.isVerified === 'pending' && (
                 <DropdownItem className='text-danger-500' color='danger' onClick={() => openRejectModal(user)}>
                   Reject
                 </DropdownItem>
@@ -149,7 +149,7 @@ export default function UsersPage() {
             <DropdownMenu disallowEmptySelection aria-label='Table Columns' closeOnSelect={false}>
               {statusOptions.map(status => (
                 <DropdownItem key={status.uid} onPressChange={() => onChange({ target: { name: 'status', value: status.uid } })} className='capitalize'>
-                  {capitalize(status.name)}
+                  {capitalize(status?.name)}
                 </DropdownItem>
               ))}
             </DropdownMenu>
@@ -180,7 +180,7 @@ export default function UsersPage() {
           )}
         </TableHeader>
         <TableBody loadingState='idle' loadingContent={<Spinner />} items={users}>
-          {item => <TableRow key={item._id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}
+          {item => <TableRow key={item?._id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}
         </TableBody>
       </Table>
 

@@ -52,23 +52,23 @@ const UserProfile = () => {
 
   const handleSubmitChange = () => {
     if (!inputFields.password) delete inputFields.password
-    dispatch(modifyUser({ isUpdateUser: true, data: { ...inputFields, department: inputFields.departmentId, user_id: id } }))
+    dispatch(modifyUser({ isUpdateUser: true, data: { ...inputFields, department: inputFields?.departmentId, user_id: id } }))
     setIsEdit(false)
   }
 
   useEffect(() => {
     setInputFields({
-      firstname: userInfo.firstname,
-      lastname: userInfo.lastname,
+      firstname: userInfo?.firstname,
+      lastname: userInfo?.lastname,
       password: '',
-      society: userInfo.society._id,
-      societyName: userInfo.society.societyName,
-      phone: userInfo.phone,
-      cnic: userInfo.cnic,
-      department: userInfo.department.department,
-      departmentId: userInfo.department._id,
-      registration: userInfo.registration,
-      program: userInfo.program,
+      society: userInfo?.society?._id,
+      societyName: userInfo?.society?.societyName,
+      phone: userInfo?.phone,
+      cnic: userInfo?.cnic,
+      department: userInfo?.department?.department,
+      departmentId: userInfo?.department?._id,
+      registration: userInfo?.registration,
+      program: userInfo?.program,
     })
 
     dispatch(getSocieties())
@@ -82,7 +82,7 @@ const UserProfile = () => {
           <Avatar src={userInfo?.image} className='w-40 h-40 top-[-70px] absolute z-10' />
         </div>
         <div className='flex flex-col justify-center items-center gap-2'>
-          <h1 className='text-22xl font-semibold leading-none text-default-600'>{`${userInfo.firstname} ${userInfo.lastname}`}</h1>
+          <h1 className='text-22xl font-semibold leading-none text-default-600'>{`${userInfo?.firstname} ${userInfo?.lastname}`}</h1>
         </div>
       </div>
       <div class='w-full border-[1px] h-fit mb-4 border-gray-50 rounded-[4px] p-[22px]'>

@@ -38,7 +38,7 @@ function Events() {
         <h1 className='text-[30px] mt-[20px] font-noto-sans text-black-100 font-bold'>At the moment, there are no upcoming events at the University</h1>
         <div className='flex flex-wrap gap-[20px] justify-start bg-slate-50 p-[15px] w-full'>
           {events.map(event => (
-            <EventCard key={event._id} item={event} />
+            <EventCard key={event?._id} item={event} />
           ))}
         </div>
       </div>

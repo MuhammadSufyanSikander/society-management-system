@@ -30,12 +30,10 @@ export default function Events() {
   const [singleEvent, setSingleEvent] = useState()
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ title: '', description: '', time: '2021-04-07T18:45:22Z', location: '', society: '', image: null, searchQuery: '' })
 
-  console.log('eventseventsevents:', events)
-
   const dispatch = useDispatch()
 
   const handleSocietyChange = value => {
-    const selectedSociety = societies.find(society => society.societyName === value.target.value)
+    const selectedSociety = societies.find(society => society?.societyName === value.target.value)
 
     onChange({ target: { name: 'society', value: selectedSociety?._id } })
     onChange({ target: { name: 'societyName', value: selectedSociety?.societyName } })
@@ -60,13 +58,13 @@ export default function Events() {
     dispatch(setEventValue({ key: 'isEventModal', value: true }))
 
     setInputFields({
-      title: event.title,
-      description: event.description,
-      time: event.time,
-      location: event.location,
-      society: event.society._id,
-      societyName: event.society.societyName,
-      event_id: event._id,
+      title: event?.title,
+      description: event?.description,
+      time: event?.time,
+      location: event?.location,
+      society: event?.society?._id,
+      societyName: event?.society?.societyName,
+      event_id: event?._id,
     })
   }
 
@@ -104,7 +102,6 @@ export default function Events() {
 
   const renderCell = React.useCallback((item, columnKey) => {
     const cellValue = item[columnKey]
-    console.log('item', item)
 
     switch (columnKey) {
       case 'title':
@@ -129,9 +126,10 @@ export default function Events() {
           </div>
         )
       case 'society':
+        if (!cellValue) return null
         return (
           <div className='flex flex-col'>
-            <p className='text-bold text-sm capitalize'>{cellValue.societyName}</p>
+            <p className='text-bold text-sm capitalize'>{cellValue?.societyName}</p>
             {/* <p className='text-bold text-sm capitalize text-default-400'>{user.team}</p> */}
           </div>
         )
@@ -201,7 +199,7 @@ export default function Events() {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={events}>{item => <TableRow key={item._id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}</TableBody>
+        <TableBody items={events}>{item => <TableRow key={item?._id}>{columnKey => <TableCell>{renderCell(item, columnKey)}</TableCell>}</TableRow>}</TableBody>
       </Table>
       <AddEventModal
         societies={societies}
