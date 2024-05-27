@@ -36,6 +36,7 @@ function Society() {
         <Icon
           imageWidth={'w-[40%] h-[100%] '}
           image={
+            society?.image ??
             'https://firebasestorage.googleapis.com/v0/b/society-management-syste-446c5.appspot.com/o/society%2F360_F_461470323_6TMQSkCCs9XQoTtyer8VCsFypxwRiDGU.jpg?alt=media&token=736c0d79-baa8-4f72-800f-b8bda8f57142'
           }
         />
