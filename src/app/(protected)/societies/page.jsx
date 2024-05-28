@@ -30,7 +30,7 @@ function Societies() {
       </div>
 
       <div className='flex flex-wrap gap-4 two-columns justify-center bg-slate-50 p-[15px] w-full'>
-        {societies.map(society => (
+        {societies?.map(society => (
           <Card key={society._id} title={society.societyName} description={society.societyDescription} routeId={society._id} />
         ))}
       </div>

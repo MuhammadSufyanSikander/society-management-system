@@ -1,12 +1,17 @@
 'use client'
 import assets from '@/app/assets/assets'
 import Footer from '@/app/components/Footer'
+import ImageCard from '@/app/components/ImageCard'
 import Icon from '@/app/components/form/Icon'
 import { ROUTES } from '@/app/constants'
+import { Button } from '@nextui-org/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React, { useRef } from 'react'
 
 function Homepage() {
+  const route = useRouter()
+  const galleryImages = [1, 2, 3, 4, 5, 6]
   const sectionRef = useRef(null)
 
   const scrollToSection = () => {
@@ -77,6 +82,7 @@ function Homepage() {
             </div>
             <div></div>
           </section>
+
           <div className='px-[50px] mt-[20px] text-left w-full'>
             <h1 className='text-[25px] font-bold'>Welcome to GCUF</h1>
             <p className='w-[65%]'>
@@ -86,6 +92,18 @@ function Homepage() {
           </div>
         </div>
       </div>
+      <section className='w-full '>
+        <h1 className='text-[40px] mb-[10px] text-center font-semibold font-noto-sans'>Gallery</h1>
+        <div className='flex flex-wrap gap-[20px] justify-center mb-[50px]'>
+          {galleryImages?.map((item, index) => (
+            <ImageCard image={assets.images.societylogo} />
+          ))}
+
+          <Button onClick={() => route.push(ROUTES.gallery)} color='primary'>
+            View more
+          </Button>
+        </div>
+      </section>
       <Footer />
     </div>
   )
