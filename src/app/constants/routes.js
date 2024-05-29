@@ -15,6 +15,7 @@ const ROUTES = {
   society: '/society',
   feedbackForm: '/feedbackForm',
   gallery: '/gallery',
+  allGallery: '/owner/gallery',
 }
 
 export const loggedOutRoutes = [
@@ -138,6 +139,10 @@ export const ownerRoutes = [
   {
     label: 'All Societies',
     route: ROUTES.allSocieties,
+  },
+  {
+    label: 'Uni Gallery',
+    route: ROUTES.allGallery,
   },
   {
     label: 'Events',
