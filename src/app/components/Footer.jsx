@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { ROUTES } from '../constants'
 
 function Footer() {
-  return null
   return (
     <div>
       <div className='bg-blue-700'>
