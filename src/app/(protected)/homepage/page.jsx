@@ -96,7 +96,7 @@ function Homepage() {
         <h1 className='text-[40px] mb-[10px] text-center font-semibold font-noto-sans'>Gallery</h1>
         <div className='flex flex-wrap gap-[20px] justify-center mb-[50px]'>
           {galleryImages?.map((item, index) => (
-            <ImageCard image={assets.images.societylogo} />
+            <ImageCard key={index} image={assets.images.societylogo} />
           ))}
 
           <Button onClick={() => route.push(ROUTES.gallery)} color='primary'>

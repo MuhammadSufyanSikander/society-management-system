@@ -3,11 +3,10 @@ import Footer from '@/app/components/Footer'
 import ImageCard from '@/app/components/ImageCard'
 import React from 'react'
 
-function page() {
+function Gallery() {
   const galleryImages = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   return (
     <div>
-      {' '}
       <div
         className='relative w-full  align-middle h-[88.6vh] bg-cover '
         style={{
@@ -26,7 +25,7 @@ function page() {
         {/* <h1 className='text-[40px] mb-[10px] text-center font-semibold font-noto-sans'>Gallery</h1> */}
         <div className='flex flex-wrap mt-[20px] gap-[20px] justify-center mb-[50px]'>
           {galleryImages?.map((item, index) => (
-            <ImageCard image={assets.images.societylogo} />
+            <ImageCard key={index} image={assets.images.societylogo} />
           ))}
         </div>
       </section>
