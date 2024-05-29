@@ -32,7 +32,7 @@ function Homepage() {
         <div className='absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white font-bold text-[40px] font-noto-sans text-center mq450:w-[85%]'>
           <div className='mb-[20px] mq450:text-[30px]'>Welcome to the GCUF Society Management System</div>
           <div className=' text-[16px] text-center text-white'>
-          Discover, engage, and thrive with GCUF's diverse societies—your hub for information, events, and active participation in university life.   </div>
+          Discover, engage, and thrive with GCUF&apos;s diverse societies—your hub for information, events, and active participation in university life.   </div>
         </div>
 
         <div className='absolute bottom-10 left-1/2'>
