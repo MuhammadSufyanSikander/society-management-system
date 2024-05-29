@@ -34,4 +34,4 @@ function Gallery() {
   )
 }
 
-export default page
+export default Gallery
