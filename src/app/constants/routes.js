@@ -141,7 +141,7 @@ export const ownerRoutes = [
     route: ROUTES.allSocieties,
   },
   {
-    label: 'Uni Gallery',
+    label: 'Gallery',
     route: ROUTES.allGallery,
   },
   {
