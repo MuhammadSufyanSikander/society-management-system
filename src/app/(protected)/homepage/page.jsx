@@ -63,7 +63,7 @@ function Homepage() {
             </div>
             <div></div>
           </section>
-          <section className='w-full bg-gray-10  justify-center text-center px-[50px] py-[30px]'>
+          <section className='w-full bg-gray-5  justify-center text-center px-[50px] py-[30px]'>
             <div className='text-[25px] font-bold mb-[20px]'>Directorate of Students Affairs</div>
             <div className='flex text-left justify-center'>
               <div className=' w-[60%] italic'>

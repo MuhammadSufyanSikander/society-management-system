@@ -36,6 +36,7 @@ import facebook from './icons/facebook.svg'
 import linkedin from './icons/linkedin.svg'
 import twitter from './icons/twitter.svg'
 import gallery from './images/gallery.jpg'
+import call from './images/call.jpg'
 
 const assets = {
   icons: {
@@ -79,6 +80,7 @@ const assets = {
     uniLogo,
     societylogo,
     gallery,
+    call,
   },
 }
 export default assets
