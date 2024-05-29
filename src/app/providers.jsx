@@ -7,8 +7,8 @@ import configureStore from '@/app/redux/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import toast, { Toaster } from 'react-hot-toast'
 
+const { persistor, store } = configureStore()
 export function Providers({ children }) {
-  const { persistor, store } = configureStore()
   return (
     <NextUIProvider>
       <Provider store={store}>
