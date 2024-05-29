@@ -6,9 +6,15 @@ import { useRouter } from 'next/navigation'
 import { ROUTES } from '../constants'
 import moment from 'moment'
 
-function EventCard({ item }) {
+function EventCard({ item, isPast = false }) {
   const router = useRouter()
   const { location, time, title, _id, image } = item
+
+  const currentDate = moment().format('YYYY-MM-DD')
+  console.log('is after :', title, moment(time).isAfter(currentDate))
+
+  if (!isPast && !moment(time).isAfter(currentDate)) return null
+  if (isPast && !moment(time).isBefore(currentDate)) return null
 
   return (
     <div className='w-[280px] mt-[20px] shadow-2xl'>

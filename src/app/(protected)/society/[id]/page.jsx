@@ -2,6 +2,7 @@
 
 import assets from '@/app/assets/assets'
 import FlexCard from '@/app/components/FlexCard'
+import ImageCard from '@/app/components/ImageCard'
 import Icon from '@/app/components/form/Icon'
 import { getSociety } from '@/app/redux/reducers/society'
 import { Spinner } from '@nextui-org/react'
@@ -54,6 +55,14 @@ function Society() {
         <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Rules & Regulations</h1>
         <p className='mt-[30px] text-start  text-gray-800 font-noto-sans'>{society?.rules}</p>
       </div>
+      <section className='w-full flex flex-col justify-center items-center mb-10'>
+        <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Gallery</h1>
+        <div className='flex flex-wrap gap-[20px] justify-center mb-[50px]'>
+          {society?.galleryImages?.map((item, index) => (
+            <ImageCard key={item} image={item} />
+          ))}
+        </div>
+      </section>
       <FlexCard />
     </div>
   )

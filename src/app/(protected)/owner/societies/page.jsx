@@ -13,7 +13,7 @@ import Button from '@/app/components/form/Button'
 import DeleteSocietyModal from '@/app/components/Modals/DeleteSociety'
 import SocietyModal from '@/app/components/Modals/SocietyModal'
 import { useDispatch, useSelector } from 'react-redux'
-import { assignAdminSociety, getSocieties, insertSociety, modifySociety, removeSociety, setSocietyValue } from '@/app/redux/reducers/society'
+import { assignAdminSociety, editSocietyImageGallery, getSocieties, insertSociety, modifySociety, removeSociety, setSocietyValue } from '@/app/redux/reducers/society'
 import useForm from '@/app/hooks/useForm'
 import { getDepartments } from '@/app/redux/reducers/department'
 import societyAddSchema from '@/app/validation/society/societyAddValidation'
@@ -21,13 +21,18 @@ import AssignAdminModal from '@/app/components/Modals/AssignAdminModal'
 import { getUsers } from '@/app/redux/reducers/user'
 import toast from 'react-hot-toast'
 import ViewSocietyModal from '@/app/components/Modals/ViewSocietyModal'
+import Icon from '@/app/components/form/Icon'
+import assets from '@/app/assets/assets'
+import SocietyGalleryModal from '@/app/components/Modals/SocietyGalleryModal'
 
 export default function Events() {
-  const { societies, isAddSociety, isEditSociety, isDeleteSociety, isAssignAdminModal } = useSelector(state => state.society)
+  const { societies, isAddSociety, isEditSociety, isDeleteSociety, isAssignAdminModal, isOpenSocietyImageModal } = useSelector(state => state.society)
   const { departments } = useSelector(state => state.department)
   const { users } = useSelector(state => state.user)
   const [isViewModal, setIsViewModal] = useState(false)
   const [singleSociety, setSingleSociety] = useState()
+
+  console.log('societies :', societies)
 
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({
     societyName: '',
@@ -147,6 +152,31 @@ export default function Events() {
     onChange({ target: { name: e.target.name, value: e.target.value } })
   }
 
+  const handleChangeSocietyImageGallery = e => {
+    dispatch(setSocietyValue({ key: 'isOpenSocietyImageModal', value: true }))
+    onChange({ target: { name: e.target.name, value: e.target.files } })
+  }
+
+  const handleOpenSocietyImageModal = value => {
+    dispatch(setSocietyValue({ key: 'isOpenSocietyImageModal', value: true }))
+    setInputFields({ allGalleryImages: value?.galleryImages, societyImages: value?.galleryImages, society_id: value?._id })
+  }
+
+  const handleAddSocietyImageGallery = () => {
+    console.log('helloqweq w:', inputFields)
+    if (!inputFields?.allGalleryImages?.length && !inputFields?.images) return toast.error('Please select an image')
+
+    onSubmit(null, () => {
+      dispatch(editSocietyImageGallery({ data: { society_id: inputFields.society_id, societyImages: inputFields.societyImages, societyFiles: inputFields?.images }, setInputFields }))
+    })
+  }
+
+  const handleRemoveGalleryImage = (item, index) => {
+    let images = [...inputFields.societyImages]
+    images.splice(index, 1)
+    onChange({ target: { name: 'societyImages', value: images } })
+  }
+
   const renderCell = React.useCallback((item, columnKey) => {
     const cellValue = item[columnKey]
 
@@ -176,6 +206,11 @@ export default function Events() {
       case 'actions':
         return (
           <div className='relative flex items-center gap-2'>
+            <Tooltip content='Gallery'>
+              <span onClick={() => handleOpenSocietyImageModal(item)} className='text-lg text-default-400 cursor-pointer active:opacity-50'>
+                <Icon imageWidth={'w-4'} imageHeight={'h-4'} image={assets.icons.image} />
+              </span>
+            </Tooltip>
             <Tooltip content='Details'>
               <span onClick={() => handleView(item)} className='text-lg text-default-400 cursor-pointer active:opacity-50'>
                 <EyeIcon />
@@ -264,6 +299,14 @@ export default function Events() {
         onClose={() => dispatch(setSocietyValue({ key: 'isAssignAdminModal', value: false }))}
       />
       <ViewSocietyModal data={singleSociety} isOpen={isViewModal} onClose={() => setIsViewModal(false)} />
+      <SocietyGalleryModal
+        onRemoveImage={handleRemoveGalleryImage}
+        images={inputFields?.societyImages}
+        isOpen={isOpenSocietyImageModal}
+        onClose={() => dispatch(setSocietyValue({ key: 'isOpenSocietyImageModal', value: false }))}
+        onChangeInput={handleChangeSocietyImageGallery}
+        onAddGallery={handleAddSocietyImageGallery}
+      />
     </div>
   )
 }

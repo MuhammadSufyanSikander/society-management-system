@@ -15,3 +15,10 @@ export const uploadImage = async ({ collectionName, file }) => {
     throw error
   }
 }
+
+export const uploadImages = async (collectionName, files) => {
+  const filePromises = Array.from(files, file => uploadImage(collectionName, file))
+
+  const fileRes = await Promise.all(filePromises)
+  return fileRes // list of url like ["https://..", ...]
+}

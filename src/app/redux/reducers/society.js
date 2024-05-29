@@ -10,6 +10,7 @@ const initialState = {
   isEditSociety: false,
   isDeleteSociety: false,
   isAssignAdminModal: false,
+  isOpenSocietyImageModal: false,
 }
 
 const society = createSlice({
@@ -66,6 +67,18 @@ const society = createSlice({
       state.loading = false
       state.error = action.payload.error
     },
+    editSocietyImageGallery: (state, action) => {
+      state.loading = true
+      state.error = null
+    },
+    editSocietyImageGallerySuccess: (state, action) => {
+      state.loading = false
+      state.error = null
+    },
+    editSocietyImageGalleryFailed: (state, action) => {
+      state.loading = false
+      state.error = action.payload.error
+    },
     removeSociety: (state, action) => {
       state.loading = true
       state.error = null
@@ -99,6 +112,9 @@ const society = createSlice({
 
 export default society.reducer
 export const {
+  editSocietyImageGallery,
+  editSocietyImageGalleryFailed,
+  editSocietyImageGallerySuccess,
   assignAdminSociety,
   assignAdminSocietyFailed,
   assignAdminSocietySuccess,

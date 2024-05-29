@@ -4,6 +4,9 @@ import {
   assignAdminSociety,
   assignAdminSocietyFailed,
   assignAdminSocietySuccess,
+  editSocietyImageGallery,
+  editSocietyImageGalleryFailed,
+  editSocietyImageGallerySuccess,
   getSocieties,
   getSocietiesFailed,
   getSocietiesSuccess,
@@ -126,6 +129,47 @@ function* deleteSociety(action) {
   }
 }
 
+function* updateSocietyGallery(action) {
+  try {
+    const { data, setInputFields } = action.payload || {}
+    let urls
+    if (data?.societyFiles) {
+      urls = yield call(firebaseStorage().uploadImages, { collectionName: 'society', files: data.societyFiles })
+    }
+
+    console.log('adarqwe :', !data?.societyFiles, data?.societyImages?.length > 0 || data?.societyImages)
+
+    let societyImages
+
+    if (!data?.societyFiles && (data?.societyImages?.length > 0 || data?.societyImages)) {
+      societyImages = [...data?.societyImages]
+    } else if (data?.societyImages) {
+      console.log('error :')
+      societyImages = [...data?.societyImages, ...urls]
+    } else {
+      societyImages = urls
+    }
+
+    data.galleryImages = societyImages
+
+    yield call(society().editSociety, data)
+
+    yield put(getSocieties())
+
+    yield put(editSocietyImageGallerySuccess({}))
+
+    yield put(setSocietyValue({ key: 'isOpenSocietyImageModal', value: false }))
+
+    setInputFields && setInputFields({})
+
+    toast.success('Society Gallery Updated Successfully')
+  } catch (error) {
+    yield put(editSocietyImageGalleryFailed({ error }))
+
+    toast.error(error?.response?.data?.message ?? error?.message)
+  }
+}
+
 function* assignAdminToSociety(action) {
   try {
     const { data, setInputFields } = action.payload || {}
@@ -153,4 +197,5 @@ export function* societySaga() {
   yield takeEvery(modifySociety.type, editSociety)
   yield takeEvery(removeSociety.type, deleteSociety)
   yield takeEvery(assignAdminSociety.type, assignAdminToSociety)
+  yield takeEvery(editSocietyImageGallery.type, updateSocietyGallery)
 }

@@ -1,10 +1,20 @@
+'use client'
+
 import assets from '@/app/assets/assets'
 import Footer from '@/app/components/Footer'
 import ImageCard from '@/app/components/ImageCard'
+import { getGallery } from '@/app/redux/reducers/gallery'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Gallery() {
-  const galleryImages = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const dispatch = useDispatch()
+  const { gallery } = useSelector(state => state.gallery)
+
+  React.useEffect(() => {
+    dispatch(getGallery())
+  }, [])
+
   return (
     <div>
       <div
@@ -24,8 +34,8 @@ function Gallery() {
       <section className='w-full '>
         {/* <h1 className='text-[40px] mb-[10px] text-center font-semibold font-noto-sans'>Gallery</h1> */}
         <div className='flex flex-wrap mt-[20px] gap-[20px] justify-center mb-[50px]'>
-          {galleryImages?.map((item, index) => (
-            <ImageCard key={index} image={assets.images.societylogo} />
+          {gallery?.map(item => (
+            <ImageCard key={item._id} image={item.image} />
           ))}
         </div>
       </section>

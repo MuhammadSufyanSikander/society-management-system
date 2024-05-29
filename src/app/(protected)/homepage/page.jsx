@@ -4,15 +4,19 @@ import Footer from '@/app/components/Footer'
 import ImageCard from '@/app/components/ImageCard'
 import Icon from '@/app/components/form/Icon'
 import { ROUTES } from '@/app/constants'
+import { getGallery } from '@/app/redux/reducers/gallery'
 import { Button } from '@nextui-org/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Homepage() {
   const route = useRouter()
   const galleryImages = [1, 2, 3, 4, 5, 6]
   const sectionRef = useRef(null)
+  const dispatch = useDispatch()
+  const { gallery } = useSelector(state => state.gallery)
 
   const scrollToSection = () => {
     if (sectionRef.current) {
@@ -20,6 +24,10 @@ function Homepage() {
       window.scrollTo({ top: topOffset - 15, behavior: 'smooth' })
     }
   }
+
+  React.useEffect(() => {
+    dispatch(getGallery())
+  }, [])
 
   return (
     <div>
@@ -30,9 +38,10 @@ function Homepage() {
         }}
       >
         <div className='absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  text-white font-bold text-[40px] font-noto-sans text-center mq450:w-[85%]'>
-          <div className='mb-[20px] mq450:text-[30px]'>Welcome to the GCUF Society Management System</div>
+          <div className='mb-[20px] mq450:text-[30px]'>GCUF Society Management System</div>
           <div className=' text-[16px] text-center text-white'>
-          Discover, engage, and thrive with GCUF&apos;s diverse societies—your hub for information, events, and active participation in university life.   </div>
+            Discover, engage, and thrive with GCUF&apos;s diverse societies—your hub for information, events, and active participation in university life.{' '}
+          </div>
         </div>
 
         <div className='absolute bottom-10 left-1/2'>
@@ -91,15 +100,15 @@ function Homepage() {
           </div>
         </div>
       </div>
-      <section className='w-full flex flex-col justify-center items-center'>
+      <section className='w-full flex flex-col justify-center items-center mb-10'>
         <h1 className='text-[40px] mb-[10px] text-center font-semibold font-noto-sans'>Gallery</h1>
         <div className='flex flex-wrap gap-[20px] justify-center mb-[50px]'>
-          {galleryImages?.map((item, index) => (
-            <ImageCard key={index} image={assets.images.societylogo} />
-          ))}          
+          {gallery.slice(0, 5)?.map((item, index) => (
+            <ImageCard key={item?._id} image={item?.image} />
+          ))}
         </div>
         <Button onClick={() => route.push(ROUTES.gallery)} color='primary'>
-            View more
+          View more
         </Button>
       </section>
       <Footer />

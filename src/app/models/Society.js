@@ -10,6 +10,7 @@ const SocietySchema = new mongoose.Schema(
     rules: { type: String, required: true },
     admin: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     image: { type: String },
+    galleryImages: [{ type: String }],
   },
   {
     timestamps: true,
