@@ -36,13 +36,13 @@ const Navbar = () => {
 
   return (
     <div className='self-stretch flex flex-row items-start justify-start pt-0 px-0 box-border top-[0] sticky max-w-full z-50'>
-      <header className='flex-1 bg-royalblue flex flex-row items-center justify-end py-4 px-6 box-border gap-[20px] max-w-full text-left text-smi text-white font-noto-sans'>
+      <header className='flex-1 bg-royalblue flex flex-row items-center justify-end py-4 px-6 box-border gap-[20px] max-w-full text-left text-smi text-white font-noto-sans mq450:flex-col'>
         <Icon
           imageHeight={'h-[39px]'}
           imageWidth={'w-[100px]'}
           image={'https://firebasestorage.googleapis.com/v0/b/society-management-syste-446c5.appspot.com/o/gcuflogo%201.png?alt=media&token=6d736dab-0428-4009-a6e9-24f5f8a25b2e'}
         />
-        <div className='w-full flex flex-row items-center justify-end gap-[24px] max-w-full mq450:w-[249px]'>
+        <div className='w-full flex flex-row items-center justify-end gap-[24px] max-w-full mq450:flex-wrap  '>
           {data?.map((item, index) => (
             <Link
               key={index}

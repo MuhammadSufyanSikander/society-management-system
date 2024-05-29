@@ -14,6 +14,7 @@ const ROUTES = {
   faq: '/faq',
   society: '/society',
   feedbackForm: '/feedbackForm',
+  gallery: '/gallery',
 }
 
 export const loggedOutRoutes = [

@@ -35,6 +35,7 @@ import members from './icons/members.svg'
 import facebook from './icons/facebook.svg'
 import linkedin from './icons/linkedin.svg'
 import twitter from './icons/twitter.svg'
+import gallery from './images/gallery.jpg'
 
 const assets = {
   icons: {
@@ -77,6 +78,7 @@ const assets = {
     faq,
     uniLogo,
     societylogo,
+    gallery,
   },
 }
 export default assets
