@@ -14,7 +14,7 @@ export default function SocietyGalleryModal({ isOpen, onClose, images = [], onAd
 
         {images?.map((item, index) => {
           return (
-            <div className='flex justify-between p-5 px-7'>
+            <div key={item} className='flex justify-between p-5 px-7'>
               <p className='text-bold text-sm'>{item.slice(0, 50)}...</p>
               <div className='flex gap-2'>
                 <Tooltip content='Details'>
