@@ -59,7 +59,7 @@ function FeedbackForm() {
           <div className='flex mt-[20px] flex-col gap-[30px]'>
             <div>
               <h1>Describe your feedback:</h1>
-              <TextArea label={'Decription...'} className='mt-[10px]' name={'feedback'} onChange={handleChangeFeedback} value={inputFields?.feedback} />
+              <TextArea label={'Message...'} className='mt-[10px]' name={'feedback'} onChange={handleChangeFeedback} value={inputFields?.feedback} />
             </div>
             <div className='flex gap-3'>
               <Input label={'First Name'} name={'firstname'} onChange={handleChangeFeedback} value={inputFields?.firstname} />
