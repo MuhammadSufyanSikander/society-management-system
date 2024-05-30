@@ -13,6 +13,8 @@ import step1Schema from '@/app/validation/register/step1Validation'
 import moment from 'moment'
 import { parseDate } from '@internationalized/date'
 import { getDepartments } from '@/app/redux/reducers/department'
+import Link from 'next/link'
+import { ROUTES } from '@/app/constants'
 
 const Step1 = () => {
   const dispatch = useDispatch()
@@ -65,6 +67,12 @@ const Step1 = () => {
       }}
       className='m-0 self-stretch flex flex-col items-center justify-start gap-[20px]'
     >
+      <div className='w-full flex'>
+        <h1 className='text-[12px] mr-[5px]'>Already have an Account?</h1>
+        <Link href={ROUTES.login} className=' font-bold text-[12px] text-royalblue'>
+          Sign in
+        </Link>
+      </div>
       <Input name={'firstname'} label={'First Name'} value={userInfo?.firstname} onChange={handleChange} errorMessage={error?.firstname} />
       <Input name={'lastname'} label={'Last Name'} value={userInfo?.lastname} onChange={handleChange} errorMessage={error?.lastname} />
       <DatePicker
