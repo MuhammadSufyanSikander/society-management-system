@@ -22,7 +22,7 @@ function page() {
       </div>
       <div className='px-10 flex flex-col justify-center items-center'>
         <div className='w-[50%]'>
-          <h1 className='text-[20px]  items-start font-bold py-[10px]'>About Us</h1>
+          <h1 className='text-[20px]  items-start font-bold py-[10px]'>FAQs</h1>
           <Divider className='w-[97%]' />
           <Accordion isCompact />
         </div>
