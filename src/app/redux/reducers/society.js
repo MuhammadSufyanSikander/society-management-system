@@ -43,6 +43,20 @@ const society = createSlice({
       state.loading = false
       state.error = action.payload.error
     },
+    getSocietyInfoCounts: (state, action) => {
+      state.loading = true
+      state.error = null
+    },
+    getSocietyInfoCountsSuccess: (state, action) => {
+      state.loading = false
+      state.error = null
+      state.usersCount = action.payload.usersCount
+      state.eventsCount = action.payload.eventsCount
+    },
+    getSocietyInfoCountsFailed: (state, action) => {
+      state.loading = false
+      state.error = action.payload.error
+    },
     insertSociety: (state, action) => {
       state.loading = true
       state.error = null
@@ -112,6 +126,9 @@ const society = createSlice({
 
 export default society.reducer
 export const {
+  getSocietyInfoCounts,
+  getSocietyInfoCountsFailed,
+  getSocietyInfoCountsSuccess,
   editSocietyImageGallery,
   editSocietyImageGalleryFailed,
   editSocietyImageGallerySuccess,

@@ -4,7 +4,7 @@ import Input from '@/app/components/form/Input'
 import TextArea from '@/app/components/form/TextArea'
 import useForm from '@/app/hooks/useForm'
 import { getSociety } from '@/app/redux/reducers/society'
-import { sendEmail } from '@/app/redux/reducers/user'
+import { getOwners, sendEmail } from '@/app/redux/reducers/user'
 import { Button, Divider } from '@nextui-org/react'
 import React from 'react'
 import toast from 'react-hot-toast'
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 function FeedbackForm() {
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ feedbackType: 'suggestion', feedback: '', firstname: '', lastname: '', email: '' })
   const dispatch = useDispatch()
-  const { society } = useSelector(state => state.society)
+  const { owners } = useSelector(state => state.user)
   const { token, userInfo } = useSelector(state => state.auth)
 
   const handleChangeFeedback = e => {
@@ -21,15 +21,13 @@ function FeedbackForm() {
   }
 
   const handleSubmitFeedback = () => {
-    if (!society?.admin) return toast.error('Admin is not available')
-
     onSubmit(null, () => {
       dispatch(
         sendEmail({
           data: {
             from: inputFields?.email,
             subject: `${inputFields?.feedbackType} from ${inputFields?.firstname} ${inputFields?.lastname}`,
-            recipients: [society?.admin?.email],
+            recipients: owners.map(owner => owner.email),
             text: inputFields?.feedback,
           },
         }),
@@ -37,11 +35,8 @@ function FeedbackForm() {
     })
   }
 
-  console.log('society :', society)
   React.useEffect(() => {
-    if (!token) return
-
-    dispatch(getSociety({ data: { society_id: userInfo?.society?._id } }))
+    dispatch(getOwners())
   }, [])
 
   return (

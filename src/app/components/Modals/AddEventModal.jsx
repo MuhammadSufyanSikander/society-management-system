@@ -5,6 +5,7 @@ import TextArea from '../form/TextArea'
 import Select from '../form/Select'
 import DateTimeInput from '../form/DateTimeInput'
 import TextEditor from '../TextEditor'
+import Tiptap from '../TipTap'
 
 export default function AddEventModal({ isOpen, inputFields, onClose, errorMessage, onAddEvent, onEditEvent, onChangeInput, societies = [], isEdit = false }) {
   return (
@@ -14,11 +15,10 @@ export default function AddEventModal({ isOpen, inputFields, onClose, errorMessa
         <ModalBody className='gap-5'>
           <input name={'image'} type='file' onChange={onChangeInput} />
           <Input autoFocus name={'title'} label='Event title' onChange={onChangeInput} value={inputFields?.title} />
-          <TextArea name={'description'} label='Description' onChange={onChangeInput} value={inputFields?.description} />
+          {/* <Tiptap /> */}
+          <TextEditor name={'description'} onChange={value => onChangeInput({ target: { name: 'description', value: value } })} value={inputFields?.description} />
           <DateTimeInput name='time' label={'Event time'} value={inputFields?.time} onChange={value => onChangeInput({ target: { name: 'time', value } })} />
           <Input label='Event location' name={'location'} onChange={onChangeInput} value={inputFields?.location} />
-
-          <TextEditor />
 
           <Select
             name={'society'}

@@ -86,6 +86,8 @@ export default function Events() {
   const handleChangeAddSociety = e => {
     if (e.target.name == 'image') return onChange({ target: { name: 'image', value: e.target.files[0] } })
 
+    if (e.target.name == 'groupMemberImage') return onChange({ target: { name: 'groupMemberImage', value: e.target.files[0] } })
+
     if (e.target.name === 'department') return handleDepartmentChange(e)
 
     onChange({ target: { name: e.target.name, value: e.target.value } })
@@ -242,7 +244,7 @@ export default function Events() {
     return (
       <div className='flex w-full flex-col gap-4 mb-10'>
         <div className='flex w-full gap-3 items-end'>
-          <Input autoFocus onChange={handleSearch} name={'searchQuery'} value={inputFields.searchQuery} className='w-[30%] sm:max-w-[44%]' placeholder='Search by name...' type='text' />
+          <Input autoFocus={false} onChange={handleSearch} name={'searchQuery'} value={inputFields.searchQuery} className='w-[30%] sm:max-w-[44%]' placeholder='Search by name...' type='text' />
           <Button color='primary' className='min-w-fit' endContent={<PlusIcon />} onClick={() => dispatch(setSocietyValue({ key: 'isAddSociety', value: true }))}>
             Add New
           </Button>

@@ -55,5 +55,13 @@ export const society = () => {
         throw error
       }
     },
+    fetchSocietyInfoCounts: async data => {
+      try {
+        const response = await client.get(`/society_info_count/${data.society_id}`)
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
   }
 }

@@ -3,6 +3,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from
 import Input from '../form/Input'
 import TextArea from '../form/TextArea'
 import Select from '../form/Select'
+import TextEditor from '../TextEditor'
 
 export default function SocietyModal({ isOpen, onClose, onAddSociety, onEditSociety, isEdit = false, onChangeInput, departments, inputFields, errorMessage }) {
   return (
@@ -10,7 +11,15 @@ export default function SocietyModal({ isOpen, onClose, onAddSociety, onEditSoci
       <ModalContent>
         <ModalHeader className='flex flex-col gap-1'> {isEdit ? 'Edit Society' : 'Add New Society'}</ModalHeader>
         <ModalBody className='gap-5'>
-          <input name={'image'} type='file' onChange={onChangeInput} />
+          <div className='flex flex-col gap-2'>
+            <label htmlFor='image'>Society Logo</label>
+            <input name={'image'} type='file' onChange={onChangeInput} />
+          </div>
+          <div className='flex flex-col gap-2'>
+            <label htmlFor='groupMemberImage'>Society Group Image</label>
+            <input name={'groupMemberImage'} type='file' onChange={onChangeInput} />
+          </div>
+
           <Input autoFocus name={'societyName'} label='Society Name' onChange={onChangeInput} value={inputFields?.societyName} errorMessage={errorMessage?.societyName} />
           <TextArea label='Society Description' name={'societyDescription'} onChange={onChangeInput} value={inputFields?.societyDescription} errorMessage={errorMessage?.societyDescription} />
           <Select
@@ -26,6 +35,8 @@ export default function SocietyModal({ isOpen, onClose, onAddSociety, onEditSoci
           <TextArea label='Society Mission' name={'mission'} onChange={onChangeInput} value={inputFields?.mission} errorMessage={errorMessage?.mission} />
           <TextArea label='Achievements' name={'achievements'} onChange={onChangeInput} value={inputFields?.achievements} errorMessage={errorMessage?.achievements} />
           <TextArea label='Rules & Regulations' name={'rules'} onChange={onChangeInput} value={inputFields?.rules} errorMessage={errorMessage?.rules} />
+          <TextArea label='Rules & Regulations' name={'rules'} onChange={onChangeInput} value={inputFields?.rules} errorMessage={errorMessage?.rules} />
+          <TextEditor label='Head Information' name={'headInformation'} onChange={value => onChangeInput({ target: { name: 'headInformation', value: value } })} value={inputFields?.headInformation} />
         </ModalBody>
         <ModalFooter>
           <Button color='danger' variant='flat' onPress={onClose}>

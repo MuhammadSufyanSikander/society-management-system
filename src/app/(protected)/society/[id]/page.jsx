@@ -4,7 +4,7 @@ import assets from '@/app/assets/assets'
 import FlexCard from '@/app/components/FlexCard'
 import ImageCard from '@/app/components/ImageCard'
 import Icon from '@/app/components/form/Icon'
-import { getSociety } from '@/app/redux/reducers/society'
+import { getSociety, getSocietyInfoCounts } from '@/app/redux/reducers/society'
 import { Spinner } from '@nextui-org/react'
 import { useParams } from 'next/navigation'
 
@@ -14,10 +14,13 @@ import { useDispatch, useSelector } from 'react-redux'
 function Society() {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const { society, loading } = useSelector(state => state.society)
+  const { society, loading, usersCount, eventsCount } = useSelector(state => state.society)
+
+  console.log('userssdawd :', usersCount, eventsCount)
 
   useEffect(() => {
     dispatch(getSociety({ data: { society_id: id } }))
+    dispatch(getSocietyInfoCounts({ data: { society_id: id } }))
   }, [])
 
   if (loading)
@@ -37,15 +40,18 @@ function Society() {
         <Icon
           imageWidth={'w-[40%] h-[100%] '}
           image={
+            society?.groupMemberImage ??
             society?.image ??
             'https://firebasestorage.googleapis.com/v0/b/society-management-syste-446c5.appspot.com/o/society%2F360_F_461470323_6TMQSkCCs9XQoTtyer8VCsFypxwRiDGU.jpg?alt=media&token=736c0d79-baa8-4f72-800f-b8bda8f57142'
           }
         />
       </div>
-      <div className='text-center'>
-        <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Society Head</h1>
-        <p className='mt-[30px] text-start  text-gray-800 font-noto-sans'>{society?.mission}</p>
-      </div>
+      {society?.headInformation && (
+        <div className='text-center'>
+          <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Society Head</h1>
+          <div className='mt-[30px] text-start  text-gray-800 font-noto-sans' dangerouslySetInnerHTML={{ __html: society.headInformation }} />
+        </div>
+      )}
       <div className='text-center'>
         <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Mission</h1>
         <p className='mt-[30px] text-start  text-gray-800 font-noto-sans'>{society?.mission}</p>
@@ -66,7 +72,7 @@ function Society() {
           ))}
         </div>
       </section>
-      <FlexCard />
+      <FlexCard usersCount={usersCount} eventsCount={eventsCount} />
     </div>
   )
 }

@@ -8,7 +8,9 @@ import moment from 'moment'
 
 function EventCard({ item, isPast = false }) {
   const router = useRouter()
-  const { location, time, title, _id, image } = item
+  const { location, time, title, _id, image, society } = item || {}
+
+  console.log('itemqweqw :', item)
 
   const currentDate = moment().format('YYYY-MM-DD')
   console.log('is after :', title, moment(time).isAfter(currentDate))
@@ -20,6 +22,7 @@ function EventCard({ item, isPast = false }) {
     <div className='w-[280px] mt-[20px] shadow-2xl'>
       <Icon imageHeight={'w-[280px]'} image={image} />
       <div className='p-[15px] flex flex-col gap-[10px]'>
+        {society && <h1 className='font-semibold text-[20px]'>Society: {society.societyName}</h1>}
         <h1 className='font-semibold text-[20px]'>{title}</h1>
         <div className='flex mt-[7px] gap-3'>
           <Icon imageHeight={'w-[20px] h-[20px]'} image={assets.icons.calendar} />

@@ -7,3 +7,30 @@ input[type='date']::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
 } */
+
+.quill .ql-container.ql-snow {
+  border: none !important;
+}
+
+.quill-toolbar .ql-toolbar.ql-snow {
+  border: none !important;
+}
+
+/* ol {
+  display: list-item;
+  list-style-type: decimal;
+} */
+
+ol,
+ul {
+  padding-left: 20px;
+}
+
+ol > li {
+  list-style-position: inside;
+  list-style-type: decimal;
+}
+ul > li {
+  list-style-position: inside;
+  list-style-type: disc;
+}

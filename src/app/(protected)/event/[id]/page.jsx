@@ -49,7 +49,7 @@ function Event() {
         </div>
         <div className='flex flex-col gap-6 font-noto-sans mt-[20px] text-[14px] text-gray-50'>
           <h1 className='text-[20px]'>Abstract</h1>
-          <p>{event.description}</p>
+          <div dangerouslySetInnerHTML={{ __html: event.description }} />
         </div>
       </div>
     </div>

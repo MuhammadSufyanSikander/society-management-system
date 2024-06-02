@@ -14,8 +14,6 @@ function ContactUs() {
   const [inputFields, setInputFields, errorMessage, onChange, onSubmit] = useForm({ firstname: '', lastname: '', email: '', feedback: '' })
   const { owners } = useSelector(state => state.user)
 
-  console.log('ownersownersowners:', owners)
-
   const handleChangeContactUs = e => {
     onChange({ target: { name: e.target.name, value: e.target.value } })
   }

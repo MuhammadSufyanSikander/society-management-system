@@ -168,7 +168,7 @@ export default function Events() {
       <div className='flex w-full flex-col gap-4 mb-10'>
         <div className='flex w-full gap-3 items-end'>
           <Input
-            autoFocus
+            // autoFocus
             value={inputFields?.searchQuery}
             name={'searchQuery'}
             onChange={e => onChange({ target: { name: e.target.name, value: e.target.value } })}

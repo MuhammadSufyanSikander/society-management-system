@@ -12,6 +12,9 @@ import {
   getSocietiesSuccess,
   getSociety,
   getSocietyFailed,
+  getSocietyInfoCounts,
+  getSocietyInfoCountsFailed,
+  getSocietyInfoCountsSuccess,
   getSocietySuccess,
   insertSociety,
   insertSocietyFailed,
@@ -64,6 +67,10 @@ function* addSociety(action) {
 
     data.image = url
 
+    const groupMemberImage = yield call(firebaseStorage().uploadImage, { collectionName: 'society', file: data?.groupMemberImage })
+
+    data.groupMemberImage = groupMemberImage
+
     const response = yield call(society().addSociety, data)
 
     console.log('error found in try')
@@ -90,6 +97,12 @@ function* editSociety(action) {
       const url = yield call(firebaseStorage().uploadImage, { collectionName: 'society', file: data.image })
 
       data.image = url
+    }
+    console.log('groupMemberImagegroupMemberImage:', data)
+    if (data?.groupMemberImage) {
+      const groupMemberImage = yield call(firebaseStorage().uploadImage, { collectionName: 'society', file: data?.groupMemberImage })
+
+      data.groupMemberImage = groupMemberImage
     }
 
     const response = yield call(society().editSociety, data)
@@ -190,6 +203,20 @@ function* assignAdminToSociety(action) {
   }
 }
 
+function* fetchSocietyInfoCounts(action) {
+  try {
+    const { data } = action.payload || {}
+
+    const response = yield call(society().fetchSocietyInfoCounts, data)
+
+    yield put(getSocietyInfoCountsSuccess({ usersCount: response.data.users_count, eventsCount: response.data.events_count }))
+  } catch (error) {
+    yield put(getSocietyInfoCountsFailed({ error }))
+
+    toast.error(error?.response?.data?.message ?? error?.message)
+  }
+}
+
 export function* societySaga() {
   yield takeEvery(getSocieties.type, fetchSocieties)
   yield takeEvery(getSociety.type, fetchSociety)
@@ -198,4 +225,5 @@ export function* societySaga() {
   yield takeEvery(removeSociety.type, deleteSociety)
   yield takeEvery(assignAdminSociety.type, assignAdminToSociety)
   yield takeEvery(editSocietyImageGallery.type, updateSocietyGallery)
+  yield takeEvery(getSocietyInfoCounts.type, fetchSocietyInfoCounts)
 }
