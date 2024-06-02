@@ -42,7 +42,10 @@ function Society() {
           }
         />
       </div>
-
+      <div className='text-center'>
+        <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Society Head</h1>
+        <p className='mt-[30px] text-start  text-gray-800 font-noto-sans'>{society?.mission}</p>
+      </div>
       <div className='text-center'>
         <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Mission</h1>
         <p className='mt-[30px] text-start  text-gray-800 font-noto-sans'>{society?.mission}</p>
