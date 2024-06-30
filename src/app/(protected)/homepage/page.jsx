@@ -54,8 +54,8 @@ function Homepage() {
         <div className='w-full h-full mb-[40px]'>
           <section className='w-full bg-gray-10  justify-center text-center px-[50px] py-[30px]'>
             <div className='text-[25px] font-bold mb-[20px]'>Vice Chancellor&apos;s Message</div>
-            <div className='flex text-left justify-center'>
-              <div className=' w-[60%] italic'>
+            <div className='mainclasscolumn flex text-left justify-center'>
+              <div className='subclasscolumn w-[60%] italic'>
                 Government College University Faisalabad is a dynamic seat of learning aspiring to provide highly stimulating and conducive academic environments for quality research, formal education
                 and professional growth. In the recent years, the university has achieved phenomenal success in research contribution and in improving the quality of education which is reflected
                 through the meteoric rise of the institution in HEC ranking from 59th to its 7th position, resulting in growing confidence of civil society and business community of the region.{' '}
@@ -63,7 +63,7 @@ function Homepage() {
                   Read more
                 </Link>
               </div>
-              <div className='  flex flex-col w-[40%] items-center text-center'>
+              <div className='subclasscolumn  flex flex-col w-[40%] items-center text-center'>
                 <Icon imageWidth={'w-[138px] h-[140px] rounded-full'} image={assets.images.rector} />
                 <div className='text-[12px] text-black-100'> Prof. Dr. Nasir Amin</div>
                 <div className='text-[12px]  text-black-100'>Vice Chancellor, Government College University Faisalabad</div>
@@ -73,8 +73,8 @@ function Homepage() {
           </section>
           <section className='w-full bg-gray-5  justify-center text-center px-[50px] py-[30px]'>
             <div className='text-[25px] font-bold mb-[20px]'>Directorate of Students Affairs</div>
-            <div className='flex text-left justify-center'>
-              <div className=' w-[60%] italic'>
+            <div className='mainclasscolumn flex text-left justify-center'>
+              <div className='subclasscolumn  w-[60%] italic'>
                 Government College University Faisalabad is a dynamic seat of learning aspiring to provide highly stimulating and conducive academic environments for quality research, formal education
                 and professional growth. In the recent years, the university has achieved phenomenal success in research contribution and in improving the quality of education which is reflected
                 through the meteoric rise of the institution in HEC ranking from 59th to its 7th position, resulting in growing confidence of civil society and business community of the region.{' '}
@@ -82,7 +82,7 @@ function Homepage() {
                   Read more
                 </Link>
               </div>
-              <div className='  flex flex-col w-[40%] items-center text-center'>
+              <div className='subclasscolumn  flex flex-col w-[40%] items-center text-center'>
                 <Icon imageWidth={'w-[138px] h-[140px] rounded-full'} image={assets.images.rector} />
                 <div className='text-[12px] text-black-100'> Prof. Dr. Nasir Amin</div>
                 <div className='text-[12px]  text-black-100'>Vice Chancellor, Government College University Faisalabad</div>

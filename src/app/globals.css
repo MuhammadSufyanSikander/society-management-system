@@ -34,3 +34,49 @@ ul > li {
   list-style-position: inside;
   list-style-type: disc;
 }
+
+/* General styles */
+.maincontactclass {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.subcontactclass {
+  /* width: 48%;
+  padding: 10px; */
+}
+
+/* Mobile view styles */
+@media (max-width: 768px) {
+  .maincontactclass {
+    flex-direction: column;
+  }
+
+  .subcontactclass {
+    width: 100%;
+  }
+}
+
+/* General styles For R column  */
+.mainclasscolumn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.subclasscolumn {
+  /* width: 48%;
+  padding: 10px; */
+}
+
+/* Mobile view styles */
+@media (max-width: 768px) {
+  .mainclasscolumn {
+    flex-direction: column-reverse;
+  }
+
+  .subclasscolumn {
+    width: 100%;
+  }
+}

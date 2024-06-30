@@ -7,15 +7,16 @@ function page() {
   return (
     <div>
       <div className='text-[14px] text-gray-50 p-5'>About Us</div>
-      <div className=' flex w-full justify-between'>
-        <div className='bg-blue-100 shadow-overlay px-[30px] pt-[30px] pb-[15px] w-[32%] min-h-[450px]'>
+
+      <div className='maincontactclass flex w-full justify-between'>
+        <div className='subcontactclass bg-blue-100 shadow-overlay px-[30px] pt-[30px] pb-[15px] w-[32%] min-h-[450px]'>
           <h1 className='text-white text-[40px] font-bold'>Vision</h1>
           <p className='text-[20px] text-white '>
             GCUF aspires to be a comprehensive university providing a higher education experience grounded in thought leadership, co-creation of knowledge, and sustainability.
           </p>
         </div>
 
-        <div className='bg-blue-200 px-[30px] pt-[30px] pb-[15px] w-[32%] min-h-[450px]'>
+        <div className='subcontactclass bg-blue-200 px-[30px] pt-[30px] pb-[15px] w-[32%] min-h-[450px]'>
           <h1 className='text-white text-[40px] font-bold'>MISSION</h1>
           <p className='text-[20px] text-white '>
             We are committed to being a university that stimulates intellectual curiosity, behavioral progression, and environmental stewardship. We nurture future leaders, job creators, and lifelong
@@ -24,7 +25,7 @@ function page() {
           </p>
         </div>
 
-        <div className='bg-blue-100 px-[30px] pt-[30px] pb-[15px] w-[32%] min-h-[450px]'>
+        <div className='subcontactclass bg-blue-100 px-[30px] pt-[30px] pb-[15px] w-[32%] min-h-[450px]'>
           <h1 className='text-white text-[40px] font-bold'>CORE VALUES</h1>
           <ul className='text-white pl-7 list-disc space-y-3'>
             {values?.map((item, index) => (
@@ -33,14 +34,18 @@ function page() {
           </ul>
         </div>
       </div>
-      <section className='w-full bg-gray-10  justify-center px-32 py-10'>
-        <div className='flex'>
-          <div className='w-[80%]'>
-            <div className='text-[25px] text-blue-200 font-bold '>RECTOR&apos;S MESSAGE</div>
-            <div className='text-[12px] text-black-100'>Prof. Dr. Nasir Amin</div>
-            <div className='text-[12px] mb-[20px]  text-black-100'>Rector GCUF</div>
 
-            <div className=' w-[100%] italic'>
+      <section className='w-full bg-gray-10 justify-center px-16 py-5'>
+        <div className='mainclasscolumn flex mx-auto'>
+          {/* <div className='subcontactclass flex flex-col w-full items-center text-center'>
+      <Icon imageWidth='w-[300px] h-[300px]' image={assets.images.rector} />
+    </div> */}
+          <div className='subclasscolumn w-full'>
+            <div className='text-[25px] text-blue-200 font-bold'>RECTOR&apos;S MESSAGE</div>
+            <div className='text-[12px] text-black-100'>Prof. Dr. Nasir Amin</div>
+            <div className='text-[12px] mb-[20px] text-black-100'>Rector GCUF</div>
+
+            <div className='w-full italic'>
               Government College University Faisalabad is a dynamic seat of learning aspiring to provide highly stimulating and conducive academic environments for quality research, formal education
               and professional growth. In the recent years, the university has achieved phenomenal success in research contribution and in improving the quality of education which is reflected through
               the meteoric rise of the institution in HEC ranking from 59th to its 7th position, resulting in growing confidence of civil society and business community of the region. <br />
@@ -63,11 +68,11 @@ function page() {
               beautiful buildings and grounds which promise a variety of healthy, congenial and intellectually transformative opportunities necessary for nation building. This University ensures a
               successful and bright career for its students. It is hoped that this University will earn more laurels in future by responding to the needs of society and market. Furthermore, you are
               welcome to experience lively opportunities that Government College University Faisalabad offers. You are here to join a vibrant community of students, researchers, friends, teachers,
-              mentors and intellectuals to discover your potential and abilities for creative learning
+              mentors and intellectuals to discover your potential and abilities for creative learning.
             </div>
           </div>
-          <div className='  flex flex-col w-[40%] items-center text-center'>
-            <Icon imageWidth={'w-[200px] h-[200px] '} image={assets.images.rector} />
+          <div className='subclasscolumn flex flex-col w-full items-center text-center'>
+            <Icon imageWidth='w-[300px] h-[300px]' image={assets.images.rector} />
           </div>
         </div>
       </section>

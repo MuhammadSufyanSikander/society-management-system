@@ -40,12 +40,12 @@ function ContactUs() {
   return (
     <div>
       <div className='w-full h-[88.6vh] flex justify-center content-center align-middle items-center '>
-        <div className='w-[80%] shadow-2xl rounded-[8px] flex  justify-between px-10 py-12'>
-          <div className=''>
+        <div className=' maincontactclass w-[80%] shadow-2xl rounded-[8px] flex  justify-between px-10 py-12'>
+          <div className='subcontactclass'>
             <div className=' text-[35px] mb-[25px]'>Contact Us</div>
             <p>Need to get contact with us? Fill out the form with your inquiry</p>
           </div>
-          <div className='w-[45%] h-auto shadow-2xl flex flex-col gap-[10px] rounded-[6px] px-[10px] py-[14px] '>
+          <div className='subcontactclass  w-[45%] h-auto shadow-2xl flex flex-col gap-[10px] rounded-[6px] px-[10px] py-[14px] '>
             <h1 className='w-full text-center font-semibold mb-[10px] text-[25px]'>Contact Us</h1>
             <div className='flex gap-[10px]'>
               <Input name='firstname' label={'First name'} value={inputFields?.firstname} onChange={handleChangeContactUs} />
@@ -65,6 +65,7 @@ function ContactUs() {
           </div>
         </div>
       </div>
+
       <div className=' gap-[10px] flex flex-wrap justify-center p-[30px]'>
         <div className=' flex flex-col border-[1px] border-gray-10 rounded-[8px] p-5  items-center  text-center shadow-2xl w-[570px]'>
           <Icon imageHeight={'w-[30px] mb-[8px] h-[30px]'} image={assets.icons.location} />
