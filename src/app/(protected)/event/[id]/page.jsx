@@ -28,17 +28,12 @@ function Event() {
   return (
     <div>
       <h1 className='text-[50px] font-noto-sans font-semibold text-royalblue p-[30px]'>{event?.title}</h1>
-    
-      
-<div
+        <div
         className='relative w-full  align-middle h-[50.6vh] bg-cover '
         style={{
           backgroundImage: url("${event?.image}"),
         }}
-      >
-      
-      
-      </div>
+      ></div>
       <div className='p-[30px] flex flex-col gap-4'>
         <div className='flex mt-[7px] gap-3'>
           <Icon imageHeight={'w-[20px] h-[20px]'} image={assets.icons.calendar} />
