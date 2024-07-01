@@ -30,14 +30,12 @@ function Event() {
       <h1 className='text-[50px] font-noto-sans font-semibold text-royalblue p-[30px]'>{event?.title}</h1>
     
       
-<div
-  className='relative w-full h-[50.6vh] bg-no-repeat bg-center'
-  style={{
-    backgroundImage: `url("${event?.image}")`,
-    backgroundSize: 'cover',  // Ensures the image covers the entire container
-    minHeight: '50.6vh',      // Set a minimum height to ensure visibility
-  }}
->
+  <div
+        className='relative w-full  align-middle h-[50.6vh] bg-cover '
+        style={{
+          backgroundImage: url("${event?.image}"),
+        }}
+      >
       
       
       </div>
