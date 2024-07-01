@@ -30,7 +30,7 @@ function Event() {
       <h1 className='text-[50px] font-noto-sans font-semibold text-royalblue p-[30px]'>{event?.title}</h1>
     
       
-  <div
+<div
         className='relative w-full  align-middle h-[50.6vh] bg-cover '
         style={{
           backgroundImage: url("${event?.image}"),
