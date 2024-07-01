@@ -31,12 +31,11 @@ function Event() {
     
       
 <div
-  className='relative w-full h-[auto] bg-no-repeat bg-center bg-cover'
+  className='relative w-full h-[50.6vh] bg-no-repeat bg-center'
   style={{
     backgroundImage: `url("${event?.image}")`,
-    minHeight: '300px',   // Set a minimum height to ensure visibility on smaller screens
-    maxHeight: '505px',   // Set a maximum height to maintain the image's aspect ratio
-    width: '100%',        // Ensure the image covers the entire width of its container
+    backgroundSize: 'cover',  // Ensures the image covers the entire container
+    minHeight: '50.6vh',      // Set a minimum height to ensure visibility
   }}
 >
       
