@@ -91,13 +91,7 @@ function Homepage() {
             <div></div>
           </section>
 
-          <div className='px-[50px] mt-[20px] text-left w-full'>
-            <h1 className='text-[25px] font-bold'>Welcome to GCUF</h1>
-            <p className='w-[65%]'>
-              GCUF is an extraordinary place for learning, discovery and transformation. Here, you have the freedom to ask questions, challenge the ordinary and spark innovation. We seek out bright
-              and curious minds with revolutionary ideas to create an empowering community of leaders and change makers.
-            </p>
-          </div>
+
         </div>
       </div>
       <section className='w-full flex flex-col justify-center items-center mb-10'>
