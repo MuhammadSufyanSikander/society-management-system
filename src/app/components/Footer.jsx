@@ -22,12 +22,12 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className='bg-blue-950 text-[12px] flex flex-row md:flex-row mq450:justify-between items-center gap-[100px] text-white p-[30px]'>
-        <div className='text-center md:text-left mb-4 md:mb-0'>
-          <p>Government College University,</p>
-          <p>Allama Iqbal Road, Faislabad</p>
+      <div className='mainfooterclass bg-blue-950 text-[12px] flex flex-row md:flex-row mq450:justify-between items-center gap-[10px] text-white p-[30px]'>
+        <div className='subfooterclass md:text-left mb-4 md:mb-0'>
+          <p>Government College University, <br></br>Allama Iqbal Road, Faislabad</p>
+          {/* <p>Allama Iqbal Road, Faislabad</p> */}
         </div>
-        <div className='flex gap-7'>
+        <div className='subfooterclass flex gap-7'>
           <Icon imageHeight={'w-[30px] h-[30px] md:w-[40px] md:h-[40px]'} image={assets.icons.facebook} />
           <Icon imageHeight={'w-[30px] h-[30px] md:w-[40px] md:h-[40px]'} image={assets.icons.twitter} />
           <Icon imageHeight={'w-[32px] h-[32px] md:w-[42px] md:h-[42px]'} image={assets.icons.linkedin} />
