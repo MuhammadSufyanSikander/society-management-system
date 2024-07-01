@@ -31,13 +31,10 @@ function Event() {
     
       
 <div
-  className='relative w-full align-middle h-[50.6vh] bg-cover'
+  className='relative w-full h-[50.6vh] bg-no-repeat bg-center bg-cover'
   style={{
     backgroundImage: `url("${event?.image}")`,
-    backgroundSize: 'cover',        // Ensures the image covers the entire container
-    backgroundPosition: 'center',   // Centers the image within the container
-    backgroundRepeat: 'no-repeat',  // Prevents the image from repeating
-    minHeight: '50.6vh',            // Sets a minimum height to ensure visibility
+    minHeight: '50.6vh',  // Adjust as needed for your layout
   }}
 >
       
