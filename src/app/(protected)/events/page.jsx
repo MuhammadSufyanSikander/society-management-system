@@ -31,7 +31,7 @@ function Events() {
           backgroundImage: 'url("https://gcuf.edu.pk/pages_data/campuses/news-campus/IMGM5195_2.jpg")',
         }}
       >
-        <Icon imageWidth={'w-[350px] h-[100px]'} image={assets.images.uniLogo} />
+     
       </div>
       {events.length === 0 && <h1 className='text-[30px] mt-[20px] font-noto-sans text-black-100 font-bold'>At the moment, there are no upcoming events at the University</h1>}
       {events.length > 0 && (
