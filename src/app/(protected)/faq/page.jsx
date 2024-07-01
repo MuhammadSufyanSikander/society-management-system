@@ -16,7 +16,7 @@ function Page() {
           <Icon image={assets.images.faq} imageHeight='w-[50%] h-[50%] md:w-[40%] md:h-[40%]' />
           <div className='text-center md:text-left'>
             <h1 className='text-[28px] md:text-[35px] font-bold'>FAQs</h1>
-            <p className='text-[14px] w-full md:w-[80%]'> Test Have questions? Here you will find the answers most valued by our partners, along with step by step instruction and support.</p>
+            <p className='text-[14px] w-full md:w-[80%]'>Have questions? Here you will find the answers most valued by our partners, along with step by step instruction and support.</p>
           </div>
         </div>
       </div>
