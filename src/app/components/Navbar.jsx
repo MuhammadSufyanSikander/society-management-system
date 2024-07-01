@@ -50,7 +50,7 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
-        <div className='hidden  md:flex flex-row items-center justify-end gap-[24px]'>
+        <div className='hidden md:flex flex-row items-center justify-end gap-[24px]'>
           {data?.map((item, index) => (
             <Link
               key={index}
@@ -71,7 +71,7 @@ const Navbar = () => {
           </div>
         </div>
         {isMobileMenuOpen && (
-          <div className='absolute  top-0 right-0 p-[60px] mt-[70px] z-10 h-[88.6vh] gap-[20px] w-[200px] md:hidden flex flex-col items-center bg-royalblue text-white py-4 transition ease-in-out delay-150'>
+          <div className='absolute overflow-y-scroll top-0 right-0 p-[60px] mt-[70px] z-10 h-[88.6vh] gap-[20px] w-[200px] md:hidden flex flex-col items-center bg-royalblue text-white py-4 transition ease-in-out delay-150'>
             {data?.map((item, index) => (
               <Link
                 key={index}

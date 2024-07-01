@@ -147,6 +147,7 @@ export default function Events() {
       mission: item?.mission,
       achievements: item?.achievements,
       rules: item?.rules,
+      headInformation: item?.headInformation,
     })
   }
 

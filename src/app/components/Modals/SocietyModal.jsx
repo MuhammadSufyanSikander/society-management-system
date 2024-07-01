@@ -32,10 +32,14 @@ export default function SocietyModal({ isOpen, onClose, onAddSociety, onEditSoci
             onChange={onChangeInput}
             errorMessage={errorMessage?.department}
           />
-          <TextArea label='Society Mission' name={'mission'} onChange={onChangeInput} value={inputFields?.mission} errorMessage={errorMessage?.mission} />
-          <TextArea label='Achievements' name={'achievements'} onChange={onChangeInput} value={inputFields?.achievements} errorMessage={errorMessage?.achievements} />
-          <TextArea label='Rules & Regulations' name={'rules'} onChange={onChangeInput} value={inputFields?.rules} errorMessage={errorMessage?.rules} />
-          <TextArea label='Rules & Regulations' name={'rules'} onChange={onChangeInput} value={inputFields?.rules} errorMessage={errorMessage?.rules} />
+          {/* <TextArea label='Society Mission' name={'mission'} onChange={onChangeInput} value={inputFields?.mission} errorMessage={errorMessage?.mission} /> */}
+          <TextEditor label='Society Mission' name={'mission'} onChange={value => onChangeInput({ target: { name: 'mission', value: value } })} value={inputFields?.mission} />
+          {/* <TextArea label='Achievements' name={'achievements'} onChange={onChangeInput} value={inputFields?.achievements} errorMessage={errorMessage?.achievements} /> */}
+          <TextEditor label='Achievements' name={'achievements'} onChange={value => onChangeInput({ target: { name: 'achievements', value: value } })} value={inputFields?.achievements} />
+          {/* <TextArea label='Rules & Regulations' name={'rules'} onChange={onChangeInput} value={inputFields?.rules} errorMessage={errorMessage?.rules} /> */}
+          <TextEditor label='Rules & Regulations' name={'rules'} onChange={value => onChangeInput({ target: { name: 'rules', value: value } })} value={inputFields?.rules} />
+
+          {/* <TextArea label='Rules & Regulations' name={'rules'} onChange={onChangeInput} value={inputFields?.rules} errorMessage={errorMessage?.rules} /> */}
           <TextEditor label='Head Information' name={'headInformation'} onChange={value => onChangeInput({ target: { name: 'headInformation', value: value } })} value={inputFields?.headInformation} />
         </ModalBody>
         <ModalFooter>
