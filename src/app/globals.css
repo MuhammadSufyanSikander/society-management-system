@@ -42,7 +42,7 @@ ul > li {
   justify-content: space-between;
 }
 
-.subcontactclass {
+.subcontactclass{
   /* width: 48%;
   padding: 10px; */
 }
@@ -53,10 +53,11 @@ ul > li {
     flex-direction: column;
   }
 
-  .subcontactclass {
+  .subcontactclass{
     width: 100%;
   }
 }
+
 
 /* General styles For R column  */
 .mainclasscolumn {
@@ -65,7 +66,7 @@ ul > li {
   justify-content: space-between;
 }
 
-.subclasscolumn {
+.subclasscolumn{
   /* width: 48%;
   padding: 10px; */
 }
@@ -73,10 +74,34 @@ ul > li {
 /* Mobile view styles */
 @media (max-width: 768px) {
   .mainclasscolumn {
-    flex-direction: column-reverse;
+    flex-direction:column-reverse;
   }
 
-  .subclasscolumn {
+  .subclasscolumn{
+    width: 100%;
+  }
+}
+
+
+/* General style for footer */
+.mainfooterclass {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.subfooterclass{
+  width: 48%;
+  padding: 10px;
+}
+
+/* Mobile view styles */
+@media (max-width: 768px) {
+  .mainfooterclass {
+    flex-direction: column;
+  }
+
+  .subfooterclass{
     width: 100%;
   }
 }
