@@ -22,7 +22,7 @@ function EventCard({ item, isPast = false }) {
     <div className='w-[280px] mt-[20px] shadow-2xl'>
       <Icon imageHeight={'w-[280px]'} image={image} />
       <div className='p-[15px] flex flex-col gap-[10px]'>
-        {society && <h1 className='font-semibold text-[18px] bg-[#0369D8] text-[white]'>Society: {society.societyName}</h1>}
+        {society && <h1 className='font-semibold text-[20px] bg-[#0369D8] text-[white]'>Society: {society.societyName}</h1>}
         <h1 className='font-semibold text-[20px]'>{title}</h1>
         <div className='flex mt-[7px] gap-3'>
           <Icon imageHeight={'w-[20px] h-[20px]'} image={assets.icons.calendar} />
