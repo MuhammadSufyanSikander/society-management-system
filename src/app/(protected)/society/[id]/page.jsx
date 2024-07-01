@@ -32,19 +32,19 @@ function Society() {
 
   return (
     <div className='p-16 flex flex-col gap-[80px]'>
-      <div className='flex'>
-        <div className=' w-full'>
+      <div className='maincontactclass flex'>
+        <div className='subcontactclass w-full'>
           <h1 className='font-bold font-noto-sans leading-[50px] text-[50px] text-royalblue'>{society?.societyName}</h1>
           <p className='mt-[40px] text-gray-800 font-noto-sans'>{society?.societyDescription}</p>
-        </div>
+        </div><div className='subcontactclass'>
         <Icon
-          imageWidth={'w-[40%] h-[100%] '}
+          imageWidth={'w-[100%] h-[100%] '}
           image={
             society?.groupMemberImage ||
             society?.image ||
             'https://firebasestorage.googleapis.com/v0/b/society-management-syste-446c5.appspot.com/o/society%2F360_F_461470323_6TMQSkCCs9XQoTtyer8VCsFypxwRiDGU.jpg?alt=media&token=736c0d79-baa8-4f72-800f-b8bda8f57142'
           }
-        />
+        />  </div>
       </div>
       {society?.headInformation && (
         <div className='text-center'>
