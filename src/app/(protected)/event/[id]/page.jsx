@@ -35,7 +35,7 @@ function Event() {
   style={{
     backgroundImage: `url("${event?.image}")`,
     minHeight: '300px',   // Set a minimum height to ensure visibility on smaller screens
-    maxHeight: '500px',   // Set a maximum height to maintain the image's aspect ratio
+    maxHeight: '505px',   // Set a maximum height to maintain the image's aspect ratio
     width: '100%',        // Ensure the image covers the entire width of its container
   }}
 >
