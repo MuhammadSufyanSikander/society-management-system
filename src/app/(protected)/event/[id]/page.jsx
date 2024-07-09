@@ -29,7 +29,7 @@ function Event() {
 
   return (
     <div>
-      <h1 className='text-[50px] font-noto-sans font-semibold text-royalblue p-[30px]'>{event?.title}</h1>
+      <h1 className='text-[25px] font-noto-sans font-semibold text-royalblue p-[30px]'>{event?.title}</h1>
       <div
         className='relative w-full align-middle h-[50.6vh] bg-cover '
         style={{
