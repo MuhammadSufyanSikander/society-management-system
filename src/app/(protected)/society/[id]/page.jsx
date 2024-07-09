@@ -31,7 +31,7 @@ function Society() {
     )
 
   return (
-    <div className='p-16 flex flex-col gap-[80px]'>
+    <div className='p-4 xs:p-8 sm:p-16 flex flex-col gap-[80px]'>
       <div className='maincontactclass flex'>
         <div className='subcontactclass w-full'>
           <h1 className='font-bold font-noto-sans leading-[50px] text-[30px] text-royalblue'>{society?.societyName}</h1>
