@@ -39,11 +39,13 @@ const Navbar = () => {
     <div className='w-full z-50'>
       <header className='relative   w-full bg-royalblue flex flex-col md:flex-row items-center justify-between py-4 px-6 box-border gap-[20px] text-left text-smi text-white font-noto-sans'>
         <div className='flex w-full md:w-auto justify-between items-center'>
+        <Link href="/homepage" passHref>
           <Icon
             imageHeight={'h-[39px]'}
             imageWidth={'w-[100px]'}
             image={'https://firebasestorage.googleapis.com/v0/b/society-management-syste-446c5.appspot.com/o/gcuflogo%201.png?alt=media&token=6d736dab-0428-4009-a6e9-24f5f8a25b2e'}
           />
+          </Link>
           <button className='block z-20 md:hidden' onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             <svg className='w-6 h-6 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
               <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d={isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}></path>
