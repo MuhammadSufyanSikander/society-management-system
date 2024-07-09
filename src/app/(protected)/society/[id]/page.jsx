@@ -34,7 +34,7 @@ function Society() {
     <div className='p-16 flex flex-col gap-[80px]'>
       <div className='maincontactclass flex'>
         <div className='subcontactclass w-full'>
-          <h1 className='font-bold font-noto-sans leading-[50px] text-[50px] text-royalblue'>{society?.societyName}</h1>
+          <h1 className='font-bold font-noto-sans leading-[50px] text-[30px] text-royalblue'>{society?.societyName}</h1>
           <p className='mt-[40px] text-gray-800 font-noto-sans'>{society?.societyDescription}</p>
         </div><div className='subcontactclass'>
         <Icon
@@ -48,24 +48,24 @@ function Society() {
       </div>
       {society?.headInformation && (
         <div className='text-center'>
-          <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Society Head</h1>
+          <h1 className='font-bold font-noto-sans  text-[30px] text-royalblue'>Society Head</h1>
           <div className='mt-[30px] text-start  text-gray-800 font-noto-sans' dangerouslySetInnerHTML={{ __html: society.headInformation }} />
         </div>
       )}
       <div className='text-center'>
-        <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Mission</h1>
+        <h1 className='font-bold font-noto-sans  text-[30px] text-royalblue'>Mission</h1>
         <div className='mt-[30px] text-start  text-gray-800 font-noto-sans' dangerouslySetInnerHTML={{ __html: society.mission }} />
       </div>
       <div className='text-center'>
-        <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Achievements</h1>
+        <h1 className='font-bold font-noto-sans  text-[30px] text-royalblue'>Achievements</h1>
         <div className='mt-[30px] text-start  text-gray-800 font-noto-sans' dangerouslySetInnerHTML={{ __html: society.achievements }} />
       </div>
       <div className='text-center'>
-        <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Rules & Regulations</h1>
+        <h1 className='font-bold font-noto-sans  text-[30px] text-royalblue'>Rules & Regulations</h1>
         <div className='mt-[30px] text-start  text-gray-800 font-noto-sans' dangerouslySetInnerHTML={{ __html: society.rules }} />
       </div>
       <section className='w-full flex flex-col justify-center items-center mb-10'>
-        <h1 className='font-bold font-noto-sans  text-[50px] text-royalblue'>Gallery</h1>
+        <h1 className='font-bold font-noto-sans  text-[30px] text-royalblue'>Gallery</h1>
         <div className='flex flex-wrap gap-[20px] justify-center mb-[50px]'>
           {society?.galleryImages?.map((item, index) => (
             <ImageCard key={item} image={item} />
