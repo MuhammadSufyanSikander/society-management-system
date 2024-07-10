@@ -35,7 +35,7 @@ function Society() {
       <div className='maincontactclass flex'>
         <div className='subcontactclass w-full'>
           <h1 className='font-bold font-noto-sans leading-[50px] text-[30px] text-royalblue'>{society?.societyName}</h1>
-          <p className='mt-[40px] text-gray-800 font-noto-sans'>{society?.societyDescription}</p>
+          <p className='mt-[40px] text-gray-800 style="text-align: justify;" font-noto-sans'>{society?.societyDescription}</p>
         </div><div className='subcontactclass'>
         <Icon
           imageWidth={'w-[100%] h-[100%] '}
