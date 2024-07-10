@@ -83,7 +83,12 @@ function Homepage() {
                 </Link>
               </div>
               <div className='subclasscolumn  flex flex-col w-[40%] items-center text-center'>
-                <Icon imageWidth={'w-[138px] h-[140px] rounded-full'} image={assets.images.director} />
+
+                
+                <img src="https://firebasestorage.googleapis.com/v0/b/society-management-syste-446c5.appspot.com/o/6.jpg?alt=media&token=cfa0e08e-cf98-4271-b420-ed2f3bb79f73" alt="Rector" className='w-[138px] h-[140px] rounded-full' />
+
+                
+                
                 <div className='text-[12px] text-black-100'> Prof. Dr. Babak Mahmood</div>
                 <div className='text-[12px]  text-black-100'>Directorate of Students Affairs, Government College University Faisalabad</div>
               </div>
