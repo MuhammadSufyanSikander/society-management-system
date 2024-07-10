@@ -19,6 +19,10 @@ function Societies() {
         className='relative w-full  align-middle h-[88.6vh] bg-cover '
         style={{
           backgroundImage: 'url("https://gcuf.edu.pk/pages_data/campuses/news-campus/IMGM5195_2.jpg")',
+
+           backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover'
         }}
       >
         <div className=' flex justify-center items-center w-full h-[100%] inset-0 bg-overlay z-10'>
