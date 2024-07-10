@@ -83,7 +83,7 @@ function Homepage() {
                 </Link>
               </div>
               <div className='subclasscolumn  flex flex-col w-[40%] items-center text-center'>
-                <Icon imageWidth={'w-[138px] h-[140px] rounded-full'} image={assets.images.rector} />
+                <Icon imageWidth={'w-[138px] h-[140px] rounded-full'} image={assets.images.Director-2} />
                 <div className='text-[12px] text-black-100'> Prof. Dr. Babak Mahmood</div>
                 <div className='text-[12px]  text-black-100'>Directorate of Students Affairs, Government College University Faisalabad</div>
               </div>
