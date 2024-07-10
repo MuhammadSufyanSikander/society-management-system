@@ -29,6 +29,9 @@ function Events() {
         className='relative w-full  align-middle h-[88.6vh] bg-cover '
         style={{
           backgroundImage: 'url("https://gcuf.edu.pk/pages_data/campuses/news-campus/IMGM5195_2.jpg")',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover'
         }}
       >
      
