@@ -32,6 +32,32 @@ function Footer() {
           <Icon imageHeight={'w-[30px] h-[30px] md:w-[40px] md:h-[40px]'} image={assets.icons.twitter} />
           <Icon imageHeight={'w-[32px] h-[32px] md:w-[42px] md:h-[42px]'} image={assets.icons.linkedin} />
         </div>
+               <div className='subfooterclass flex gap-7'>
+        <section  className='poweredsection' style={{   width: '80%', margin: '0 auto' }}>
+      <h1 style={{ textAlign: 'left', marginBottom: '10px', fontWeight:'bold' }}>Powered by: Department of Computer Science</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ flexBasis: '45%' }}>
+          <h2 >Supervisor:</h2>
+          <ul>
+          <li>Nafees Ayub (Lecturer)</li>
+          </ul>
+         
+        </div>
+
+        <div style={{ flexBasis: '45%' }}>
+          <h2>Students:</h2>
+          <ul>
+            <li>M. Sufyan Sikander</li>
+            <li>Ali Hamza</li>
+            <li>M. Waqas Adrees</li>
+         
+            {/* Add more student names as needed */}
+          </ul>
+        </div>
+ 
+      </div>
+    </section>
+        </div>
       </div>
     </div>
   )
