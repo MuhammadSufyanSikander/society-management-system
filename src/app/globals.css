@@ -105,3 +105,7 @@ ul > li {
     width: 100%;
   }
 }
+
+.poweredsection li{
+  list-style-type: none;
+}
